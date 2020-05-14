@@ -39,7 +39,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.default_headers['User-Agent'] = f'Python AuthressSDK'
+        self.default_headers['User-Agent'] = f'Python AuthressSDK version: 1.0'
 
     def __del__(self):
         self.pool.close()

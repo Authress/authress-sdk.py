@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 TRAVIS_BUILD_VERSION = os.environ.get('TRAVIS_BUILD_NUMBER') or "0"
-VERSION = f"0.0.{TRAVIS_BUILD_VERSION}"
+VERSION = f"1.0.{TRAVIS_BUILD_VERSION}"
 REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 
 # To install the library, run the following

@@ -23,7 +23,7 @@ class UserPermissionsApi(object):
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get most conservative resource permission a user has access to. Since resource uris are cascading, a user with * access will always return a list with a single result. In the case that the user only has access to a list of resources in a collection, the list will be paginated.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_users_user_id_resources_get(user_id, async_req=True)
+        >>> thread = api.get_user_resources(user_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -35,18 +35,18 @@ class UserPermissionsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_users_user_id_resources_get_with_http_info(user_id, **kwargs)
+            return self.get_user_resources_with_http_info(user_id, **kwargs)
         else:
-            (data) = self.v1_users_user_id_resources_get_with_http_info(user_id, **kwargs)
+            (data) = self.get_user_resources_with_http_info(user_id, **kwargs)
             return data
 
-    def v1_users_user_id_resources_get_with_http_info(self, user_id, **kwargs):
+    def get_user_resources_with_http_info(self, user_id, **kwargs):
         """Get the resources a user has to permission to.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get most conservative resource permission a user has access to. Since resource uris are cascading, a user with * access will always return a list with a single result. In the case that the user only has access to a list of resources in a collection, the list will be paginated.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_users_user_id_resources_get_with_http_info(user_id, async_req=True)
+        >>> thread = api.get_user_resources_with_http_info(user_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -68,7 +68,7 @@ class UserPermissionsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_users_user_id_resources_get" % key
+                    " to method get_user_resources" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -121,7 +121,7 @@ class UserPermissionsApi(object):
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get a summary of the permissions a user has to a particular resource.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_users_user_id_resources_resource_uri_permissions_get(user_id, resource_uri, async_req=True)
+        >>> thread = api.get_user_authorization_for_resource(user_id, resource_uri, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -133,18 +133,18 @@ class UserPermissionsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_users_user_id_resources_resource_uri_permissions_get_with_http_info(user_id, resource_uri, **kwargs)
+            return self.get_user_authorization_for_resource_with_http_info(user_id, resource_uri, **kwargs)
         else:
-            (data) = self.v1_users_user_id_resources_resource_uri_permissions_get_with_http_info(user_id, resource_uri, **kwargs)
+            (data) = self.get_user_authorization_for_resource_with_http_info(user_id, resource_uri, **kwargs)
             return data
 
-    def v1_users_user_id_resources_resource_uri_permissions_get_with_http_info(self, user_id, resource_uri, **kwargs):
+    def get_user_authorization_for_resource_with_http_info(self, user_id, resource_uri, **kwargs):
         """Get the permissions a user has to a resource.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get a summary of the permissions a user has to a particular resource.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_users_user_id_resources_resource_uri_permissions_get_with_http_info(user_id, resource_uri, async_req=True)
+        >>> thread = api.get_user_authorization_for_resource_with_http_info(user_id, resource_uri, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -166,7 +166,7 @@ class UserPermissionsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_users_user_id_resources_resource_uri_permissions_get" % key
+                    " to method get_user_authorization_for_resource" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -223,7 +223,7 @@ class UserPermissionsApi(object):
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Does the user have the specified permissions to the resource?
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_users_user_id_resources_resource_uri_permissions_permission_get(user_id, resource_uri, permission, async_req=True)
+        >>> thread = api.authorize_user(user_id, resource_uri, permission, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -236,18 +236,18 @@ class UserPermissionsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_users_user_id_resources_resource_uri_permissions_permission_get_with_http_info(user_id, resource_uri, permission, **kwargs)
+            return self.authorize_user_with_http_info(user_id, resource_uri, permission, **kwargs)
         else:
-            (data) = self.v1_users_user_id_resources_resource_uri_permissions_permission_get_with_http_info(user_id, resource_uri, permission, **kwargs)
+            (data) = self.authorize_user_with_http_info(user_id, resource_uri, permission, **kwargs)
             return data
 
-    def v1_users_user_id_resources_resource_uri_permissions_permission_get_with_http_info(self, user_id, resource_uri, permission, **kwargs):
+    def authorize_user_with_http_info(self, user_id, resource_uri, permission, **kwargs):
         """Check to see if a user has permissions to a resource.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Does the user have the specified permissions to the resource?
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_users_user_id_resources_resource_uri_permissions_permission_get_with_http_info(user_id, resource_uri, permission, async_req=True)
+        >>> thread = api.authorize_user_with_http_info(user_id, resource_uri, permission, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -270,7 +270,7 @@ class UserPermissionsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_users_user_id_resources_resource_uri_permissions_permission_get" % key
+                    " to method authorize_user" % key
                 )
             params[key] = val
         del params['kwargs']

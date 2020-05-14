@@ -35,18 +35,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_client_id_access_keys_key_id_delete_with_http_info(client_id, key_id, **kwargs)
+            return self.delete_access_key_with_http_info(client_id, key_id, **kwargs)
         else:
-            (data) = self.v1_clients_client_id_access_keys_key_id_delete_with_http_info(client_id, key_id, **kwargs)
+            (data) = self.delete_access_key_with_http_info(client_id, key_id, **kwargs)
             return data
 
-    def v1_clients_client_id_access_keys_key_id_delete_with_http_info(self, client_id, key_id, **kwargs):
+    def delete_access_key_with_http_info(self, client_id, key_id, **kwargs):
         """Remove an access key for a client
 
         Deletes an access key for a client prevent it from being used to authenticate with Authress.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_client_id_access_keys_key_id_delete_with_http_info(client_id, key_id, async_req=True)
+        >>> thread = api.delete_access_key_with_http_info(client_id, key_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -68,7 +68,7 @@ class ServiceClientsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_clients_client_id_access_keys_key_id_delete" % key
+                    " to method delete_access_key" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -132,18 +132,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_client_id_access_keys_post_with_http_info(client_id, **kwargs)
+            return self.request_access_key_with_http_info(client_id, **kwargs)
         else:
-            (data) = self.v1_clients_client_id_access_keys_post_with_http_info(client_id, **kwargs)
+            (data) = self.request_access_key_with_http_info(client_id, **kwargs)
             return data
 
-    def v1_clients_client_id_access_keys_post_with_http_info(self, client_id, **kwargs):
+    def request_access_key_with_http_info(self, client_id, **kwargs):
         """Request a new access key
 
         Create a new access key for the client so that a service can authenticate with Authress as that client. Using the client will allow delegation of permission checking of users.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_client_id_access_keys_post_with_http_info(client_id, async_req=True)
+        >>> thread = api.request_access_key_with_http_info(client_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -164,7 +164,7 @@ class ServiceClientsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_clients_client_id_access_keys_post" % key
+                    " to method request_access_key" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -226,18 +226,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_client_id_delete_with_http_info(client_id, **kwargs)
+            return self.delete_client_with_http_info(client_id, **kwargs)
         else:
-            (data) = self.v1_clients_client_id_delete_with_http_info(client_id, **kwargs)
+            (data) = self.delete_client_with_http_info(client_id, **kwargs)
             return data
 
-    def v1_clients_client_id_delete_with_http_info(self, client_id, **kwargs):
+    def delete_client_with_http_info(self, client_id, **kwargs):
         """Delete a client
 
         This deletes the service client.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_client_id_delete_with_http_info(client_id, async_req=True)
+        >>> thread = api.delete_client_with_http_info(client_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -316,18 +316,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_client_id_get_with_http_info(client_id, **kwargs)
+            return self.get_client_with_http_info(client_id, **kwargs)
         else:
-            (data) = self.v1_clients_client_id_get_with_http_info(client_id, **kwargs)
+            (data) = self.get_client_with_http_info(client_id, **kwargs)
             return data
 
-    def v1_clients_client_id_get_with_http_info(self, client_id, **kwargs):
+    def get_client_with_http_info(self, client_id, **kwargs):
         """Get a client.
 
         Returns all information related to client except for the private access keys.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_client_id_get_with_http_info(client_id, async_req=True)
+        >>> thread = api.get_client_with_http_info(client_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -348,7 +348,7 @@ class ServiceClientsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_clients_client_id_get" % key
+                    " to method get_client" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -411,18 +411,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_client_id_put_with_http_info(body, client_id, **kwargs)
+            return self.update_client_http_info(body, client_id, **kwargs)
         else:
-            (data) = self.v1_clients_client_id_put_with_http_info(body, client_id, **kwargs)
+            (data) = self.update_client_http_info(body, client_id, **kwargs)
             return data
 
-    def v1_clients_client_id_put_with_http_info(self, body, client_id, **kwargs):
+    def update_client_http_info(self, body, client_id, **kwargs):
         """Update a client
 
         Updates a client information.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_client_id_put_with_http_info(body, client_id, async_req=True)
+        >>> thread = api.update_client_http_info(body, client_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -515,18 +515,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_get_with_http_info(**kwargs)
+            return self.get_clients_with_http_info(**kwargs)
         else:
-            (data) = self.v1_clients_get_with_http_info(**kwargs)
+            (data) = self.get_clients_with_http_info(**kwargs)
             return data
 
-    def v1_clients_get_with_http_info(self, **kwargs):
+    def get_clients_with_http_info(self, **kwargs):
         """Get clients collection
 
         Returns all clients that the user has access to in the account.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_get_with_http_info(async_req=True)
+        >>> thread = api.get_clients_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -546,7 +546,7 @@ class ServiceClientsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_clients_get" % key
+                    " to method get_clients" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -591,7 +591,7 @@ class ServiceClientsApi(object):
         Creates a service client to interact with Authress or any other service on behalf of users. Each client has secret private keys used to authenticate with Authress. To use service clients created through other mechanisms, skip creating a client and create access records with the client identifier.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_post(body, async_req=True)
+        >>> thread = api.create_client(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -602,18 +602,18 @@ class ServiceClientsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_clients_post_with_http_info(body, **kwargs)
+            return self.create_client_with_http_info(body, **kwargs)
         else:
-            (data) = self.v1_clients_post_with_http_info(body, **kwargs)
+            (data) = self.create_client_with_http_info(body, **kwargs)
             return data
 
-    def v1_clients_post_with_http_info(self, body, **kwargs):
+    def create_client_with_http_info(self, body, **kwargs):
         """Create a new client.
 
         Creates a service client to interact with Authress or any other service on behalf of users. Each client has secret private keys used to authenticate with Authress. To use service clients created through other mechanisms, skip creating a client and create access records with the client identifier.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_clients_post_with_http_info(body, async_req=True)
+        >>> thread = api.create_client_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -634,7 +634,7 @@ class ServiceClientsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_clients_post" % key
+                    " to method create_client" % key
                 )
             params[key] = val
         del params['kwargs']

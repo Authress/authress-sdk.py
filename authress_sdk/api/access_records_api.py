@@ -34,18 +34,18 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_claims_post_with_http_info(body, **kwargs)
+            return self.create_claim_with_http_info(body, **kwargs)
         else:
-            (data) = self.v1_claims_post_with_http_info(body, **kwargs)
+            (data) = self.create_claim_with_http_info(body, **kwargs)
             return data
 
-    def v1_claims_post_with_http_info(self, body, **kwargs):
+    def create_claim_with_http_info(self, body, **kwargs):
         """Claim a resource by an allowed user
 
         Claim a resource by allowing a user to pick an identifier and receive admin access to that resource if it hasn't already been claimed. This only works for resources specifically marked as <strong>CLAIM</strong>. The result will be a new access record listing that user as the admin for this resource.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_claims_post_with_http_info(body, async_req=True)
+        >>> thread = api.create_claim_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -66,7 +66,7 @@ class AccessRecordsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_claims_post" % key
+                    " to method create_claim" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -131,18 +131,18 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_records_get_with_http_info(**kwargs)
+            return self.get_records_with_http_info(**kwargs)
         else:
-            (data) = self.v1_records_get_with_http_info(**kwargs)
+            (data) = self.get_records_with_http_info(**kwargs)
             return data
 
-    def v1_records_get_with_http_info(self, **kwargs):
+    def get_records_with_http_info(self, **kwargs):
         """Get all account records.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Returns a paginated records list for the account. Only records the user has access to are returned.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_records_get_with_http_info(async_req=True)
+        >>> thread = api.get_records_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -162,7 +162,7 @@ class AccessRecordsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_records_get" % key
+                    " to method get_records" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -218,18 +218,18 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_records_post_with_http_info(body, **kwargs)
+            return self.create_record_with_http_info(body, **kwargs)
         else:
-            (data) = self.v1_records_post_with_http_info(body, **kwargs)
+            (data) = self.create_record_with_http_info(body, **kwargs)
             return data
 
-    def v1_records_post_with_http_info(self, body, **kwargs):
+    def create_record_with_http_info(self, body, **kwargs):
         """Create a new access record
 
         Specify user roles for specific resources.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_records_post_with_http_info(body, async_req=True)
+        >>> thread = api.create_record_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -250,7 +250,7 @@ class AccessRecordsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_records_post" % key
+                    " to method create_record" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -316,18 +316,18 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_records_record_id_delete_with_http_info(record_id, **kwargs)
+            return self.delete_record_with_http_info(record_id, **kwargs)
         else:
-            (data) = self.v1_records_record_id_delete_with_http_info(record_id, **kwargs)
+            (data) = self.delete_record_with_http_info(record_id, **kwargs)
             return data
 
-    def v1_records_record_id_delete_with_http_info(self, record_id, **kwargs):
+    def delete_record_with_http_info(self, record_id, **kwargs):
         """Deletes an access record.
 
         Remove an access record, removing associated permissions from all users in record. If a user has a permission from another record, that permission will not be removed.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_records_record_id_delete_with_http_info(record_id, async_req=True)
+        >>> thread = api.delete_record_with_http_info(record_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -348,7 +348,7 @@ class AccessRecordsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_records_record_id_delete" % key
+                    " to method delete_record" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -406,18 +406,18 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_records_record_id_get_with_http_info(record_id, **kwargs)
+            return self.get_record_with_http_info(record_id, **kwargs)
         else:
-            (data) = self.v1_records_record_id_get_with_http_info(record_id, **kwargs)
+            (data) = self.get_record_with_http_info(record_id, **kwargs)
             return data
 
-    def v1_records_record_id_get_with_http_info(self, record_id, **kwargs):
+    def get_record_with_http_info(self, record_id, **kwargs):
         """Get an access record for the account.
 
         Access records contain information assigning permissions to users for resources.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_records_record_id_get_with_http_info(record_id, async_req=True)
+        >>> thread = api.get_record_with_http_info(record_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -438,7 +438,7 @@ class AccessRecordsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_records_record_id_get" % key
+                    " to method get_record" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -501,18 +501,18 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_records_record_id_put_with_http_info(body, record_id, **kwargs)
+            return self.update_record_with_http_info(body, record_id, **kwargs)
         else:
-            (data) = self.v1_records_record_id_put_with_http_info(body, record_id, **kwargs)
+            (data) = self.update_record_with_http_info(body, record_id, **kwargs)
             return data
 
-    def v1_records_record_id_put_with_http_info(self, body, record_id, **kwargs):
+    def update_record_with_http_info(self, body, record_id, **kwargs):
         """Update an access record.
 
         Updates an access record adding or removing user permissions to resources.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_records_record_id_put_with_http_info(body, record_id, async_req=True)
+        >>> thread = api.update_record_with_http_info(body, record_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -534,7 +534,7 @@ class AccessRecordsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_records_record_id_put" % key
+                    " to method update_record" % key
                 )
             params[key] = val
         del params['kwargs']

@@ -33,18 +33,18 @@ class ResourcePermissionsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_resources_get_with_http_info(**kwargs)
+            return self.get_resources_with_http_info(**kwargs)
         else:
-            (data) = self.v1_resources_get_with_http_info(**kwargs)
+            (data) = self.get_resources_with_http_info(**kwargs)
             return data
 
-    def v1_resources_get_with_http_info(self, **kwargs):
+    def get_resources_with_http_info(self, **kwargs):
         """List resource configurations
 
         Permissions can be set globally at a resource level. Lists any resources with a globally set resource policy
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_resources_get_with_http_info(async_req=True)
+        >>> thread = api.get_resources_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -64,7 +64,7 @@ class ResourcePermissionsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_resources_get" % key
+                    " to method get_resources" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -120,18 +120,18 @@ class ResourcePermissionsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_resources_resource_uri_get_with_http_info(resource_uri, **kwargs)
+            return self.get_resource_permissions_with_http_info(resource_uri, **kwargs)
         else:
-            (data) = self.v1_resources_resource_uri_get_with_http_info(resource_uri, **kwargs)
+            (data) = self.get_resource_permissions_with_http_info(resource_uri, **kwargs)
             return data
 
-    def v1_resources_resource_uri_get_with_http_info(self, resource_uri, **kwargs):
+    def get_resource_permissions_with_http_info(self, resource_uri, **kwargs):
         """Get a resource permissions object.
 
         Permissions can be set globally at a resource level. This will apply to all users in an account.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_resources_resource_uri_get_with_http_info(resource_uri, async_req=True)
+        >>> thread = api.get_resource_permissions_with_http_info(resource_uri, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -152,7 +152,7 @@ class ResourcePermissionsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_resources_resource_uri_get" % key
+                    " to method get_resource_permissions" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -215,18 +215,18 @@ class ResourcePermissionsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_resources_resource_uri_put_with_http_info(body, resource_uri, **kwargs)
+            return self.set_resource_permissions_with_http_info(body, resource_uri, **kwargs)
         else:
-            (data) = self.v1_resources_resource_uri_put_with_http_info(body, resource_uri, **kwargs)
+            (data) = self.set_resource_permissions_with_http_info(body, resource_uri, **kwargs)
             return data
 
-    def v1_resources_resource_uri_put_with_http_info(self, body, resource_uri, **kwargs):
+    def set_resource_permissions_with_http_info(self, body, resource_uri, **kwargs):
         """Update a resource permissions object.
 
         Updates the global permissions on a resource. This applies to all users in an account.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_resources_resource_uri_put_with_http_info(body, resource_uri, async_req=True)
+        >>> thread = api.set_resource_permissions_with_http_info(body, resource_uri, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -248,7 +248,7 @@ class ResourcePermissionsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_resources_resource_uri_put" % key
+                    " to method set_resource_permissions" % key
                 )
             params[key] = val
         del params['kwargs']

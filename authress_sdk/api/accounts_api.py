@@ -34,18 +34,18 @@ class AccountsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_accounts_account_id_get_with_http_info(account_id, **kwargs)
+            return self.get_account_with_http_info(account_id, **kwargs)
         else:
-            (data) = self.v1_accounts_account_id_get_with_http_info(account_id, **kwargs)
+            (data) = self.get_account_with_http_info(account_id, **kwargs)
             return data
 
-    def v1_accounts_account_id_get_with_http_info(self, account_id, **kwargs):
+    def get_account_with_http_info(self, account_id, **kwargs):
         """Get account information.
 
         Includes the original configuration information.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_accounts_account_id_get_with_http_info(account_id, async_req=True)
+        >>> thread = api.get_account_with_http_info(account_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -66,7 +66,7 @@ class AccountsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_accounts_account_id_get" % key
+                    " to method get_account" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -127,18 +127,18 @@ class AccountsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_accounts_get_with_http_info(**kwargs)
+            return self.get_accounts_with_http_info(**kwargs)
         else:
-            (data) = self.v1_accounts_get_with_http_info(**kwargs)
+            (data) = self.get_accounts_with_http_info(**kwargs)
             return data
 
-    def v1_accounts_get_with_http_info(self, **kwargs):
+    def get_accounts_with_http_info(self, **kwargs):
         """Get all accounts user has access to
 
         Returns a list of accounts that the user has access to.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_accounts_get_with_http_info(async_req=True)
+        >>> thread = api.get_accounts_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -158,7 +158,7 @@ class AccountsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_accounts_get" % key
+                    " to method get_accounts" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -203,7 +203,7 @@ class AccountsApi(object):
         Returns a list of identities linked for this account.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_identities_get(async_req=True)
+        >>> thread = api.get_account_identities(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -213,18 +213,18 @@ class AccountsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_identities_get_with_http_info(**kwargs)
+            return self.get_account_identities_with_http_info(**kwargs)
         else:
-            (data) = self.v1_identities_get_with_http_info(**kwargs)
+            (data) = self.get_account_identities_with_http_info(**kwargs)
             return data
 
-    def v1_identities_get_with_http_info(self, **kwargs):
+    def get_account_identities_with_http_info(self, **kwargs):
         """Get all linked identities for this account.
 
         Returns a list of identities linked for this account.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_identities_get_with_http_info(async_req=True)
+        >>> thread = api.get_account_identities_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -244,7 +244,7 @@ class AccountsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_identities_get" % key
+                    " to method get_account_identities" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -289,7 +289,7 @@ class AccountsApi(object):
         An identity is a JWT subscriber *sub* and issuer *iss*. Only one account my be linked to a particular JWT combination. Allows calling the API with a federated token directly instead of using a client access key.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_identities_post(body, async_req=True)
+        >>> thread = api.create_identity(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -300,18 +300,18 @@ class AccountsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.v1_identities_post_with_http_info(body, **kwargs)
+            return self.create_identity_with_http_info(body, **kwargs)
         else:
-            (data) = self.v1_identities_post_with_http_info(body, **kwargs)
+            (data) = self.create_identity_with_http_info(body, **kwargs)
             return data
 
-    def v1_identities_post_with_http_info(self, body, **kwargs):
+    def create_identity_with_http_info(self, body, **kwargs):
         """Link a new account identity.
 
         An identity is a JWT subscriber *sub* and issuer *iss*. Only one account my be linked to a particular JWT combination. Allows calling the API with a federated token directly instead of using a client access key.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.v1_identities_post_with_http_info(body, async_req=True)
+        >>> thread = api.create_identity_with_http_info(body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -332,7 +332,7 @@ class AccountsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method v1_identities_post" % key
+                    " to method create_identity" % key
                 )
             params[key] = val
         del params['kwargs']
