@@ -1,0 +1,24 @@
+language: python
+python:
+- 3.6.3
+cache: pip
+install:
+- pip3 install -r requirements.txt
+script:
+- echo 'Success'
+deploy:
+  provider: pypi
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH != master"
+  user: __token__
+  password:
+    secure: pfearN1m5YARufA66KEUWX4KqXfkyjCO99eXjELrkAPO2UBWpbEo5l7jynvJgIJZGCZI1tB611jjNnKzhYvB6xBalVPDPnyrFkvpEzH8ODWXa8CYeFbOricu6xb+sO4hLRRIQRM6OulFf5uHL+sA8K8B7hsof99R2rMQ+V/QNgxpo5T3Ht1DqV5ACZTHpfD7Uko4TScCNyfiAd3hf3jAaacXXx7b6bpCVFFYvJ//29xDMw41VEC5tdbXChsZMl2toCzvI2JAlqVUh256/7OOo6st0tWpSC05LZmATyz2flmDPD7Bx/RKZp4NIoCU0b20JCIPV/vsuayKF2jeFki6sKhRFmqamXFrGF0tQFrL7jT8SOzeQihOsG+vFTPZQAyuwPTH40bIPV6DSQBzxYt9uyL+VyhG2uk/SG+LdCX+2JlAhTFX+xTfzsbXZ+zT7nBT7mUCxaqjYLK4boRPmpbiFdexFyTAVZWBfE//lA0GS7YQK1+nximvbTR09yGFlktwlrttcWBjfYdZ+FoIOr2TdVBivDv4RARZMbl/QA8Obg4DdOkRaRjp2GtGyMqE2F1yggc0EB2PRvF1qPoE6z/QmNuYScwQcO2mWNEt902WyehlTW0W73Q0SJQ+Kodh/jFz2Kc83VAyfZYMgjL7euxJ9mmyYKCATBK9QjOCmvDWIS8=
+branches:
+  only:
+  - master
+  - "/^release.*/"
+env:
+  global:
+    secure: fa5mW5YvHk/rL46fVERsRBQGNc6SfbNeO13kA+byoFZbG7PIwMrMpDvUHot+cv/Ls/2GxP4mGgnD7fOTP4Ucit9Lp2rFxVPbIOelyRo4iwlWo5NhwZyZo2DGPEXQsWPtNlNNgzV8DlfU/ZpFM4agU1GTGtdprzSPpBSWzXNF1D/8m/tytLs3OSPfQnACPeTxbZ761kS28viXxwYOVr5/NUNOPUbeGa/XaL0Cdi2X+s0dznnShFNF4I4NDw34m2xT+u45sRcAQmZziqNDPvB3/xfFuQysDS/b4hrMeI2vlI8qGqyYu4ICpju/8gjdtaLZr468vtOVSa7MjwEIWN95iwUMn+jJzShQR2FtYbZYY2AWJg1UuIg01OzgEFR79uJOjlZjfGpGYAolan1OOijE2NBty5BR1HNiZcGodM2iDTyxfyToKERKoC8M6JimTAKG/oMJhWL1R+wQ+d6UWxsrjZzJ5g1SlwWHygZy2s/OzuevuV1p85Q9KxvcyxKX0hHyxDXudVaQHmixe/lFSfc5JKOTH1Z7SF+aNwWTh2ddcfrsLYbLim0tDsot3zVp6yXgoOQzQon/xK32fdhbxQH9mYi5qm0d7Mqd1gDO3B/QlL10KNDWecHeRwF8ZqhNKiPLdFf5xZIiSiPAJRirkvrZ9rpp91LFMHyvvT3nrowqlG4=
