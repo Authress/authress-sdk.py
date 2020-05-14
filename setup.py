@@ -22,4 +22,7 @@ setup(
   download_url = f"https://github.com/Authress/authress-sdk.py/tarball/{VERSION}",
   keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
   classifiers = [],
+  long_description="""\
+  This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.
+"""
 )
