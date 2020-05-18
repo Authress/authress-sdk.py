@@ -27,13 +27,17 @@ class UserPermissionsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str user_id: The user to check permissions on (required)
+        :param str user_id: The user to check permissions on, if not specified will use the token sub as the expected user to authorize
         :param str resource_uri: The top level uri path of a resource to query for. Will only match explicit or collection resource children. Will not partial match resource names.
         :return: UserResources
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
+
+        if user_id is None:
+          user_id = self.api_client.get_user_from_token()
+
         if kwargs.get('async_req'):
             return self.get_user_resources_with_http_info(user_id, **kwargs)
         else:
@@ -108,7 +112,7 @@ class UserPermissionsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='UserResources',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -125,13 +129,17 @@ class UserPermissionsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str user_id: The user to check permissions on (required)
+        :param str user_id: The user to check permissions on, if not specified will use the token sub as the expected user to authorize
         :param str resource_uri: The uri path of a resource to validate, uri segments are allowed. (required)
         :return: UserPermissions
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
+
+        if user_id is None:
+          user_id = self.api_client.get_user_from_token()
+
         if kwargs.get('async_req'):
             return self.get_user_authorization_for_resource_with_http_info(user_id, resource_uri, **kwargs)
         else:
@@ -210,7 +218,7 @@ class UserPermissionsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='UserPermissions',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -227,7 +235,7 @@ class UserPermissionsApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param str user_id: The user to check permissions on (required)
+        :param str user_id: The user to check permissions on, if not specified will use the token sub as the expected user to authorize
         :param str resource_uri: The uri path of a resource to validate, uri segments are allowed, the resource must be a full path, and permissions are not inherited by sub resources. (required)
         :param str permission: Permission to check, '*' and scoped permissions can also be checked here. (required)
         :return: object
@@ -235,6 +243,11 @@ class UserPermissionsApi(object):
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
+
+
+        if user_id is None:
+          user_id = self.api_client.get_user_from_token()
+
         if kwargs.get('async_req'):
             return self.authorize_user_with_http_info(user_id, resource_uri, permission, **kwargs)
         else:
@@ -306,10 +319,7 @@ class UserPermissionsApi(object):
 
         body_params = None
         # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/links+json'])
-
-
+        header_params['Accept'] = self.api_client.select_header_accept(['application/links+json'])
 
         return self.api_client.call_api(
             '/v1/users/{userId}/resources/{resourceUri}/permissions/{permission}', 'GET',
@@ -320,7 +330,7 @@ class UserPermissionsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='object',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),

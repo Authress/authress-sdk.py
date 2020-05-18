@@ -8,6 +8,7 @@ from multiprocessing.pool import ThreadPool
 import os
 import re
 import tempfile
+import jwt
 
 # python 2 and python 3 compatibility library
 import six
@@ -21,7 +22,7 @@ class ApiClient(object):
     PRIMITIVE_TYPES = (float, bool, bytes, six.text_type) + six.integer_types
     NATIVE_TYPES_MAPPING = {
         'int': int,
-        'long': int if six.PY3 else long,  # noqa: F821
+        'long': int if six.PY3 else long,
         'float': float,
         'str': str,
         'bool': bool,
@@ -46,7 +47,15 @@ class ApiClient(object):
         self.pool.join()
 
     def set_token(self, token):
-        self.default_headers['Authorization'] = token
+        self.default_headers['Authorization'] = f'Bearer {token.replace("Bearer", "").strip()}'
+
+    def get_user_from_token(self):
+        token = self.default_headers['Authorization'].replace("Bearer", "").strip()
+        jwtData = jwt.decode(token, verify=False)
+        if 'https://api.authress.io' in jwtData['aud']:
+          return f"Authress|{jwtData['sub']}"
+
+        return jwtData['sub']
 
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value
@@ -54,13 +63,14 @@ class ApiClient(object):
     def __call_api(
             self, resource_path, method, path_params=None,
             query_params=None, header_params=None, body=None, post_params=None,
-            files=None, response_type=None, auth_settings=None,
+            files=None, response_type=None,
             _return_http_data_only=None, collection_formats=None,
             _preload_content=True, _request_timeout=None):
 
         # header parameters
         header_params = header_params or {}
         header_params.update(self.default_headers)
+
         if self.cookie:
             header_params['Cookie'] = self.cookie
         if header_params:
@@ -92,9 +102,6 @@ class ApiClient(object):
             post_params = self.sanitize_for_serialization(post_params)
             post_params = self.parameters_to_tuples(post_params,
                                                     collection_formats)
-
-        # auth setting
-        self.update_params_for_auth(header_params, query_params, auth_settings)
 
         # body
         if body:
@@ -228,7 +235,7 @@ class ApiClient(object):
     def call_api(self, resource_path, method,
                  path_params=None, query_params=None, header_params=None,
                  body=None, post_params=None, files=None,
-                 response_type=None, auth_settings=None, async_req=None,
+                 response_type=None, async_req=None,
                  _return_http_data_only=None, collection_formats=None,
                  _preload_content=True, _request_timeout=None):
         """Makes the HTTP request (synchronous) and returns deserialized data.
@@ -271,7 +278,7 @@ class ApiClient(object):
             return self.__call_api(resource_path, method,
                                    path_params, query_params, header_params,
                                    body, post_params, files,
-                                   response_type, auth_settings,
+                                   response_type,
                                    _return_http_data_only, collection_formats,
                                    _preload_content, _request_timeout)
         else:
@@ -279,7 +286,7 @@ class ApiClient(object):
                                            method, path_params, query_params,
                                            header_params, body,
                                            post_params, files,
-                                           response_type, auth_settings,
+                                           response_type,
                                            _return_http_data_only,
                                            collection_formats,
                                            _preload_content, _request_timeout))
@@ -435,30 +442,6 @@ class ApiClient(object):
             return 'application/json'
         else:
             return content_types[0]
-
-    def update_params_for_auth(self, headers, querys, auth_settings):
-        """Updates header and query params based on authentication setting.
-
-        :param headers: Header parameters dict to be updated.
-        :param querys: Query parameters tuple list to be updated.
-        :param auth_settings: Authentication setting identifiers list.
-        """
-        if not auth_settings:
-            return
-
-        for auth in auth_settings:
-            auth_setting = self.auth_settings().get(auth)
-            if auth_setting:
-                if not auth_setting['value']:
-                    continue
-                elif auth_setting['in'] == 'header':
-                    headers[auth_setting['key']] = auth_setting['value']
-                elif auth_setting['in'] == 'query':
-                    querys.append((auth_setting['key'], auth_setting['value']))
-                else:
-                    raise ValueError(
-                        'Authentication token must be in `query` or `header`'
-                    )
 
     def __deserialize_primitive(self, data, klass):
         """Deserializes string to primitive type.

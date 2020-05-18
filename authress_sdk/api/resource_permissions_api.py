@@ -96,7 +96,7 @@ class ResourcePermissionsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='ResourcePermissionCollection',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -190,7 +190,7 @@ class ResourcePermissionsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='ResourcePermission',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -296,7 +296,7 @@ class ResourcePermissionsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='object',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),

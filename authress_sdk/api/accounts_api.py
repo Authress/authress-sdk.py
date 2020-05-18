@@ -104,7 +104,7 @@ class AccountsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='Account',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -190,7 +190,7 @@ class AccountsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='AccountCollection',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -276,7 +276,7 @@ class AccountsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='IdentityCollection',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),
@@ -374,7 +374,7 @@ class AccountsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='object',
-            auth_settings=auth_settings,
+
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
             _preload_content=params.get('_preload_content', True),

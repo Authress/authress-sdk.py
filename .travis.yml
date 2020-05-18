@@ -3,9 +3,9 @@ python:
 - 3.6.3
 cache: pip
 install:
-- pip3 install -r requirements.txt
+- pip3 install -r requirements.txt -r test-requirements.txt
 script:
-- echo 'Success'
+- nosetests --verbosity=3
 deploy:
   provider: pypi
   skip_cleanup: true

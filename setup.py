@@ -9,6 +9,11 @@ REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil"]
 #
 # python setup.py install
 
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+  long_description = f.read()
+
 setup(
   name = 'authress-sdk',
   version = VERSION,
@@ -22,7 +27,6 @@ setup(
   download_url = f"https://github.com/Authress/authress-sdk.py/tarball/{VERSION}",
   keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
   classifiers = [],
-  long_description="""\
-  This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.
-"""
+  long_description=long_description,
+  long_description_content_type='text/markdown'
 )
