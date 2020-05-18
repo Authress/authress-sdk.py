@@ -10,7 +10,7 @@ This is the Authress SDK used to integrate with the authorization as a service p
 ```sh
 pip install authress-sdk
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
+(you may need to run `pip` with root permission: `sudo pip install authress-sdk`)
 
 Then import the package:
 ```python
@@ -49,5 +49,5 @@ def get_resource(resourceId):
     raise api_exception
 
   # On success, continue with the route code to load resource and return it
-  return 'Resource'
+  return 'Resource', 200
 ```
