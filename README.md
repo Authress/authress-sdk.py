@@ -19,6 +19,7 @@ import authress_sdk
 
 ## Getting Started
 
+### Authorize using a user token
 ```python
 from authress_sdk import ApiClient
 
@@ -40,7 +41,43 @@ def get_resource(resourceId):
   # Check Authress to authorize the user
   try
     api_instance = UserPermissionsApi(authress_client)
-    api_instance.authorize_user(None, f'resources/{request.view_args['resourceId']}', 'READ')
+    api_instance.authorize_user(None, f'resources/{resourceId}', 'READ')
+  except ApiException as api_exception:
+    # Will throw except if the user is not authorized to read the resource
+    if api_exception.status is 403:
+      return 403
+
+    raise api_exception
+
+  # On success, continue with the route code to load resource and return it
+  return 'Resource', 200
+```
+
+### Authorize with a service client
+```python
+from authress_sdk import ApiClient
+
+# create an instance of the API class during service initialization
+# Replace DOMAIN with the Authress domain for your account
+host = "https://DOMAIN.api.authress.io"
+
+# Create a service client in the Authress management portal and past the access token here
+access_token = 'eyJrZXlJ....'
+authress_client = ApiClient(host, access_token)
+
+# on api route
+from flask import request
+from authress_sdk import UserPermissionsApi, ApiException
+
+@app.route('/resources/<resourceId>')
+def get_resource(resourceId):
+  # Get the user
+  user_id = get_user_id(request)
+
+  # Check Authress to authorize the user
+  try
+    api_instance = UserPermissionsApi(authress_client)
+    api_instance.authorize_user(user_id, f'resources/{resourceId}', 'READ')
   except ApiException as api_exception:
     # Will throw except if the user is not authorized to read the resource
     if api_exception.status is 403:

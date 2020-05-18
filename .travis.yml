@@ -5,7 +5,7 @@ cache: pip
 install:
 - pip3 install -r requirements.txt -r test-requirements.txt
 script:
-- nosetests --verbosity=3
+- nosetests
 deploy:
   provider: pypi
   skip_cleanup: true

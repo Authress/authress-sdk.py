@@ -9,6 +9,8 @@ import os
 import re
 import tempfile
 import jwt
+import base64
+import json
 
 # python 2 and python 3 compatibility library
 import six
@@ -31,14 +33,13 @@ class ApiClient(object):
         'object': object,
     }
 
-    def __init__(self, host=None, header_name=None, header_value=None, cookie=None):
+    def __init__(self, host=None, access_key=None):
         self.host = host
+        self.access_key = access_key
+        self.token = None
         self.pool = ThreadPool()
         self.rest_client = rest.RESTClientObject()
         self.default_headers = {}
-        if header_name is not None:
-            self.default_headers[header_name] = header_value
-        self.cookie = cookie
         # Set default User-Agent.
         self.default_headers['User-Agent'] = f'Python AuthressSDK version: 1.0'
 
@@ -71,8 +72,10 @@ class ApiClient(object):
         header_params = header_params or {}
         header_params.update(self.default_headers)
 
-        if self.cookie:
-            header_params['Cookie'] = self.cookie
+        token = self.get_client_token()
+        if token is not None:
+          header_params['Authorization'] = f'Bearer {token}'
+
         if header_params:
             header_params = self.sanitize_for_serialization(header_params)
             header_params = dict(self.parameters_to_tuples(header_params,
@@ -540,3 +543,26 @@ class ApiClient(object):
             if klass_name:
                 instance = self.__deserialize(data, klass_name)
         return instance
+
+    def get_client_token(self):
+      if self.access_key is not None:
+          current_token_is_valid = False
+          try:
+            current_token_is_valid = self.token is not None and jwt.decode(self.token, verify=False)['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
+          except jwt.ExpiredSignatureError:
+            current_token_is_valid = False
+
+          if current_token_is_valid is not False:
+            return self.token
+
+          decoded_access_key = json.loads(base64.b64decode(self.access_key))
+          payload = {
+            'iss': f"https://api.authress.io/v1/clients/{decoded_access_key['clientId']}",
+            'aud': decoded_access_key['audience'],
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
+            'sub': decoded_access_key['clientId'],
+            'scopes': 'openId'
+          }
+
+          self.token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm='RS256', headers={'kid': decoded_access_key['keyId'] })
+          return self.token
