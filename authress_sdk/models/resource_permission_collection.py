@@ -17,7 +17,7 @@ class ResourcePermissionCollection(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'resources': 'ResourcePermission'
+        'resources': 'list[ResourcePermission]'
     }
 
     attribute_map = {
@@ -36,7 +36,7 @@ class ResourcePermissionCollection(object):
 
 
         :return: The resources of this ResourcePermissionCollection.
-        :rtype: ResourcePermission
+        :rtype: list[ResourcePermission]
         """
         return self._resources
 
