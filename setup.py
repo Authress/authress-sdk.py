@@ -26,11 +26,11 @@ setup(
   url = 'https://github.com/Authress/authress-sdk.py.git',
   include_package_data = True,
   install_requires=REQUIRES,
-  packages = ['authress_sdk'],
+  packages = find_packages(exclude=['tests']),
+  data_files=[('', ['authress_sdk/VERSION'])],
   keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
   classifiers = [],
   license = 'Apache-2.0',
-  data_files=[('', ['VERSION'])],
   long_description=long_description,
   long_description_content_type='text/markdown'
 )
