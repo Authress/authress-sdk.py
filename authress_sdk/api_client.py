@@ -564,5 +564,5 @@ class ApiClient(object):
             'scopes': 'openId'
           }
 
-          self.token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm='RS256', headers={'kid': decoded_access_key['keyId'] })
+          self.token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm='RS256', headers={'kid': decoded_access_key['keyId'] }).decode("utf-8")
           return self.token

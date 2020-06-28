@@ -24,7 +24,6 @@ setup(
   include_package_data = True,
   install_requires=REQUIRES,
   packages=find_packages(),
-  download_url = f"https://github.com/Authress/authress-sdk.py/tarball/{VERSION}",
   keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
   classifiers = [],
   long_description=long_description,
