@@ -41,7 +41,11 @@ class ApiClient(object):
         self.rest_client = rest.RESTClientObject()
         self.default_headers = {}
         # Set default User-Agent.
-        self.default_headers['User-Agent'] = f'Python AuthressSDK version: 1.0'
+
+        this_directory = os.path.abspath(os.path.dirname(__file__))
+        with open(os.path.join(this_directory, '..', 'VERSION')) as version_file:
+          VERSION = version_file.read().strip()
+        self.default_headers['User-Agent'] = f'Python AuthressSDK version: {VERSION}'
 
     def __del__(self):
         self.pool.close()

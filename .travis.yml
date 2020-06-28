@@ -3,9 +3,10 @@ python:
 - 3.6.3
 cache: pip
 install:
-- pip3 install -r requirements.txt -r test-requirements.txt
+  - pip3 install -r requirements.txt -r test-requirements.txt
 script:
-- nosetests
+  - echo "${TRAVIS_BRANCH/release\//}.$TRAVIS_BUILD_NUMBER" > VERSION
+  - nosetests
 deploy:
   provider: pypi
   skip_cleanup: true
