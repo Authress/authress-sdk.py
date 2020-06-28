@@ -1,7 +1,7 @@
 # authress-sdk
 Authress SDK for Python.
 
-[![NuGet version](https://badge.fury.io/py/authress-sdk.svg)](https://badge.fury.io/py/authress-sdk) [![Build Status](https://travis-ci.com/authress/authress-sdk.py.svg?branch=master)](https://travis-ci.com/authress/authress-sdk.py)
+[![NuGet version](https://badge.fury.io/py/authress-sdk.svg)](https://badge.fury.io/py/authress-sdk) [![Build Status](https://travis-ci.com/Authress/authress-sdk.py.svg?branch=release%2F1.0)](https://travis-ci.com/authress/authress-sdk.py)
 
 This is the Authress SDK used to integrate with the authorization as a service provider Authress at https://authress.io.
 

@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-TRAVIS_BUILD_VERSION = os.environ.get('TRAVIS_BUILD_NUMBER') or "0"
+TRAVIS_BUILD_VERSION = os.environ['TRAVIS_BUILD_NUMBER'] or "0"
 VERSION = f"1.0.{TRAVIS_BUILD_VERSION}"
 REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil", "PyJWT >= 1.7.1", "cryptography >= 2.9.2"]
 
@@ -28,6 +28,7 @@ setup(
   packages=find_packages(),
   keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
   classifiers = [],
+  license = "Apache-2.0",
   long_description=long_description,
   long_description_content_type='text/markdown'
 )
