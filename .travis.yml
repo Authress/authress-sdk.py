@@ -5,7 +5,7 @@ cache: pip
 install:
   - pip3 install -r requirements.txt -r test-requirements.txt
 script:
-  - echo "${TRAVIS_BRANCH/release\//}.$TRAVIS_BUILD_NUMBER" > VERSION
+  - echo "${TRAVIS_BRANCH/release\//}.$TRAVIS_BUILD_NUMBER" > ./authress_sdk/VERSION
   - nosetests
 deploy:
   provider: pypi

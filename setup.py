@@ -12,7 +12,7 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
   long_description = f.read()
 
-with open(os.path.join(this_directory, 'VERSION')) as version_file:
+with open(os.path.join(this_directory, 'authress_sdk', 'VERSION')) as version_file:
   VERSION = version_file.read().strip()
 
 print("Building version", VERSION)
@@ -26,7 +26,7 @@ setup(
   url = 'https://github.com/Authress/authress-sdk.py.git',
   include_package_data = True,
   install_requires=REQUIRES,
-  packages = find_packages(exclude=["tests", "integrationTests"]),
+  packages = ['authress_sdk'],
   keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
   classifiers = [],
   license = 'Apache-2.0',

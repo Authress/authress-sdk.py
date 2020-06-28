@@ -43,7 +43,7 @@ class ApiClient(object):
         # Set default User-Agent.
 
         this_directory = os.path.abspath(os.path.dirname(__file__))
-        with open(os.path.join(this_directory, '..', 'VERSION')) as version_file:
+        with open(os.path.join(this_directory, 'VERSION')) as version_file:
           VERSION = version_file.read().strip()
         self.default_headers['User-Agent'] = f'Python AuthressSDK version: {VERSION}'
 
