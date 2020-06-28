@@ -17,7 +17,7 @@ class AccessRecordCollection(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'records': 'AccessRecord'
+        'records': 'list[AccessRecord]'
     }
 
     attribute_map = {
@@ -36,7 +36,7 @@ class AccessRecordCollection(object):
 
 
         :return: The records of this AccessRecordCollection.
-        :rtype: AccessRecord
+        :rtype: list[AccessRecord]
         """
         return self._records
 
@@ -46,7 +46,7 @@ class AccessRecordCollection(object):
 
 
         :param records: The records of this AccessRecordCollection.
-        :type: AccessRecord
+        :type: list[AccessRecord]
         """
         if records is None:
             raise ValueError("Invalid value for `records`, must not be `None`")

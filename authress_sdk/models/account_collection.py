@@ -17,7 +17,7 @@ class AccountCollection(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'accounts': 'Account'
+        'accounts': 'list[Account]'
     }
 
     attribute_map = {
@@ -36,7 +36,7 @@ class AccountCollection(object):
 
 
         :return: The accounts of this AccountCollection.
-        :rtype: Account
+        :rtype: list[Account]
         """
         return self._accounts
 
@@ -46,7 +46,7 @@ class AccountCollection(object):
 
 
         :param accounts: The accounts of this AccountCollection.
-        :type: Account
+        :type: list[Account]
         """
         if accounts is None:
             raise ValueError("Invalid value for `accounts`, must not be `None`")
