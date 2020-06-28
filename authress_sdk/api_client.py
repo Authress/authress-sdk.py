@@ -14,7 +14,7 @@ import json
 
 # python 2 and python 3 compatibility library
 import six
-from six.moves.urllib.parse import quote, urlencode
+from six.moves.urllib.parse import quote, quote
 
 import authress_sdk.models
 from authress_sdk import rest
@@ -557,7 +557,7 @@ class ApiClient(object):
 
           decoded_access_key = json.loads(base64.b64decode(self.access_key))
           payload = {
-            'iss': f"https://api.authress.io/v1/clients/{urlencode(decoded_access_key['clientId'])}",
+            'iss': f"https://api.authress.io/v1/clients/{quote(decoded_access_key['clientId'])}",
             'aud': decoded_access_key['audience'],
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
             'sub': decoded_access_key['clientId'],
