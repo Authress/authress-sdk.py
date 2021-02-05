@@ -88,3 +88,23 @@ def get_resource(resourceId):
   # On success, continue with the route code to load resource and return it
   return 'Resource', 200
 ```
+
+## Using the Authress service client as an API key
+You can use the Authress service client access token as an api key for your application. This is as simple as pulling in the SDK and referencing the token provider.
+
+```python
+from authress_sdk import ApiClient as AuthressClient
+
+access_key = "eyARB5k-..." # For your API clients, these can be created via the API at https://authress.io/app/#/api
+authress_host = None # Optionally you can call the Authress API if there are authress resources to be fetched
+authress_client = AuthressClient(authress_host, access_key)
+# Generates a JWT to be used as a Bearer token for your API
+jwt_token = authress_client.get_client_token()
+```
+
+In the case of a CLI or an SDK, the recommendation is to receive the access key from the user, perform these steps and then use the resulting `jwt_token` with your API. You can handle the JWTs as you would validate any JWT, in most cases it might be easier to make a request to Authress on the service side for token validation. An example is above:
+```python
+authress_client.set_token(jwt_token)
+api_instance = UserPermissionsApi(authress_client)
+api_instance.authorize_user(...)
+```
