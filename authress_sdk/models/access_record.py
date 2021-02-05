@@ -74,9 +74,6 @@ class AccessRecord(object):
         :param record_id: The record_id of this AccessRecord.
         :type: str
         """
-        if record_id is None:
-            raise ValueError("Invalid value for `record_id`, must not be `None`")
-
         self._record_id = record_id
 
     @property
@@ -99,9 +96,6 @@ class AccessRecord(object):
         :param name: The name of this AccessRecord.
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")
-
         self._name = name
 
     @property
@@ -122,9 +116,6 @@ class AccessRecord(object):
         :param account: The account of this AccessRecord.
         :type: AccessRecordAccount
         """
-        if account is None:
-            raise ValueError("Invalid value for `account`, must not be `None`")
-
         self._account = account
 
     @property
@@ -147,9 +138,6 @@ class AccessRecord(object):
         :param users: The users of this AccessRecord.
         :type: list[AccessRecordUsers]
         """
-        if users is None:
-            raise ValueError("Invalid value for `users`, must not be `None`")
-
         self._users = users
 
     @property
@@ -172,9 +160,6 @@ class AccessRecord(object):
         :param admins: The admins of this AccessRecord.
         :type: list[AccessRecordUsers]
         """
-        if admins is None:
-            raise ValueError("Invalid value for `admins`, must not be `None`")
-
         self._admins = admins
 
     @property
@@ -220,9 +205,6 @@ class AccessRecord(object):
         :param links: The links of this AccessRecord.
         :type: object
         """
-        if links is None:
-            raise ValueError("Invalid value for `links`, must not be `None`")
-
         self._links = links
 
     def to_dict(self):

@@ -48,9 +48,6 @@ class AccessRecordAccount(object):
         :param account_id: The account_id of this AccessRecordAccount.
         :type: str
         """
-        if account_id is None:
-            raise ValueError("Invalid value for `account_id`, must not be `None`")
-
         self._account_id = account_id
 
     def to_dict(self):

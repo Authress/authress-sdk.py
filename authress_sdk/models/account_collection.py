@@ -48,9 +48,6 @@ class AccountCollection(object):
         :param accounts: The accounts of this AccountCollection.
         :type: list[Account]
         """
-        if accounts is None:
-            raise ValueError("Invalid value for `accounts`, must not be `None`")
-
         self._accounts = accounts
 
     def to_dict(self):

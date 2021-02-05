@@ -92,6 +92,7 @@ def get_resource(resourceId):
 ## Using the Authress service client as an API key
 You can use the Authress service client access token as an api key for your application. This is as simple as pulling in the SDK and referencing the token provider.
 
+### Application SDK example
 ```python
 from authress_sdk import ApiClient as AuthressClient
 
@@ -107,4 +108,36 @@ In the case of a CLI or an SDK, the recommendation is to receive the access key 
 authress_client.set_token(jwt_token)
 api_instance = UserPermissionsApi(authress_client)
 api_instance.authorize_user(...)
+```
+
+### Generation of service client
+Since part of this process involves creating the service client and access token as part of your api. First create a service client which has `Authress:Owner` to resource `Authress:ServiceClients/*`. Then execute the following on user request to create a new api key.
+
+```python
+from authress_sdk import ServiceClientsApi, AccessRecordsApi, ApiClient
+from authress_sdk.models import *
+
+# Your service's service client access token
+access_token = 'eyJrZXlJ....'
+host = "https://DOMAIN.api.authress.io"
+authress_client = ApiClient(host, access_token)
+
+# User to create access token for
+user_id = 'USER_A1'
+
+# Create the service client
+service_client_api = ServiceClientsApi(authress_client)
+new_client = service_client_api.create_client(Client(name=f'ServiceClient for User {user_id}'))
+
+# Give the service client access to the users data
+record_api = AccessRecordsApi(authress_client)
+record_api.create_record(AccessRecord(
+  name=f'API Key {new_client.client_id}',
+  users=[AccessRecordUsers(f'Authress:ServiceClients/{new_client.client_id}')],
+  # Add the list of permissions this api key should have, for example here we've added all access to all the users resources as defined in Authress
+  statements=[AccessRecordStatements(['Authress:Owner'], [AccessRecordResources(f'/users/{user_id}')])]))
+# Request a new access key for that client
+data = service_client_api.request_access_key(new_client.client_id)
+# Return the access key to the user for usage
+return data.access_key
 ```

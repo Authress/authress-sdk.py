@@ -64,9 +64,6 @@ class Account(object):
         :param account_id: The account_id of this Account.
         :type: str
         """
-        if account_id is None:
-            raise ValueError("Invalid value for `account_id`, must not be `None`")
-
         self._account_id = account_id
 
     @property
@@ -87,9 +84,6 @@ class Account(object):
         :param created_time: The created_time of this Account.
         :type: datetime
         """
-        if created_time is None:
-            raise ValueError("Invalid value for `created_time`, must not be `None`")
-
         self._created_time = created_time
 
     @property
@@ -112,9 +106,6 @@ class Account(object):
         :param domain: The domain of this Account.
         :type: str
         """
-        if domain is None:
-            raise ValueError("Invalid value for `domain`, must not be `None`")
-
         self._domain = domain
 
     @property
@@ -135,9 +126,6 @@ class Account(object):
         :param company: The company of this Account.
         :type: object
         """
-        if company is None:
-            raise ValueError("Invalid value for `company`, must not be `None`")
-
         self._company = company
 
     @property
@@ -158,9 +146,6 @@ class Account(object):
         :param links: The links of this Account.
         :type: object
         """
-        if links is None:
-            raise ValueError("Invalid value for `links`, must not be `None`")
-
         self._links = links
 
     def to_dict(self):

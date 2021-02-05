@@ -62,9 +62,6 @@ class PermissionObject(object):
         :param action: The action of this PermissionObject.
         :type: str
         """
-        if action is None:
-            raise ValueError("Invalid value for `action`, must not be `None`")
-
         self._action = action
 
     @property
@@ -87,9 +84,6 @@ class PermissionObject(object):
         :param allow: The allow of this PermissionObject.
         :type: bool
         """
-        if allow is None:
-            raise ValueError("Invalid value for `allow`, must not be `None`")
-
         self._allow = allow
 
     @property
@@ -112,9 +106,6 @@ class PermissionObject(object):
         :param grant: The grant of this PermissionObject.
         :type: bool
         """
-        if grant is None:
-            raise ValueError("Invalid value for `grant`, must not be `None`")
-
         self._grant = grant
 
     @property
@@ -137,9 +128,6 @@ class PermissionObject(object):
         :param delegate: The delegate of this PermissionObject.
         :type: bool
         """
-        if delegate is None:
-            raise ValueError("Invalid value for `delegate`, must not be `None`")
-
         self._delegate = delegate
 
     def to_dict(self):

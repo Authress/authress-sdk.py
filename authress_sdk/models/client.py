@@ -63,9 +63,6 @@ class Client(object):
         :param client_id: The client_id of this Client.
         :type: str
         """
-        if client_id is None:
-            raise ValueError("Invalid value for `client_id`, must not be `None`")
-
         self._client_id = client_id
 
     @property
@@ -86,9 +83,6 @@ class Client(object):
         :param created_time: The created_time of this Client.
         :type: datetime
         """
-        if created_time is None:
-            raise ValueError("Invalid value for `created_time`, must not be `None`")
-
         self._created_time = created_time
 
     @property
@@ -111,9 +105,6 @@ class Client(object):
         :param name: The name of this Client.
         :type: str
         """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")
-
         self._name = name
 
     @property

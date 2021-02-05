@@ -53,9 +53,6 @@ class UserResources(object):
         :param user_id: The user_id of this UserResources.
         :type: str
         """
-        if user_id is None:
-            raise ValueError("Invalid value for `user_id`, must not be `None`")
-
         self._user_id = user_id
 
     @property
