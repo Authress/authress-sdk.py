@@ -552,7 +552,7 @@ class ApiClient(object):
       if self.access_key is not None:
           current_token_is_valid = False
           try:
-            current_token_is_valid = self.token is not None and jwt.decode(self.token, verify=False)['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
+            current_token_is_valid = self.token is not None and jwt.decode(self.token, verify=False, options={"verify_signature": False}, algorithms=['RS256'])['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
           except jwt.ExpiredSignatureError:
             current_token_is_valid = False
 
@@ -568,5 +568,6 @@ class ApiClient(object):
             'scopes': 'openId'
           }
 
-          self.token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm='RS256', headers={'kid': decoded_access_key['keyId'] }).decode("utf-8")
+          jwt_token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm='RS256', headers={'kid': decoded_access_key['keyId'] })
+          self.token = jwt_token if isinstance(jwt_token, str) else jwt_token.decode("utf-8")
           return self.token

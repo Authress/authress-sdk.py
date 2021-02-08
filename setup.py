@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil", "PyJWT >= 1.7.1", "cryptography >= 2.9.2"]
+REQUIRES = ["urllib3 >= 1.15", "six >= 1.10", "certifi", "python-dateutil", "PyJWT == 1.7.1", "cryptography >= 2.9.2"]
 
 # To install the library, run the following
 #
