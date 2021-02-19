@@ -549,25 +549,38 @@ class ApiClient(object):
         return instance
 
     def get_client_token(self):
-      if self.access_key is not None:
-          current_token_is_valid = False
-          try:
-            current_token_is_valid = self.token is not None and jwt.decode(self.token, verify=False, options={"verify_signature": False}, algorithms=['RS256'])['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
-          except jwt.ExpiredSignatureError:
-            current_token_is_valid = False
+      if self.access_key is None:
+        return None
 
-          if current_token_is_valid is not False:
-            return self.token
+      current_token_is_valid = False
+      try:
+        current_token_is_valid = self.token is not None and jwt.decode(self.token, verify=False, options={"verify_signature": False}, algorithms=['RS256', 'EdDSA'])['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
+      except jwt.ExpiredSignatureError:
+        current_token_is_valid = False
 
-          decoded_access_key = json.loads(base64.b64decode(self.access_key))
-          payload = {
-            'iss': f"https://api.authress.io/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
-            'aud': decoded_access_key['audience'],
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
-            'sub': decoded_access_key['clientId'],
-            'scopes': 'openId'
-          }
+      if current_token_is_valid is not False:
+        return self.token
 
-          jwt_token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm='RS256', headers={'kid': decoded_access_key['keyId'] })
-          self.token = jwt_token if isinstance(jwt_token, str) else jwt_token.decode("utf-8")
-          return self.token
+      try:
+        decoded_access_key = json.loads(base64.b64decode(self.access_key))
+        algorithm = 'RS256'
+      except:
+        decoded_access_key = {
+          'clientId': self.access_key.split('.')[0],
+          'keyId': self.access_key.split('.')[1],
+          'audience': f"{self.access_key.split('.')[2]}.accounts.authress.io",
+          'privateKey': f"-----BEGIN PRIVATE KEY-----\n{self.access_key.split('.')[3]}\n-----END PRIVATE KEY-----"
+        }
+        algorithm = 'EdDSA'
+
+      payload = {
+        'iss': f"https://api.authress.io/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
+        'aud': decoded_access_key['audience'],
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
+        'sub': decoded_access_key['clientId'],
+        'scopes': 'openId'
+      }
+
+      jwt_token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm=algorithm, headers={'kid': decoded_access_key['keyId'] })
+      self.token = jwt_token if isinstance(jwt_token, str) else jwt_token.decode("utf-8")
+      return self.token

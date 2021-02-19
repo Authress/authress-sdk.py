@@ -29,6 +29,21 @@ class ServiceClientTokenProviderTest(unittest.TestCase):
     nose.tools.eq_(token1, token2)
     pass
 
+  def test_get_token_for_eddsa(self):
+    """Test case for get_token for EdDsa
+
+    Get the token for a client registered as the token provider
+    """
+
+    access_key = 'CLINET.KEY.ACCOUNT.MC4CAQAwBQYDK2VwBCIEIIM7npIckfT431rYzEeF+hCqvHogpOllmVSgINwqQv+g'
+
+    authress_client = ApiClient("", access_key)
+    token1 = authress_client.get_client_token()
+    time.sleep(2)
+    token2 = authress_client.get_client_token()
+    nose.tools.eq_(token1, token2)
+    pass
+
   def test_get_token_without_access_key(self):
     """Test case for get_token with no access key
 
