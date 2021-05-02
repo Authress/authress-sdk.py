@@ -28,7 +28,7 @@ setup(
   install_requires=REQUIRES,
   packages = find_packages(exclude=['tests']),
   data_files=[('', ['authress_sdk/VERSION'])],
-  keywords = ['Authentication', 'Authorization', 'Authorization as a service', 'Security', 'Authress'],
+  keywords = ['Authorization as a service', 'Security', 'authorization', 'authorization as a service', 'authentication', 'user authentication', 'Authress', 'Authress client', 'access management', 'access management as a service', 'user security', 'oso', 'polar', 'open source policy engine', 'embedded authorization', 'batteries included authorization'],
   classifiers = [],
   license = 'Apache-2.0',
   long_description=long_description,
