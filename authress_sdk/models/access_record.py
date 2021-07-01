@@ -21,6 +21,7 @@ class AccessRecord(object):
         'name': 'str',
         'account': 'AccessRecordAccount',
         'users': 'list[AccessRecordUsers]',
+        'groups': 'list[AccessRecordGroup]',
         'admins': 'list[AccessRecordUsers]',
         'statements': 'list[AccessRecordStatements]',
         'links': 'object'
@@ -31,17 +32,19 @@ class AccessRecord(object):
         'name': 'name',
         'account': 'account',
         'users': 'users',
+        'groups': 'groups',
         'admins': 'admins',
         'statements': 'statements',
         'links': 'links'
     }
 
-    def __init__(self, record_id=None, name=None, account=None, users=None, admins=None, statements=None, links=None):
+    def __init__(self, record_id=None, name=None, account=None, users=None, admins=None, statements=None, links=None, groups=None):
         """AccessRecord"""
         self._record_id = None
         self._name = None
         self._account = None
         self._users = None
+        self._groups = None
         self._admins = None
         self._statements = None
         self._links = None
@@ -50,6 +53,7 @@ class AccessRecord(object):
         self.name = name
         self.account = account
         self.users = users
+        self.groups = groups
         self.admins = admins
         self.statements = statements
         self.links = links
@@ -139,6 +143,28 @@ class AccessRecord(object):
         :type: list[AccessRecordUsers]
         """
         self._users = users
+
+    @property
+    def groups(self):
+        """Gets the groups of this AccessRecord.
+
+        The list of groups this record applies to. Users in these groups will be receive access to the resources listed.
+
+        :return: The groups of this AccessRecord.
+        :rtype: list[AccessRecordGroup]
+        """
+        return self._groups
+
+    @groups.setter
+    def groups(self, groups):
+        """Sets the groups of this AccessRecord.
+
+        The list of groups this record applies to. Users in these groups will be receive access to the resources listed.
+
+        :param groups: The groups of this AccessRecord.
+        :type: list[AccessRecordGroup]
+        """
+        self._groups = groups
 
     @property
     def admins(self):

@@ -11,6 +11,7 @@ from authress_sdk.models.access_record_collection import AccessRecordCollection
 from authress_sdk.models.access_record_resources import AccessRecordResources
 from authress_sdk.models.access_record_statements import AccessRecordStatements
 from authress_sdk.models.access_record_users import AccessRecordUsers
+from authress_sdk.models.access_record_group import AccessRecordGroup
 from authress_sdk.models.account import Account
 from authress_sdk.models.account_collection import AccountCollection
 from authress_sdk.models.claim_request import ClaimRequest
