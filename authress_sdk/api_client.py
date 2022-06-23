@@ -34,7 +34,7 @@ class ApiClient(object):
     }
 
     def __init__(self, host=None, access_key=None):
-        self.host = host
+        self.host = host if host.startswith('http') else f"https://{host}"
         self.access_key = access_key
         self.token = None
         self.pool = ThreadPool()
@@ -573,9 +573,11 @@ class ApiClient(object):
         }
         algorithm = 'EdDSA'
 
+      issuer_origin = "https://api.authress.io" if (self.host == None or self.host == '' or '.authress.io' in self.host) else self.host
       payload = {
-        'iss': f"https://api.authress.io/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
+        'iss': f"{issuer_origin}/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
         'aud': decoded_access_key['audience'],
+        'iat': datetime.datetime.utcnow(),
         'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
         'sub': decoded_access_key['clientId'],
         'scopes': 'openId'
