@@ -39,6 +39,7 @@ jobs:
         print_hash: true
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
+        packages_dir: authress_sdk/
 
     - name: Tag and release version
       if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
