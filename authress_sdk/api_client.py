@@ -56,7 +56,7 @@ class ApiClient(object):
 
     def get_user_from_token(self):
         token = self.default_headers['Authorization'].replace("Bearer", "").strip()
-        jwtData = jwt.decode(token, verify=False, algorithms=['RS256', 'RS512', 'EdDSA'])
+        jwtData = jwt.decode(authorization_token, options={"verify_signature": False})
         if 'https://api.authress.io' in jwtData['aud']:
           return f"Authress|{jwtData['sub']}"
 
@@ -554,7 +554,7 @@ class ApiClient(object):
 
       current_token_is_valid = False
       try:
-        current_token_is_valid = self.token is not None and jwt.decode(self.token, verify=False, options={"verify_signature": False}, algorithms=['RS256', 'EdDSA'])['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
+        current_token_is_valid = self.token is not None and jwt.decode(self.token, options={"verify_signature": False})['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
       except jwt.ExpiredSignatureError:
         current_token_is_valid = False
 
