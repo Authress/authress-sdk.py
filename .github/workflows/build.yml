@@ -22,9 +22,11 @@ jobs:
         python-version: 3.8.5
 
     - name: Set Version number
+      if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
       run: |
         branchId="${GITHUB_REF/refs\/heads\/release\//}"
         buildNumber="${branchId}.${GITHUB_RUN_NUMBER}"
+        echo $brandId $buildNumber
         sed "s/0.0.0/${buildNumber}/g" ./authress_sdk/VERSION -i
     - name: Install dependencies
       run: pip3 install -r requirements.txt -r test-requirements.txt

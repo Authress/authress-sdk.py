@@ -56,7 +56,7 @@ class ApiClient(object):
 
     def get_user_from_token(self):
         token = self.default_headers['Authorization'].replace("Bearer", "").strip()
-        jwtData = jwt.decode(token, verify=False)
+        jwtData = jwt.decode(token, verify=False, algorithms=['RS256', 'RS512', 'EdDSA'])
         if 'https://api.authress.io' in jwtData['aud']:
           return f"Authress|{jwtData['sub']}"
 
