@@ -44,7 +44,7 @@ class ApiClient(object):
 
         this_directory = os.path.abspath(os.path.dirname(__file__))
         with open(os.path.join(this_directory, 'VERSION')) as version_file:
-          VERSION = version_file.read().strip()
+            VERSION = version_file.read().strip()
         self.default_headers['User-Agent'] = f'Python AuthressSDK version: {VERSION}'
 
     def __del__(self):
@@ -57,9 +57,8 @@ class ApiClient(object):
     def get_user_from_token(self):
         token = self.default_headers['Authorization'].replace("Bearer", "").strip()
         jwtData = jwt.decode(token, options={"verify_signature": False})
-        if 'https://api.authress.io' in jwtData['aud']:
-          return f"Authress|{jwtData['sub']}"
-
+        if 'aud' in jwtData and 'https://api.authress.io' in jwtData['aud']:
+            return f"Authress|{jwtData['sub']}"
         return jwtData['sub']
 
     def set_default_header(self, header_name, header_value):
@@ -78,7 +77,7 @@ class ApiClient(object):
 
         token = self.get_client_token()
         if token is not None:
-          header_params['Authorization'] = f'Bearer {token}'
+            header_params['Authorization'] = f'Bearer {token}'
 
         if header_params:
             header_params = self.sanitize_for_serialization(header_params)
@@ -290,13 +289,13 @@ class ApiClient(object):
                                    _preload_content, _request_timeout)
         else:
             thread = self.pool.apply_async(self.__call_api, (resource_path,
-                                           method, path_params, query_params,
-                                           header_params, body,
-                                           post_params, files,
-                                           response_type,
-                                           _return_http_data_only,
-                                           collection_formats,
-                                           _preload_content, _request_timeout))
+                                                             method, path_params, query_params,
+                                                             header_params, body,
+                                                             post_params, files,
+                                                             response_type,
+                                                             _return_http_data_only,
+                                                             collection_formats,
+                                                             _preload_content, _request_timeout))
         return thread
 
     def request(self, method, url, query_params=None, headers=None,
@@ -507,12 +506,12 @@ class ApiClient(object):
                 status=0,
                 reason=(
                     "Failed to parse `{0}` as datetime object"
-                    .format(string)
+                        .format(string)
                 )
             )
 
     def __hasattr(self, object, name):
-            return name in object.__class__.__dict__
+        return name in object.__class__.__dict__
 
     def __deserialize_model(self, data, klass):
         """Deserializes list or dict to model.
@@ -549,40 +548,40 @@ class ApiClient(object):
         return instance
 
     def get_client_token(self):
-      if self.access_key is None:
-        return None
+        if self.access_key is None:
+            return None
 
-      current_token_is_valid = False
-      try:
-        current_token_is_valid = self.token is not None and jwt.decode(self.token, options={"verify_signature": False})['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
-      except jwt.ExpiredSignatureError:
         current_token_is_valid = False
+        try:
+            current_token_is_valid = self.token is not None and jwt.decode(self.token, options={"verify_signature": False})['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
+        except jwt.ExpiredSignatureError:
+            current_token_is_valid = False
 
-      if current_token_is_valid is not False:
-        return self.token
+        if current_token_is_valid is not False:
+            return self.token
 
-      try:
-        decoded_access_key = json.loads(base64.b64decode(self.access_key))
-        algorithm = 'RS256'
-      except:
-        decoded_access_key = {
-          'clientId': self.access_key.split('.')[0],
-          'keyId': self.access_key.split('.')[1],
-          'audience': f"{self.access_key.split('.')[2]}.accounts.authress.io",
-          'privateKey': f"-----BEGIN PRIVATE KEY-----\n{self.access_key.split('.')[3]}\n-----END PRIVATE KEY-----"
+        try:
+            decoded_access_key = json.loads(base64.b64decode(self.access_key))
+            algorithm = 'RS256'
+        except:
+            decoded_access_key = {
+                'clientId': self.access_key.split('.')[0],
+                'keyId': self.access_key.split('.')[1],
+                'audience': f"{self.access_key.split('.')[2]}.accounts.authress.io",
+                'privateKey': f"-----BEGIN PRIVATE KEY-----\n{self.access_key.split('.')[3]}\n-----END PRIVATE KEY-----"
+            }
+            algorithm = 'EdDSA'
+
+        issuer_origin = "https://api.authress.io" if (self.host == None or self.host == '' or '.authress.io' in self.host) else self.host
+        payload = {
+            'iss': f"{issuer_origin}/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
+            'aud': decoded_access_key['audience'],
+            'iat': datetime.datetime.utcnow(),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
+            'sub': decoded_access_key['clientId'],
+            'scopes': 'openId'
         }
-        algorithm = 'EdDSA'
 
-      issuer_origin = "https://api.authress.io" if (self.host == None or self.host == '' or '.authress.io' in self.host) else self.host
-      payload = {
-        'iss': f"{issuer_origin}/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
-        'aud': decoded_access_key['audience'],
-        'iat': datetime.datetime.utcnow(),
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
-        'sub': decoded_access_key['clientId'],
-        'scopes': 'openId'
-      }
-
-      jwt_token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm=algorithm, headers={'kid': decoded_access_key['keyId'] })
-      self.token = jwt_token if isinstance(jwt_token, str) else jwt_token.decode("utf-8")
-      return self.token
+        jwt_token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm=algorithm, headers={'kid': decoded_access_key['keyId'] })
+        self.token = jwt_token if isinstance(jwt_token, str) else jwt_token.decode("utf-8")
+        return self.token
