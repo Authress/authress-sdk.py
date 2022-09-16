@@ -5,7 +5,8 @@ import nose
 import time
 
 from authress_sdk import ApiClient
-
+from authress_sdk.models import *
+from authress_sdk import ServiceClientsApi, AccessRecordsApi
 
 class ServiceClientTokenProviderTest(unittest.TestCase):
   def setUp(self):
@@ -35,7 +36,7 @@ class ServiceClientTokenProviderTest(unittest.TestCase):
     Get the token for a client registered as the token provider
     """
 
-    access_key = 'CLINET.KEY.ACCOUNT.MC4CAQAwBQYDK2VwBCIEIIM7npIckfT431rYzEeF+hCqvHogpOllmVSgINwqQv+g'
+    access_key = 'CLIENT.KEY.ACCOUNT.MC4CAQAwBQYDK2VwBCIEIIM7npIckfT431rYzEeF+hCqvHogpOllmVSgINwqQv+g'
 
     authress_client = ApiClient("", access_key)
     token1 = authress_client.get_client_token()
