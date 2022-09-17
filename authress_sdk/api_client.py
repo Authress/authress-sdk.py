@@ -14,7 +14,8 @@ import json
 
 # python 2 and python 3 compatibility library
 import six
-from six.moves.urllib.parse import quote, quote
+from six.moves.urllib.parse import quote
+from authress_sdk.api import service_client_token_provider, token_verifier
 
 import authress_sdk.models
 from authress_sdk import rest
@@ -39,6 +40,8 @@ class ApiClient(object):
         self.token = None
         self.pool = ThreadPool()
         self.rest_client = rest.RESTClientObject()
+        self.token_verifier = token_verifier.TokenVerifier()
+        self.service_client_token_provider = service_client_token_provider.ServiceClientTokenProvider()
         self.default_headers = {}
         # Set default User-Agent.
 
@@ -549,40 +552,20 @@ class ApiClient(object):
         return instance
 
     def get_client_token(self):
-      if self.access_key is None:
-        return None
+      return self.service_client_token_provider.get_client_token(self.access_key, self.host)
 
-      current_token_is_valid = False
-      try:
-        current_token_is_valid = self.token is not None and jwt.decode(self.token, options={"verify_signature": False})['exp'] > (datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)).timestamp()
-      except jwt.ExpiredSignatureError:
-        current_token_is_valid = False
+    def verify_token(self, token):
+      """Verify a user access token
 
-      if current_token_is_valid is not False:
-        return self.token
+        On successful verification the response is the decoded user identity JWT.
+        On failure this raises an exception
 
-      try:
-        decoded_access_key = json.loads(base64.b64decode(self.access_key))
-        algorithm = 'RS256'
-      except:
-        decoded_access_key = {
-          'clientId': self.access_key.split('.')[0],
-          'keyId': self.access_key.split('.')[1],
-          'audience': f"{self.access_key.split('.')[2]}.accounts.authress.io",
-          'privateKey': f"-----BEGIN PRIVATE KEY-----\n{self.access_key.split('.')[3]}\n-----END PRIVATE KEY-----"
-        }
-        algorithm = 'EdDSA'
+        Note: This method makes HTTP calls to fetch public keys for token signature verification
 
-      issuer_origin = "https://api.authress.io" if (self.host == None or self.host == '' or '.authress.io' in self.host) else self.host
-      payload = {
-        'iss': f"{issuer_origin}/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
-        'aud': decoded_access_key['audience'],
-        'iat': datetime.datetime.utcnow(),
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
-        'sub': decoded_access_key['clientId'],
-        'scopes': 'openId'
-      }
+        :param string token: (required) The user's access token to verify
+        :raises: :class:`Exception`: Unauthorized
 
-      jwt_token = jwt.encode(payload, decoded_access_key['privateKey'], algorithm=algorithm, headers={'kid': decoded_access_key['keyId'] })
-      self.token = jwt_token if isinstance(jwt_token, str) else jwt_token.decode("utf-8")
-      return self.token
+        :return: UserIdentityJWT
+        """
+      return self.token_verifier.verify_token(self.host, token)
+

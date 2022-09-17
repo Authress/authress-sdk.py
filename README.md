@@ -24,8 +24,8 @@ import authress_sdk
 from authress_sdk import ApiClient
 
 # create an instance of the API class during service initialization
-# Replace DOMAIN with the Authress domain for your account
-host = "https://DOMAIN.api.authress.io"
+# Authress custom domain or if there isn't one yet, use the authress account specific url
+host = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
 authress_client = ApiClient(host)
 
 # on api route
@@ -58,8 +58,8 @@ def get_resource(resourceId):
 from authress_sdk import ApiClient
 
 # create an instance of the API class during service initialization
-# Replace DOMAIN with the Authress domain for your account
-host = "https://DOMAIN.api.authress.io"
+# Authress custom domain or if there isn't one yet, use the authress account specific url
+host = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # Create a service client in the Authress management portal and past the access token here
 access_token = 'eyJrZXlJ....'
@@ -119,7 +119,8 @@ from authress_sdk.models import *
 
 # Your service's service client access token
 access_token = 'eyJrZXlJ....'
-host = "https://DOMAIN.api.authress.io"
+# Authress custom domain or if there isn't one yet, use the authress account specific url
+host = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
 authress_client = ApiClient(host, access_token)
 
 # User to create access token for
@@ -140,4 +141,24 @@ record_api.create_record(AccessRecord(
 data = service_client_api.request_access_key(new_client.client_id)
 # Return the access key to the user for usage
 return data.access_key
+```
+
+### Token Verifier
+To verify incoming tokens from Authress call the `verify_token` method on the `ApiClient`
+
+```python
+from authress_sdk import ApiClient
+
+# User's access token from request
+authorization_token = request.headers.get("authorization")
+
+# Authress custom domain or if there isn't one yet, use the authress account specific url
+host = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+
+# Instantiate the client
+authress_client = ApiClient(host)
+
+# Verify the token, on successful verification the response is the decoded user identity JWT. On failure this raises an exception
+user_identity = authress_client.verify_token(authorization_token)
+
 ```

@@ -1,0 +1,19 @@
+{
+    "name": "Nose",
+    "type": "python",
+    "request": "launch",
+    "stopOnEntry": false,
+    "python": "${config.python.pythonPath}",
+    "program": "${workspaceRoot}/.vscode/run_nose.py",
+    "cwd": "${workspaceRoot}",
+    "debugOptions": [
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
+    ],
+    "args": [
+        "${file}",
+        "-v",
+        "-s"
+    ]
+}
