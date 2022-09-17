@@ -15,7 +15,7 @@ class TokenVerifier(object):
   def __init__(self):
     self.keyMap = dict()
 
-  def verify_token(self, authressCustomDomain, token, options):
+  def verify_token(self, authressCustomDomain, token, options=None):
     sanitized_domain = re.sub(r"https?://", "", authressCustomDomain)
     completeIssuerUrl = f"https://{sanitized_domain}"
     if token is None:
@@ -53,7 +53,7 @@ class TokenVerifier(object):
     if (clientIdMatcher is not None and clientIdMatcher.group(1) != unverifiedPayload['sub']):
       raise Exception("Unauthorized", "Service ID does not match token sub claim")
 
-    jwk = options['expectedPublicKey'] if 'expectedPublicKey' in options else self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks", kid)
+    jwk = options['expectedPublicKey'] if options is not None and 'expectedPublicKey' in options else self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks", kid)
 
     try:
       return jwt.decode(authenticationToken, jwt.api_jwk.PyJWK.from_dict(jwk).key, algorithms=['EdDSA'], options = { 'verify_aud': False })
