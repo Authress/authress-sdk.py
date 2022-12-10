@@ -4,16 +4,14 @@ class AccessRecordCollection(object):
 
     """
     Attributes:
-      swagger_types (dict): The key is attribute name
-                            and the value is attribute type.
-      attribute_map (dict): The key is attribute name
-                            and the value is json key in definition.
+      openapi_spec_types (dict): The key is attribute name and the value is attribute type.
+      attribute_serialization_map (dict): The key is attribute name and the value is json key in definition.
     """
-    swagger_types = {
+    openapi_spec_types = {
         'records': 'list[AccessRecord]'
     }
 
-    attribute_map = {
+    attribute_serialization_map = {
         'records': 'records'
     }
 

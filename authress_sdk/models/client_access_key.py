@@ -4,19 +4,17 @@ class ClientAccessKey(object):
 
     """
     Attributes:
-      swagger_types (dict): The key is attribute name
-                            and the value is attribute type.
-      attribute_map (dict): The key is attribute name
-                            and the value is json key in definition.
+      openapi_spec_types (dict): The key is attribute name and the value is attribute type.
+      attribute_serialization_map (dict): The key is attribute name and the value is json key in definition.
     """
-    swagger_types = {
+    openapi_spec_types = {
         'key_id': 'str',
         'client_id': 'str',
         'generation_date': 'datetime',
         'access_key': 'str'
     }
 
-    attribute_map = {
+    attribute_serialization_map = {
         'key_id': 'keyId',
         'client_id': 'clientId',
         'generation_date': 'generationDate',
