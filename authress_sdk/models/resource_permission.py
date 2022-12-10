@@ -1,9 +1,4 @@
 # coding: utf-8
-import pprint
-import re
-
-import six
-
 
 class ResourcePermission(object):
 

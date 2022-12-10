@@ -3,8 +3,6 @@
 
 from __future__ import absolute_import
 
-import re
-
 # python 2 and python 3 compatibility library
 import six
 
