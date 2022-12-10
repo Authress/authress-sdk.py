@@ -32,7 +32,7 @@ jobs:
       run: pip3 install -r requirements.txt -r test-requirements.txt
 
     - name: Run Tests
-      run: nosetests
+      run: python3 -m unittest
 
     - name: Build deployable
       run: |

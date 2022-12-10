@@ -23,8 +23,4 @@ class TokenVerifierTest(unittest.IsolatedAsyncioTestCase):
     publicKey = { 'alg': 'EdDSA', 'kty': 'OKP', 'crv': 'Ed25519', 'x': 'JxtSC5tZZJuaW7Aeu5Kh_3tgCpPZRkHaaFyTj5sQ3KU' }
 
     identity = token_verifier.TokenVerifier().verify_token(f"https://{customDomain}", access_key, { 'expectedPublicKey': publicKey })
-    print(identity)
-    pass
-
-if __name__ == '__main__':
-  unittest.main()
+    assert identity['iss'] == f'https://{customDomain}/v1/clients/CLIENT'

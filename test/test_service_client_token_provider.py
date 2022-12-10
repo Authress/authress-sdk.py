@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
 import unittest
-import nose
 import time
 
 from authress_sdk import ApiClient
@@ -27,7 +26,7 @@ class ServiceClientTokenProviderTest(unittest.TestCase):
     token1 = authress_client.get_client_token()
     time.sleep(2)
     token2 = authress_client.get_client_token()
-    nose.tools.eq_(token1, token2)
+    assert token1 == token2
     pass
 
   def test_get_token_for_eddsa(self):
@@ -42,7 +41,7 @@ class ServiceClientTokenProviderTest(unittest.TestCase):
     token1 = authress_client.get_client_token()
     time.sleep(2)
     token2 = authress_client.get_client_token()
-    nose.tools.eq_(token1, token2)
+    assert token1 == token2
     pass
 
   def test_get_token_without_access_key(self):
@@ -53,8 +52,5 @@ class ServiceClientTokenProviderTest(unittest.TestCase):
 
     authress_client = ApiClient("")
     token1 = authress_client.get_client_token()
-    nose.tools.eq_(token1, None)
+    assert token1 == None
     pass
-
-if __name__ == '__main__':
-  unittest.main()

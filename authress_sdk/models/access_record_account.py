@@ -23,7 +23,7 @@ class AccessRecordAccount(object):
         self.account_id = account_id
 
     @property
-    def account_id(self):
+    def account_id(self) -> str:
         """Gets the account_id of this AccessRecordAccount.
 
 
@@ -33,7 +33,7 @@ class AccessRecordAccount(object):
         return self._account_id
 
     @account_id.setter
-    def account_id(self, account_id):
+    def account_id(self, account_id: str):
         """Sets the account_id of this AccessRecordAccount.
 
 
