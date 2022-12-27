@@ -8,14 +8,9 @@ import re
 # python 2 and python 3 compatibility library
 import six
 
-from authress_sdk.api_client import ApiClient
-
-
 class ServiceClientsApi(object):
-    def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = ApiClient()
-        self.api_client = api_client
+    def __init__(self, api_client):
+      self.api_client = api_client
 
     def delete_access_key(self, client_id, key_id, **kwargs):
         """Remove an access key for a client

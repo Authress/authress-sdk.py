@@ -15,7 +15,7 @@ class ServiceClientTokenProvider(object):
   def __init__(self):
     self.token = None
 
-  def get_client_token(self, access_key, host=None):
+  def get_client_token(self, access_key, host=None) -> str:
     if access_key is None:
       return None
 

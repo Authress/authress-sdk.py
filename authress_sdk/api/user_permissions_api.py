@@ -8,16 +8,11 @@ import re
 # python 2 and python 3 compatibility library
 import six
 
-from authress_sdk.api_client import ApiClient
-
-
 class UserPermissionsApi(object):
-    def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = ApiClient()
-        self.api_client = api_client
+    def __init__(self, api_client):
+      self.api_client = api_client
 
-    def get_user_resources(self, user_id, **kwargs):
+    def get_user_resources(self, user_id=None, **kwargs):
         """Get the resources a user has to permission to.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get most conservative resource permission a user has access to. Since resource uris are cascading, a user with * access will always return a list with a single result. In the case that the user only has access to a list of resources in a collection, the list will be paginated.
@@ -44,7 +39,7 @@ class UserPermissionsApi(object):
             (data) = self.get_user_resources_with_http_info(user_id, **kwargs)
             return data
 
-    def get_user_resources_with_http_info(self, user_id, **kwargs):
+    def get_user_resources_with_http_info(self, user_id=None, **kwargs):
         """Get the resources a user has to permission to.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get most conservative resource permission a user has access to. Since resource uris are cascading, a user with * access will always return a list with a single result. In the case that the user only has access to a list of resources in a collection, the list will be paginated.
@@ -119,7 +114,7 @@ class UserPermissionsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_user_authorization_for_resource (self, user_id, resource_uri, **kwargs):
+    def get_user_authorization_for_resource (self, user_id=None, resource_uri=None, **kwargs):
         """Get the permissions a user has to a resource.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get a summary of the permissions a user has to a particular resource.
@@ -146,7 +141,7 @@ class UserPermissionsApi(object):
             (data) = self.get_user_authorization_for_resource_with_http_info(user_id, resource_uri, **kwargs)
             return data
 
-    def get_user_authorization_for_resource_with_http_info(self, user_id, resource_uri, **kwargs):
+    def get_user_authorization_for_resource_with_http_info(self, user_id=None, resource_uri=None, **kwargs):
         """Get the permissions a user has to a resource.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Get a summary of the permissions a user has to a particular resource.
@@ -225,7 +220,7 @@ class UserPermissionsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def authorize_user(self, user_id, resource_uri, permission, **kwargs):
+    def authorize_user(self, user_id=None, resource_uri=None, permission=None, **kwargs):
         """Check to see if a user has permissions to a resource.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Does the user have the specified permissions to the resource?
@@ -254,7 +249,7 @@ class UserPermissionsApi(object):
             (data) = self.authorize_user_with_http_info(user_id, resource_uri, permission, **kwargs)
             return data
 
-    def authorize_user_with_http_info(self, user_id, resource_uri, permission, **kwargs):
+    def authorize_user_with_http_info(self, user_id=None, resource_uri=None, permission=None, **kwargs):
         """Check to see if a user has permissions to a resource.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Does the user have the specified permissions to the resource?

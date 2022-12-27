@@ -6,14 +6,9 @@ from __future__ import absolute_import
 # python 2 and python 3 compatibility library
 import six
 
-from authress_sdk.api_client import ApiClient
-
-
 class AccountsApi(object):
-    def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = ApiClient()
-        self.api_client = api_client
+    def __init__(self, api_client):
+      self.api_client = api_client
 
     def get_account(self, account_id, **kwargs):
         """Get account information.

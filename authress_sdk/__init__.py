@@ -11,8 +11,9 @@ from authress_sdk.api.accounts_api import AccountsApi
 from authress_sdk.api.resource_permissions_api import ResourcePermissionsApi
 from authress_sdk.api.service_clients_api import ServiceClientsApi
 from authress_sdk.api.user_permissions_api import UserPermissionsApi
-# import ApiClient
-from authress_sdk.api_client import ApiClient
+# import AuthressClient
+from authress_sdk.authress_client import AuthressClient
+from authress_sdk.http_client import HttpClient
 from authress_sdk.rest import ApiException
 # import models into sdk package
 from authress_sdk.models.access_record import AccessRecord

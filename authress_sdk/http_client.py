@@ -7,21 +7,19 @@ import mimetypes
 from multiprocessing.pool import ThreadPool
 import os
 import re
-import tempfile
 import jwt
-import base64
 import json
 
 # python 2 and python 3 compatibility library
 import six
 from six.moves.urllib.parse import quote
-from authress_sdk.api import service_client_token_provider, token_verifier
+from authress_sdk.api import service_client_token_provider
 
 import authress_sdk.models
 from authress_sdk import rest
 
 
-class ApiClient(object):
+class HttpClient(object):
     PRIMITIVE_TYPES = (float, bool, bytes, six.text_type) + six.integer_types
     NATIVE_TYPES_MAPPING = {
         'int': int,
@@ -40,7 +38,6 @@ class ApiClient(object):
         self.token = None
         self.pool = ThreadPool()
         self.rest_client = rest.RESTClientObject()
-        self.token_verifier = token_verifier.TokenVerifier()
         self.service_client_token_provider = service_client_token_provider.ServiceClientTokenProvider()
         self.default_headers = {}
         # Set default User-Agent.
@@ -79,7 +76,7 @@ class ApiClient(object):
         header_params = header_params or {}
         header_params.update(self.default_headers)
 
-        token = self.get_client_token()
+        token = self._get_client_token()
         if token is not None:
           header_params['Authorization'] = f'Bearer {token}'
 
@@ -551,21 +548,5 @@ class ApiClient(object):
                 instance = self.__deserialize(data, klass_name)
         return instance
 
-    def get_client_token(self):
+    def _get_client_token(self) -> str:
       return self.service_client_token_provider.get_client_token(self.access_key, self.host)
-
-    def verify_token(self, token):
-      """Verify a user access token
-
-        On successful verification the response is the decoded user identity JWT.
-        On failure this raises an exception
-
-        Note: This method makes HTTP calls to fetch public keys for token signature verification
-
-        :param string token: (required) The user's access token to verify
-        :raises: :class:`Exception`: Unauthorized
-
-        :return: UserIdentityJWT
-        """
-      return self.token_verifier.verify_token(self.host, token)
-
