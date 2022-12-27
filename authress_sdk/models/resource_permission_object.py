@@ -1,6 +1,6 @@
 # coding: utf-8
 
-class ResourcePermissionPermissions(object):
+class ResourcePermissionObject(object):
 
     """
     Attributes:
@@ -18,7 +18,7 @@ class ResourcePermissionPermissions(object):
     }
 
     def __init__(self, action=None, allow=None):
-        """ResourcePermissionPermissions"""
+        """ResourcePermissionObject"""
         self._action = None
         self._allow = None
         self.action = action
@@ -26,20 +26,20 @@ class ResourcePermissionPermissions(object):
 
     @property
     def action(self):
-        """Gets the action of this ResourcePermissionPermissions.
+        """Gets the action of this ResourcePermissionObject.
 
 
-        :return: The action of this ResourcePermissionPermissions.
+        :return: The action of this ResourcePermissionObject.
         :rtype: str
         """
         return self._action
 
     @action.setter
     def action(self, action):
-        """Sets the action of this ResourcePermissionPermissions.
+        """Sets the action of this ResourcePermissionObject.
 
 
-        :param action: The action of this ResourcePermissionPermissions.
+        :param action: The action of this ResourcePermissionObject.
         :type: str
         """
         if action is None:
@@ -55,20 +55,20 @@ class ResourcePermissionPermissions(object):
 
     @property
     def allow(self):
-        """Gets the allow of this ResourcePermissionPermissions.
+        """Gets the allow of this ResourcePermissionObject.
 
 
-        :return: The allow of this ResourcePermissionPermissions.
+        :return: The allow of this ResourcePermissionObject.
         :rtype: str
         """
         return self._allow
 
     @allow.setter
     def allow(self, allow):
-        """Sets the allow of this ResourcePermissionPermissions.
+        """Sets the allow of this ResourcePermissionObject.
 
 
-        :param allow: The allow of this ResourcePermissionPermissions.
+        :param allow: The allow of this ResourcePermissionObject.
         :type: str
         """
         if allow is None:

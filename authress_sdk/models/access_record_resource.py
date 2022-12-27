@@ -1,6 +1,6 @@
 # coding: utf-8
 
-class AccessRecordResources(object):
+class AccessRecordResource(object):
 
     """
     Attributes:
@@ -16,28 +16,28 @@ class AccessRecordResources(object):
     }
 
     def __init__(self, resource_uri=None):
-        """AccessRecordResources"""
+        """AccessRecordResource"""
         self._resource_uri = None
         self.resource_uri = resource_uri
 
     @property
     def resource_uri(self):
-        """Gets the resource_uri of this AccessRecordResources.
+        """Gets the resource_uri of this AccessRecordResource.
 
         A resource path which can be top level, fully qualified, or end with a *. Parent resources imply permissions to sub resources.
 
-        :return: The resource_uri of this AccessRecordResources.
+        :return: The resource_uri of this AccessRecordResource.
         :rtype: str
         """
         return self._resource_uri
 
     @resource_uri.setter
     def resource_uri(self, resource_uri):
-        """Sets the resource_uri of this AccessRecordResources.
+        """Sets the resource_uri of this AccessRecordResource.
 
         A resource path which can be top level, fully qualified, or end with a *. Parent resources imply permissions to sub resources.
 
-        :param resource_uri: The resource_uri of this AccessRecordResources.
+        :param resource_uri: The resource_uri of this AccessRecordResource.
         :type: str
         """
         if resource_uri is None:

@@ -11,10 +11,10 @@ class AccessRecord(object):
         'record_id': 'str',
         'name': 'str',
         'account': 'AccessRecordAccount',
-        'users': 'list[AccessRecordUsers]',
+        'users': 'list[AccessRecordUser]',
         'groups': 'list[AccessRecordGroup]',
-        'admins': 'list[AccessRecordUsers]',
-        'statements': 'list[AccessRecordStatements]',
+        'admins': 'list[AccessRecordUser]',
+        'statements': 'list[AccessRecordStatement]',
         'links': 'object'
     }
 
@@ -119,7 +119,7 @@ class AccessRecord(object):
         The list of users this record applies to
 
         :return: The users of this AccessRecord.
-        :rtype: list[AccessRecordUsers]
+        :rtype: list[AccessRecordUser]
         """
         return self._users
 
@@ -130,7 +130,7 @@ class AccessRecord(object):
         The list of users this record applies to
 
         :param users: The users of this AccessRecord.
-        :type: list[AccessRecordUsers]
+        :type: list[AccessRecordUser]
         """
         self._users = users
 
@@ -163,7 +163,7 @@ class AccessRecord(object):
         The list of admin that can edit this record even if they do not have global record edit permissions.
 
         :return: The admins of this AccessRecord.
-        :rtype: list[AccessRecordUsers]
+        :rtype: list[AccessRecordUser]
         """
         return self._admins
 
@@ -174,7 +174,7 @@ class AccessRecord(object):
         The list of admin that can edit this record even if they do not have global record edit permissions.
 
         :param admins: The admins of this AccessRecord.
-        :type: list[AccessRecordUsers]
+        :type: list[AccessRecordUser]
         """
         self._admins = admins
 
@@ -185,7 +185,7 @@ class AccessRecord(object):
         A list of statements which match roles to resources. Users in this record have all statements apply to them
 
         :return: The statements of this AccessRecord.
-        :rtype: list[AccessRecordStatements]
+        :rtype: list[AccessRecordStatement]
         """
         return self._statements
 
@@ -196,7 +196,7 @@ class AccessRecord(object):
         A list of statements which match roles to resources. Users in this record have all statements apply to them
 
         :param statements: The statements of this AccessRecord.
-        :type: list[AccessRecordStatements]
+        :type: list[AccessRecordStatement]
         """
         if statements is None:
             raise ValueError("Invalid value for `statements`, must not be `None`")

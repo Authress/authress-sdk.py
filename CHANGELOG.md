@@ -1,6 +1,10 @@
 # Change log
 This is the changelog for [Authress SDK](readme.md).
 
+## 2.0 ##
+* Add support for users and groups at the statement level of access records.
+* Fix naming of some incorrectly named plural classes in the Access Record Models.
+
 ## 1.1 ##
 * Add the `TokenVerifier`
 

@@ -8,7 +8,7 @@ class ResourcePermission(object):
       attribute_serialization_map (dict): The key is attribute name and the value is json key in definition.
     """
     openapi_spec_types = {
-        'permissions': 'list[ResourcePermissionPermissions]'
+        'permissions': 'list[ResourcePermissionObject]'
     }
 
     attribute_serialization_map = {
@@ -26,7 +26,7 @@ class ResourcePermission(object):
 
 
         :return: The permissions of this ResourcePermission.
-        :rtype: list[ResourcePermissionPermissions]
+        :rtype: list[ResourcePermissionObject]
         """
         return self._permissions
 
@@ -36,7 +36,7 @@ class ResourcePermission(object):
 
 
         :param permissions: The permissions of this ResourcePermission.
-        :type: list[ResourcePermissionPermissions]
+        :type: list[ResourcePermissionObject]
         """
         if permissions is None:
             raise ValueError("Invalid value for `permissions`, must not be `None`")

@@ -8,9 +8,9 @@ from __future__ import absolute_import
 from authress_sdk.models.access_record import AccessRecord
 from authress_sdk.models.access_record_account import AccessRecordAccount
 from authress_sdk.models.access_record_collection import AccessRecordCollection
-from authress_sdk.models.access_record_resources import AccessRecordResources
-from authress_sdk.models.access_record_statements import AccessRecordStatements
-from authress_sdk.models.access_record_users import AccessRecordUsers
+from authress_sdk.models.access_record_resource import AccessRecordResource
+from authress_sdk.models.access_record_statement import AccessRecordStatement
+from authress_sdk.models.access_record_user import AccessRecordUser
 from authress_sdk.models.access_record_group import AccessRecordGroup
 from authress_sdk.models.account import Account
 from authress_sdk.models.account_collection import AccountCollection
@@ -28,4 +28,4 @@ from authress_sdk.models.user_permissions import UserPermissions
 from authress_sdk.models.permission_object import PermissionObject
 from authress_sdk.models.resource_permission import ResourcePermission
 from authress_sdk.models.resource_permission_collection import ResourcePermissionCollection
-from authress_sdk.models.resource_permission_permissions import ResourcePermissionPermissions
+from authress_sdk.models.resource_permission_object import ResourcePermissionObject
