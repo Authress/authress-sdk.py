@@ -31,17 +31,19 @@ class ServiceClientTokenProvider(object):
 
     try:
       decoded_access_key = json.loads(base64.b64decode(access_key))
+      account_id = decoded_access_key['audience'].split('.')[0]
       algorithm = 'RS256'
     except:
+      account_id = access_key.split('.')[2]
       decoded_access_key = {
         'clientId': access_key.split('.')[0],
         'keyId': access_key.split('.')[1],
-        'audience': f"{access_key.split('.')[2]}.accounts.authress.io",
+        'audience': f"{account_id}.accounts.authress.io",
         'privateKey': f"-----BEGIN PRIVATE KEY-----\n{access_key.split('.')[3]}\n-----END PRIVATE KEY-----"
       }
       algorithm = 'EdDSA'
 
-    issuer_origin = "https://api.authress.io" if (host == None or host == '' or '.authress.io' in host) else host
+    issuer_origin = f"https://{account_id}.api.authress.io" if (host == None or host == '' or '.authress.io' in host) else host
     payload = {
       'iss': f"{issuer_origin}/v1/clients/{quote(decoded_access_key['clientId'], safe='')}",
       'aud': decoded_access_key['audience'],
