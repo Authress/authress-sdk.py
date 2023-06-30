@@ -8,6 +8,9 @@ import re
 # python 2 and python 3 compatibility library
 import six
 
+from authress_sdk.models.access_record_collection import AccessRecordCollection
+from authress_sdk.models.access_record import AccessRecord
+
 
 class AccessRecordsApi(object):
     def __init__(self, api_client):
@@ -110,7 +113,7 @@ class AccessRecordsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_records(self, limit=20, cursor=None, filter=None, **kwargs):
+    def get_records(self, limit: int = 20, cursor: str = None, filter: str = None, **kwargs) -> AccessRecordCollection:
         """Get all account records.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Returns a paginated records list for the account. Only records the user has access to are returned.
@@ -205,7 +208,7 @@ class AccessRecordsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def create_record(self, body, **kwargs):
+    def create_record(self, body: AccessRecord, **kwargs):
         """Create a new access record
 
         Specify user roles for specific resources.
@@ -302,7 +305,7 @@ class AccessRecordsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_record(self, record_id, **kwargs):
+    def delete_record(self, record_id: str, **kwargs):
         """Deletes an access record.
 
         Remove an access record, removing associated permissions from all users in record. If a user has a permission from another record, that permission will not be removed.
@@ -391,7 +394,7 @@ class AccessRecordsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_record(self, record_id, **kwargs):
+    def get_record(self, record_id: str, **kwargs) -> AccessRecord:
         """Get an access record for the account.
 
         Access records contain information assigning permissions to users for resources.
@@ -484,7 +487,7 @@ class AccessRecordsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_record(self, body, record_id, **kwargs):
+    def update_record(self, body: AccessRecord, record_id: str, **kwargs):
         """Update an access record.
 
         Updates an access record adding or removing user permissions to resources.
