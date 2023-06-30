@@ -110,7 +110,7 @@ class AccessRecordsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_records(self, **kwargs):
+    def get_records(self, limit=20, cursor=None, filter=None, **kwargs):
         """Get all account records.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Returns a paginated records list for the account. Only records the user has access to are returned.
@@ -126,12 +126,12 @@ class AccessRecordsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_records_with_http_info(**kwargs)
+            return self.get_records_with_http_info(limit, cursor, filter, **kwargs)
         else:
-            (data) = self.get_records_with_http_info(**kwargs)
+            (data) = self.get_records_with_http_info(limit, cursor, filter, **kwargs)
             return data
 
-    def get_records_with_http_info(self, **kwargs):
+    def get_records_with_http_info(self, limit, cursor, filter, **kwargs):
         """Get all account records.
 
         <i class=\"far fa-money-bill-alt text-primary\"></i> <span class=\"text-primary\">Billable</span> Returns a paginated records list for the account. Only records the user has access to are returned.
@@ -167,6 +167,16 @@ class AccessRecordsApi(object):
         path_params = {}
 
         query_params = []
+        query_params.append(('status', 'ACTIVE'))
+
+        if limit is not None:
+          query_params.append(('limit', limit))
+
+        if cursor is not None:
+          query_params.append(('cursor', cursor))
+
+        if filter is not None:
+          query_params.append(('filter', filter))
 
         header_params = {}
 
