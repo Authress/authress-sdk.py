@@ -10,6 +10,11 @@ on:
     - master
     - 'release/**'
 
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -54,8 +59,6 @@ jobs:
       if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
       with:
         print_hash: true
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
 
     - name: Tag and release version
       if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.event_name == 'push'
