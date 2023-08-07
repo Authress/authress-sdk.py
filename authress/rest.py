@@ -58,44 +58,15 @@ class RESTClientObject(object):
         cert_reqs = ssl.CERT_REQUIRED
 
         addition_pool_args = {}
-        # if configuration.assert_hostname is not None:
-        #     addition_pool_args['assert_hostname'] = configuration.assert_hostname  # noqa: E501
-
-        # if configuration.retries is not None:
-        #     addition_pool_args['retries'] = configuration.retries
-
-        # if configuration.tls_server_name:
-        #     addition_pool_args['server_hostname'] = configuration.tls_server_name
-
-
-        # if configuration.socket_options is not None:
-        #     addition_pool_args['socket_options'] = configuration.socket_options
-
         maxsize = multiprocessing.cpu_count() * 5
 
         # https pool manager
-        if False:
-            self.pool_manager = urllib3.ProxyManager(
-                num_pools=pools_size,
-                maxsize=maxsize,
-                cert_reqs=cert_reqs,
-                ca_certs=configuration.ssl_ca_cert,
-                cert_file=configuration.cert_file,
-                key_file=configuration.key_file,
-                proxy_url=configuration.proxy,
-                proxy_headers=configuration.proxy_headers,
-                **addition_pool_args
-            )
-        else:
-            self.pool_manager = urllib3.PoolManager(
-                num_pools=pools_size,
-                maxsize=maxsize,
-                cert_reqs=cert_reqs,
-                # ca_certs=configuration.ssl_ca_cert,
-                # cert_file=configuration.cert_file,
-                # key_file=configuration.key_file,
-                **addition_pool_args
-            )
+        self.pool_manager = urllib3.PoolManager(
+          num_pools=pools_size,
+          maxsize=maxsize,
+          cert_reqs=cert_reqs,
+          **addition_pool_args
+        )
 
     def request(self, method, url, query_params=None, headers=None,
                 body=None, post_params=None, _preload_content=True,

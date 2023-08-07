@@ -568,7 +568,7 @@ class AccountsApi(object):
         _query_params = []
         if _params.get('earliest_cache_time') is not None:  # noqa: E501
             if isinstance(_params['earliest_cache_time'], datetime):
-                _query_params.append(('earliestCacheTime', _params['earliest_cache_time'].strftime(self.api_client.configuration.datetime_format)))
+                _query_params.append(('earliestCacheTime', _params['earliest_cache_time'].strftime("%Y-%m-%dT%H:%M:%S.%f%z")))
             else:
                 _query_params.append(('earliestCacheTime', _params['earliest_cache_time']))
 

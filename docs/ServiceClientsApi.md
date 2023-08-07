@@ -1,7 +1,4 @@
 # authress.ServiceClientsApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_client**](ServiceClientsApi.md#create_client) | **POST** /v1/clients | Create service client

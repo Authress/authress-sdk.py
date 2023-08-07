@@ -612,13 +612,6 @@ class HttpClient(object):
                                     request_auth)
             return
 
-        # for auth in auth_settings:
-            # auth_setting = self.configuration.auth_settings().get(auth)
-            # if auth_setting:
-            #     self._apply_auth_params(headers, queries,
-            #                             resource_path, method, body,
-            #                             auth_setting)
-
     def _apply_auth_params(self, headers, queries,
                            resource_path, method, body,
                            auth_setting):
@@ -653,7 +646,7 @@ class HttpClient(object):
         :param response:  RESTResponse.
         :return: file path.
         """
-        fd, path = tempfile.mkstemp(dir=self.configuration.temp_folder_path)
+        fd, path = tempfile.mkstemp(dir=None)
         os.close(fd)
         os.remove(path)
 

@@ -1,7 +1,4 @@
 # authress.TenantsApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_tenant**](TenantsApi.md#create_tenant) | **POST** /v1/tenants | Create tenant

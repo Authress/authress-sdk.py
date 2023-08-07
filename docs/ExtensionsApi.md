@@ -1,7 +1,4 @@
 # authress.ExtensionsApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_extension**](ExtensionsApi.md#create_extension) | **POST** /v1/extensions | Create extension
@@ -293,12 +290,6 @@ from authress.models.o_auth_authorize_response import OAuthAuthorizeResponse
 from authress.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = authress.Configuration(
-    host = "http://localhost"
-)
-
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
 authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
@@ -371,12 +362,6 @@ from authress.models.o_auth_token_request import OAuthTokenRequest
 from authress.models.o_auth_token_response import OAuthTokenResponse
 from authress.rest import ApiException
 from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = authress.Configuration(
-    host = "http://localhost"
-)
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url

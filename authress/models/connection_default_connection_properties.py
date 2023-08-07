@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, constr
+from pydantic import BaseModel, constr, Dict, Any
 
 class ConnectionDefaultConnectionProperties(BaseModel):
     """

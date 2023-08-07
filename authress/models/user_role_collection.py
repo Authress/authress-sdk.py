@@ -20,14 +20,14 @@ import json
 
 
 from typing import List
-from pydantic import BaseModel, Field, conlist
+from pydantic import BaseModel, Field, StrictStr, conlist
 from authress.models.user_role import UserRole
 
 class UserRoleCollection(BaseModel):
     """
     A collect of roles that the user has to a resource.
     """
-    user_id: UserId = Field(..., alias="userId")
+    user_id: StrictStr = Field(..., alias="userId")
     roles: conlist(UserRole) = Field(..., description="A list of the roles")
     __properties = ["userId", "roles"]
 

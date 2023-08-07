@@ -1,7 +1,4 @@
 # authress.AccessRecordsApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_claim**](AccessRecordsApi.md#create_claim) | **POST** /v1/claims | Create resource Claim

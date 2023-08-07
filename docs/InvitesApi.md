@@ -1,7 +1,4 @@
 # authress.InvitesApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_invite**](InvitesApi.md#create_invite) | **POST** /v1/invites | Create user invite

@@ -20,13 +20,13 @@ import json
 
 
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictStr
 
 class UserRole(BaseModel):
     """
     A role with associated role data.
     """
-    role_id: RoleId = Field(..., alias="roleId")
+    role_id: StrictStr = Field(..., alias="roleId")
     __properties = ["roleId"]
 
     class Config:
@@ -68,7 +68,7 @@ class UserRole(BaseModel):
             return UserRole.parse_obj(obj)
 
         _obj = UserRole.parse_obj({
-            "role_id": RoleId.from_dict(obj.get("roleId")) if obj.get("roleId") is not None else None
+            "role_id": obj.get("roleId")
         })
         return _obj
 

@@ -1,7 +1,4 @@
 # authress.ConnectionsApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_connection**](ConnectionsApi.md#create_connection) | **POST** /v1/connections | Create SSO connection

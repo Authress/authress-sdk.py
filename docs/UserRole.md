@@ -5,7 +5,7 @@ A role with associated role data.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role_id** | [**RoleId**](RoleId.md) |  |
+**role_id** | **str** |  |
 
 ## Example
 

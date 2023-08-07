@@ -1,7 +1,4 @@
 # authress.UsersApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_user**](UsersApi.md#delete_user) | **DELETE** /v1/users/{userId} | Delete a user

@@ -1,7 +1,4 @@
 # authress.AccountsApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delegate_authentication**](AccountsApi.md#delegate_authentication) | **POST** /v1/identities | Link external provider

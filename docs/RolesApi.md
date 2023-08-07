@@ -1,7 +1,4 @@
 # authress.RolesApi
-
-All URIs are relative to *http://localhost*
-
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_role**](RolesApi.md#create_role) | **POST** /v1/roles | Create role
