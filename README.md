@@ -16,7 +16,7 @@ The Nuget package connects to the [Authress API](https://authress.io/app/#/api).
     <a href="https://github.com/Authress/authress-sdk.py/actions/workflows/build.yml" alt="Build status">
       <img src="https://github.com/Authress/authress-sdk.py/actions/workflows/build.yml/badge.svg">
     </a>
-    <a href="https://github.com/Authress/authress-sdk.py/blob/release/3.0/LICENSE" alt="Apache-2.0">
+    <a href="https://github.com/Authress/authress-sdk.py/blob/main/LICENSE" alt="Apache-2.0">
       <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg">
     </a>
     <a href="https://authress.io/community" alt="authress community">
@@ -43,17 +43,17 @@ import authress
 
 See the SDK reference guide for a examples of commonly executed blocks with descriptions.
 
-[SDK Documentation](https://github.com/Authress/authress-sdk.py/blob/release/3.0/docs/README.md)
+[SDK Documentation](https://github.com/Authress/authress-sdk.py/blob/main/docs/README.md)
 
 
 ## Quick Examples:
 
-* [Authorize using a user token](https://github.com/Authress/authress-sdk.py/blob/release/3.0/docs/EXAMPLES.md#authorize-using-a-user-token)
-* [Authorize with a service client](https://github.com/Authress/authress-sdk.py/blob/release/3.0/docs/EXAMPLES.md#authorize-with-a-service-client)
-* [Using the Authress service client as an API key](https://github.com/Authress/authress-sdk.py/blob/release/3.0/docs/EXAMPLES.md#using-the-authress-service-client-as-an-api-key)
-* [Embedding service clients into your api](https://github.com/Authress/authress-sdk.py/blob/release/3.0/docs/EXAMPLES.md#generation-of-service-client)
-* [Token verification](https://github.com/Authress/authress-sdk.py/blob/release/3.0/docs/EXAMPLES.md#token-verifier)
+* [Authorize using a user token](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#authorize-using-a-user-token)
+* [Authorize with a service client](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#authorize-with-a-service-client)
+* [Using the Authress service client as an API key](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#using-the-authress-service-client-as-an-api-key)
+* [Embedding service clients into your api](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#generation-of-service-client)
+* [Token verification](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#token-verifier)
 
 ## Contribution Guide
 
-[Developing for the Python SDK](https://github.com/Authress/authress-sdk.py/blob/release/3.0/contributing.md)
+[Developing for the Python SDK](https://github.com/Authress/authress-sdk.py/blob/main/contributing.md)
