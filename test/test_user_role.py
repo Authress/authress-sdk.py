@@ -14,7 +14,6 @@
 
 
 import unittest
-import datetime
 
 import authress
 from authress.models.user_role import UserRole  # noqa: E501

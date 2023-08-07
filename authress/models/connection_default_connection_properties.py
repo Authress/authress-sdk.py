@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, constr, Dict, Any
+from typing import Any, Dict, Optional
+from pydantic import BaseModel, constr
 
 class ConnectionDefaultConnectionProperties(BaseModel):
     """
