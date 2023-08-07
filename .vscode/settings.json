@@ -10,5 +10,9 @@
     "python.testing.unittestEnabled": true,
     "files.exclude": {
         "**/__pycache__": true
-    }
+    },
+    "cSpell.words": [
+        "conint",
+        "Permissioned"
+    ]
 }

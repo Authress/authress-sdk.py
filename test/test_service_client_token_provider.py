@@ -3,9 +3,9 @@ from __future__ import absolute_import
 import unittest
 import time
 
-from authress_sdk.models import *
-from authress_sdk import AuthressClient
-from authress_sdk.http_client import HttpClient
+from authress.models import *
+from authress import AuthressClient
+from authress.http_client import HttpClient
 
 class ServiceClientTokenProviderTest(unittest.TestCase):
   def setUp(self):

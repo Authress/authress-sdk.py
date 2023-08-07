@@ -1,10 +1,14 @@
 # Change log
 This is the changelog for [Authress SDK](readme.md).
 
+## 3.0 ##
+* Added type checking everywhere
+* Converted properties to be consistent across all generators
+
 ## 2.0 ##
 * Add support for users and groups at the statement level of access records.
 * Fix naming of some incorrectly named plural classes in the Access Record Models.
-* Rename `ApiClient` to `AuthressClient` and split out non-essential functionality to a separate HttpClient.
+* Rename `HttpClient` to `AuthressClient` and split out non-essential functionality to a separate HttpClient.
 * Add `limit`, `filter`, `cursor` to `get_records` endpoint.
 
 ## 1.1 ##

@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import unittest
 
-from authress_sdk.api import token_verifier
+from authress.api import token_verifier
 
 customDomain = 'authress.token-validation.test'
 
@@ -22,5 +22,5 @@ class TokenVerifierTest(unittest.IsolatedAsyncioTestCase):
     access_key = 'CLIENT.KEY.ACCOUNT.MC4CAQAwBQYDK2VwBCIEIDVjjrIVCH3dVRq4ixRzBwjVHSoB2QzZ2iJuHq1Wshwp'
     publicKey = { 'alg': 'EdDSA', 'kty': 'OKP', 'crv': 'Ed25519', 'x': 'JxtSC5tZZJuaW7Aeu5Kh_3tgCpPZRkHaaFyTj5sQ3KU' }
 
-    identity = token_verifier.TokenVerifier().verify_token(f"https://{customDomain}", access_key, { 'expectedPublicKey': publicKey })
+    identity = token_verifier.TokenVerifier().verify_token(authressCustomDomain=f"https://{customDomain}", token=access_key, options={ 'expectedPublicKey': publicKey })
     assert identity['iss'] == f'https://{customDomain}/v1/clients/CLIENT'
