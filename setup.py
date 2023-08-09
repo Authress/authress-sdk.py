@@ -32,7 +32,7 @@ setup(
   include_package_data = True,
   package_data={"authress": ["py.typed"]},
   install_requires=REQUIRES,
-  packages = find_packages(exclude=['test', 'tests']),
+  packages = find_packages(exclude=['test', 'tests', 'tests_integration']),
   data_files=[('', ['authress/VERSION'])],
   keywords = ['Authorization as a service', 'Security', 'authorization', 'authorization as a service', 'authentication', 'user authentication', 'Authress', 'Authress client', 'access management', 'access management as a service', 'user security', 'oso', 'polar', 'open source policy engine', 'embedded authorization', 'batteries included authorization', 'verified', 'verified access', 'verified permissions'],
   classifiers = [],
