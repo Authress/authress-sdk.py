@@ -57,7 +57,7 @@ class HttpClient(object):
         this_directory = os.path.abspath(os.path.dirname(__file__))
         with open(os.path.join(this_directory, 'VERSION')) as version_file:
           VERSION = version_file.read().strip()
-        self.default_headers['User-Agent'] = f'Python AuthressSDK version: {VERSION}'
+        self.default_headers['User-Agent'] = f'Authress SDK; Python; {VERSION};'
 
     def set_token(self, token):
         self.default_headers['Authorization'] = f'Bearer {token.replace("Bearer", "").strip()}'
