@@ -19,7 +19,6 @@ from authress.rest import ApiException
 from authress.models.access_record import AccessRecord
 from authress.models.access_record_account import AccessRecordAccount
 from authress.models.access_record_collection import AccessRecordCollection
-from authress.models.access_record_statement import AccessRecordStatement
 from authress.models.account import Account
 from authress.models.account_collection import AccountCollection
 from authress.models.claim_request import ClaimRequest
