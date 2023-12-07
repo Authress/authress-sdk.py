@@ -115,7 +115,7 @@ authress_client.access_records.create_record(AccessRecord(
   name=f'API Key {new_client.client_id}',
   users=[AccessRecordUser(f'Authress:ServiceClients/{new_client.client_id}')],
   # Add the list of permissions this api key should have, for example here we've added all access to all the users resources as defined in Authress
-  statements=[Statement(['Authress:Owner'], [AccessRecordResource(f'/users/{user_id}')])]))
+  statements=[Statement(['Authress:Owner'], [Resource(f'/users/{user_id}')])]))
 # Request a new access key for that client
 data = service_client_api.request_access_key(new_client.client_id)
 # Return the access key to the user for usage
