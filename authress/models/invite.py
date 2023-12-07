@@ -21,7 +21,6 @@ import json
 
 from typing import List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist, constr
-from authress.models.account_links import AccountLinks
 from authress.models.statement import Statement
 
 class Invite(BaseModel):
@@ -31,8 +30,7 @@ class Invite(BaseModel):
     invite_id: StrictStr = Field(..., alias="inviteId", description="The unique identifier for the invite. Use this ID to accept the invite. This parameter is ignored during invite creation.")
     tenant_id: Optional[constr(strict=True, max_length=64, min_length=0)] = Field(None, alias="tenantId")
     statements: conlist(Statement) = Field(..., description="A list of statements which match roles to resources. The invited user will all statements apply to them when the invite is accepted.")
-    links: AccountLinks = Field(...)
-    __properties = ["inviteId", "tenantId", "statements", "links"]
+    __properties = ["inviteId", "tenantId", "statements"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,9 +67,6 @@ class Invite(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['statements'] = _items
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            _dict['links'] = self.links.to_dict()
         return _dict
 
     @classmethod
@@ -87,7 +82,6 @@ class Invite(BaseModel):
             "invite_id": obj.get("inviteId"),
             "tenant_id": obj.get("tenantId"),
             "statements": [Statement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None,
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
         })
         return _obj
 

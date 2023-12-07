@@ -22,9 +22,12 @@ def get_resource(resourceId):
   authorization_token = request.headers.get('authorization')
   authress_client.set_token(authorization_token)
 
+  # Get the user
+  user_id = get_user_id(request)
+
   # Check Authress to authorize the user
   try
-    authress_client.user_permissions.authorize_user(None, f'resources/{resourceId}', 'READ')
+    authress_client.user_permissions.authorize_user(user_id, f'resources/{resourceId}', 'READ')
   except ApiException as api_exception:
     # Will throw except if the user is not authorized to read the resource
     if api_exception.status is 403:

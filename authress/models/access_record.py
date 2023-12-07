@@ -21,8 +21,6 @@ import json
 from datetime import datetime
 from typing import Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, validator
-from authress.models.access_record_account import AccessRecordAccount
-from authress.models.account_links import AccountLinks
 from authress.models.linked_group import LinkedGroup
 from authress.models.statement import Statement
 from authress.models.user import User
@@ -37,14 +35,12 @@ class AccessRecord(BaseModel):
     capacity: Optional[Union[confloat(le=1, ge=0, strict=True), conint(le=1, ge=0, strict=True)]] = Field(None, description="Percentage capacity of record that is filled.")
     last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="The expected last time the record was updated")
     status: Optional[StrictStr] = Field(None, description="Current status of the access record.")
-    account: AccessRecordAccount = Field(...)
     users: Optional[conlist(User)] = Field(None, description="The list of users this record applies to")
     admins: Optional[conlist(User)] = Field(None, description="The list of admin that can edit this record even if they do not have global record edit permissions.")
     groups: Optional[conlist(LinkedGroup)] = Field(None, description="The list of groups this record applies to. Users in these groups will be receive access to the resources listed.")
     statements: conlist(Statement, min_items=1) = Field(..., description="A list of statements which match roles to resources.")
-    links: AccountLinks = Field(...)
     tags: Optional[Dict[str, constr(strict=True, max_length=128)]] = Field(None, description="The tags associated with this resource, this property is an map. { key1: value1, key2: value2 }")
-    __properties = ["recordId", "name", "description", "capacity", "lastUpdated", "status", "account", "users", "admins", "groups", "statements", "links", "tags"]
+    __properties = ["recordId", "name", "description", "capacity", "lastUpdated", "status", "users", "admins", "groups", "statements", "tags"]
 
     @validator('record_id')
     def record_id_validate_regular_expression(cls, value):
@@ -93,9 +89,6 @@ class AccessRecord(BaseModel):
                             "status",
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of account
-        if self.account:
-            _dict['account'] = self.account.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in users (list)
         _items = []
         if self.users:
@@ -124,9 +117,6 @@ class AccessRecord(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['statements'] = _items
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            _dict['links'] = self.links.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -170,12 +160,10 @@ class AccessRecord(BaseModel):
             "capacity": obj.get("capacity"),
             "last_updated": obj.get("lastUpdated"),
             "status": obj.get("status"),
-            "account": AccessRecordAccount.from_dict(obj.get("account")) if obj.get("account") is not None else None,
             "users": [User.from_dict(_item) for _item in obj.get("users")] if obj.get("users") is not None else None,
             "admins": [User.from_dict(_item) for _item in obj.get("admins")] if obj.get("admins") is not None else None,
             "groups": [LinkedGroup.from_dict(_item) for _item in obj.get("groups")] if obj.get("groups") is not None else None,
             "statements": [Statement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None,
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
             "tags": obj.get("tags")
         })
         return _obj

@@ -21,7 +21,6 @@ import json
 from datetime import datetime
 from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, conlist, constr, validator
-from authress.models.account_links import AccountLinks
 from authress.models.user import User
 
 class Group(BaseModel):
@@ -33,9 +32,8 @@ class Group(BaseModel):
     last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="The expected last time the group was updated")
     users: conlist(User) = Field(..., description="The list of users in this group")
     admins: conlist(User) = Field(..., description="The list of admins that can edit this record even if they do not have global record edit permissions.")
-    links: AccountLinks = Field(...)
     tags: Optional[Dict[str, constr(strict=True, max_length=128)]] = Field(None, description="The tags associated with this resource, this property is an map. { key1: value1, key2: value2 }")
-    __properties = ["groupId", "name", "lastUpdated", "users", "admins", "links", "tags"]
+    __properties = ["groupId", "name", "lastUpdated", "users", "admins", "tags"]
 
     @validator('group_id')
     def group_id_validate_regular_expression(cls, value):
@@ -86,9 +84,6 @@ class Group(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['admins'] = _items
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            _dict['links'] = self.links.to_dict()
         # set to None if tags (nullable) is None
         # and __fields_set__ contains the field
         if self.tags is None and "tags" in self.__fields_set__:
@@ -111,7 +106,6 @@ class Group(BaseModel):
             "last_updated": obj.get("lastUpdated"),
             "users": [User.from_dict(_item) for _item in obj.get("users")] if obj.get("users") is not None else None,
             "admins": [User.from_dict(_item) for _item in obj.get("admins")] if obj.get("admins") is not None else None,
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
             "tags": obj.get("tags")
         })
         return _obj

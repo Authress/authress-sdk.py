@@ -30,9 +30,9 @@ class Extension(BaseModel):
     """
     extension_id: constr(strict=True, max_length=64, min_length=1) = Field(..., alias="extensionId")
     name: Optional[constr(strict=True, max_length=128, min_length=1)] = Field(None, description="The name of the extension. This name is visible in the Authress management portal")
-    created_time: datetime = Field(..., alias="createdTime")
+    created_time: Optional[datetime] = Field(..., alias="createdTime")
     application: Optional[ExtensionApplication] = None
-    client: ExtensionClient = Field(...)
+    client: Optional[ExtensionClient] = Field(...)
     tags: Optional[Dict[str, constr(strict=True, max_length=128)]] = Field(None, description="The tags associated with this resource, this property is an map. { key1: value1, key2: value2 }")
     __properties = ["extensionId", "name", "createdTime", "application", "client", "tags"]
 

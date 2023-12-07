@@ -21,7 +21,6 @@ import json
 from datetime import datetime
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, constr
-from authress.models.account_links import AccountLinks
 
 class Account(BaseModel):
     """
@@ -31,8 +30,7 @@ class Account(BaseModel):
     created_time: datetime = Field(..., alias="createdTime")
     name: Optional[constr(strict=True, max_length=32)] = None
     company: Dict[str, Any] = Field(...)
-    links: AccountLinks = Field(...)
-    __properties = ["accountId", "createdTime", "name", "company", "links"]
+    __properties = ["accountId", "createdTime", "name", "company"]
 
     class Config:
         """Pydantic configuration"""
@@ -59,9 +57,7 @@ class Account(BaseModel):
                             "created_time",
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            _dict['links'] = self.links.to_dict()
+
         # set to None if name (nullable) is None
         # and __fields_set__ contains the field
         if self.name is None and "name" in self.__fields_set__:
@@ -82,8 +78,7 @@ class Account(BaseModel):
             "account_id": obj.get("accountId"),
             "created_time": obj.get("createdTime"),
             "name": obj.get("name"),
-            "company": obj.get("company"),
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
+            "company": obj.get("company")
         })
         return _obj
 
