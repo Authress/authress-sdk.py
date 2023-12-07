@@ -2,8 +2,8 @@
 This is the changelog for [Authress SDK](readme.md).
 
 ## 3.0 ##
-* Added type checking everywhere
-* Converted properties to be consistent across all generators
+* [Breaking] Added type checking everywhere - This means most models have breaking changes.
+* [Breaking] Converted properties to be consistent across all generators
 * [Breaking] Moved `authress_client.users` api to `authress_client.user_permissions`.
 * [Breaking] Moved `authress_client.records` api to `authress_client.access_records`.
 * [Breaking] Moved `authress_client.clients` api to `authress_client.service_clients`.
