@@ -22,6 +22,7 @@ from datetime import datetime
 from typing import Dict, Optional
 from pydantic import BaseModel, Field, StrictStr, constr, validator
 from authress.models.access_template import AccessTemplate
+from authress.models.account_links import AccountLinks
 
 class AccessRequest(BaseModel):
     """
@@ -31,8 +32,9 @@ class AccessRequest(BaseModel):
     last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="The expected last time the request was updated")
     status: Optional[StrictStr] = Field(None, description="Current status of the access request.")
     access: AccessTemplate = Field(...)
+    links: Optional[AccountLinks] = Field(...)
     tags: Optional[Dict[str, constr(strict=True, max_length=128)]] = Field(None, description="The tags associated with this resource, this property is an map. { key1: value1, key2: value2 }")
-    __properties = ["requestId", "lastUpdated", "status", "access", "tags"]
+    __properties = ["requestId", "lastUpdated", "status", "access", "links", "tags"]
 
     @validator('request_id')
     def request_id_validate_regular_expression(cls, value):
@@ -81,6 +83,9 @@ class AccessRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of access
         if self.access:
             _dict['access'] = self.access.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            _dict['links'] = self.links.to_dict()
         # set to None if tags (nullable) is None
         # and __fields_set__ contains the field
         if self.tags is None and "tags" in self.__fields_set__:
@@ -102,6 +107,7 @@ class AccessRequest(BaseModel):
             "last_updated": obj.get("lastUpdated"),
             "status": obj.get("status"),
             "access": AccessTemplate.from_dict(obj.get("access")) if obj.get("access") is not None else None,
+            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
             "tags": obj.get("tags")
         })
         return _obj
