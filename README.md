@@ -10,18 +10,10 @@ This is the Authress SDK for Python. Authress provides an authorization API for 
 The Nuget package connects to the [Authress API](https://authress.io/app/#/api). You can use Authress to build authentication and authorization directly into your applications and services. Additionally, Authress can be used locally to develop faster without needing an [Authress Account](https://authress.io).
 
 <p align="center">
-    <a href="https://badge.fury.io/py/authress" alt="Authress pypi package">
-        <img src="https://badge.fury.io/py/authress.svg">
-    </a>
-    <a href="https://github.com/Authress/authress-sdk.py/actions/workflows/build.yml" alt="Build status">
-      <img src="https://github.com/Authress/authress-sdk.py/actions/workflows/build.yml/badge.svg">
-    </a>
-    <a href="https://github.com/Authress/authress-sdk.py/blob/main/LICENSE" alt="Apache-2.0">
-      <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg">
-    </a>
-    <a href="https://authress.io/community" alt="authress community">
-      <img src="https://img.shields.io/badge/Community-Authress-fbaf0b.svg">
-    </a>
+    <a href="https://badge.fury.io/py/authress" alt="Authress pypi package"><img src="https://badge.fury.io/py/authress.svg"></a>
+    <a href="https://github.com/Authress/authress-sdk.py/actions/workflows/build.yml" alt="Build status"><img src="https://github.com/Authress/authress-sdk.py/actions/workflows/build.yml/badge.svg"></a>
+    <a href="https://github.com/Authress/authress-sdk.py/blob/main/LICENSE" alt="Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
+    <a href="https://authress.io/community" alt="authress community"><img src="https://img.shields.io/badge/Community-Authress-fbaf0b.svg"></a>
 </p>
 
 ## Usage
