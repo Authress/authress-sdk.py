@@ -44,24 +44,28 @@ podman stop $CID && podman rm $CID
 
 ### Common review items
 * [ ] Inputs to Constructor are (string: authress_api_url, string: service_client_access_key)
+* [ ] authress_api_url should sanitize https:// prefix and remove trailing `/`s
 * [ ] Add authentication to the configuration class.
 * [ ] Change configuration class name to be `AuthressSettings`
   * Specify all the inputs to be consistent across languages
-* [ ] constructors for classes should only have relevant input properties, for instances `links` are not required.
-* [ ] Update documentation
+* [x] constructors for classes should only have relevant input properties, for instances `links` are not required.
+* [x] Update documentation
   * Make sure markdown is valid
   * Remove unnecessary links
   * Add first class examples to readme.md + api documentation
-* [ ] Url encode all url inputs, frequently the generator doesn't do that
+  * Find failed UserId, RoleId, TenantId, GroupId, Action properties and convert them to strings
 * [ ] Remove any unnecessary validations from object and parameter injection, often there are some even when properties are allowed to be null
 * [ ] The service client code to generate a JWT from private key needs to be added
 * [ ] Add UnauthorizedError type to the authorizeUser function
 * [ ] GET query parameters should be an object
-* [ ] Top level tags from the API should accessible from the base class: `authressClient.accessRecords.getRecords(...)`
-* [ ] Automatic Retry
-  * [ ] Automatic fallback to cache
+* [x] Top level tags from the API should accessible from the base class: `authressClient.accessRecords.getRecords(...)`
+* [x] Automatic Retry
+  * [x] Automatic fallback to cache
+* [ ] `OptimisticPerformanceHandler` - Automatic fallback to cache on timeout reached
 * [ ] In memory caching for authorization checks - memoize
 * [ ] Unsigned int for all limits
-* [ ] Update Documentation for the API
+* [x] readonly properties are never specified as required for request bodies
+* [x] Update Documentation for the API
 * [ ] Validate all enums are enums and can be null when they should be.
+* [x] Remove LocalHost from the docs
 * [ ] Tests

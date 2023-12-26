@@ -8,6 +8,8 @@ import os
 import re
 import tempfile
 import jwt
+import math
+import time
 
 from urllib.parse import quote
 
@@ -15,7 +17,10 @@ from authress.api_response import ApiResponse
 from authress.api import service_client_token_provider
 import authress.models
 from authress import rest
-from authress.exceptions import ApiValueError, ApiException
+from authress.exceptions import ApiValueError, ApiException, ServiceException
+
+additional_retries = 5
+retry_delay_milliseconds = 20
 
 
 class HttpClient(object):
@@ -189,19 +194,13 @@ class HttpClient(object):
                                                      collection_formats)
             url += "?" + url_query
 
-        try:
-            # perform request and return response
-            response_data = self.request(
+        response_data = self.request_with_retries(
                 method, url,
                 query_params=query_params,
                 headers=header_params,
                 post_params=post_params, body=body,
                 _preload_content=_preload_content,
                 _request_timeout=_request_timeout)
-        except ApiException as e:
-            if e.body:
-                e.body = e.body.decode('utf-8')
-            raise e
 
         self.last_response = response_data
 
@@ -406,6 +405,40 @@ class HttpClient(object):
                                                        _preload_content,
                                                        _request_timeout,
                                                        _host, _request_auth))
+
+    def request_with_retries(self, method, url, query_params=None, headers=None,
+                post_params=None, body=None, _preload_content=True,
+                _request_timeout=None):
+        """Wrapper for automatically handling retries."""
+
+        last_exception = None
+        for iteration in range(0, additional_retries + 1):
+          try:
+              # perform request and return response
+              response_data = self.request(
+                  method, url,
+                  query_params=query_params,
+                  headers=headers,
+                  post_params=post_params, body=body,
+                  _preload_content=_preload_content,
+                  _request_timeout=_request_timeout)
+              return response_data
+          except ServiceException as e:
+              if e.body:
+                  e.body = e.body.decode('utf-8')
+              last_exception = e
+          except ApiException as e:
+              if e.body:
+                  e.body = e.body.decode('utf-8')
+              raise e
+
+          if iteration == additional_retries:
+            break
+
+          time.sleep(retry_delay_milliseconds / 1000 * math.pow(2, iteration))
+
+        raise last_exception
+
 
     def request(self, method, url, query_params=None, headers=None,
                 post_params=None, body=None, _preload_content=True,
