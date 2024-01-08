@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_group**
-> Group update_group(group_id, group)
+> Group update_group(group_id, group, expected_last_modified_time=expected_last_modified_time)
 
 Update a group
 
@@ -310,10 +310,11 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 group_id = "group_id" # str | The identifier of the group.
 group = authress.Group() # Group |
+expected_last_modified_time = '2023-08-23T14:01:12 GMT' # str | The expected last time the group was modified. (optional)
 
 try:
     # Update a group
-    api_response = authress_client.groups.update_group(group_id, group)
+    api_response = authress_client.groups.update_group(group_id, group, expected_last_modified_time=expected_last_modified_time)
     print("The response of GroupsApi->update_group:\n")
     pprint(api_response)
 except Exception as e:
@@ -328,6 +329,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **str**| The identifier of the group. |
  **group** | [**Group**](Group.md)|  |
+ **expected_last_modified_time** | **str**| The expected last time the group was modified. | [optional]
 
 ### Return type
 
@@ -349,6 +351,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
 **403** | Forbidden. The user doesn&#39;t have permission to update the group. |  -  |
 **404** | Not found. The user doesn&#39;t have any permissions to the group. |  -  |
+**412** | Precondition failed. Usually the result of a concurrent update to the group. Get the latest version and retry again. |  * Last-Modified - The expected last time the group was modified.  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
