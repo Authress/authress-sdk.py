@@ -628,20 +628,26 @@ class GroupsApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def update_group(self, group_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier of the group.")], group : Group, **kwargs) -> Group:  # noqa: E501
+    def update_group(self,
+        group_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier of the group.")],
+        group : Group,
+        expected_last_modified_time : Annotated[Optional[constr(strict=True, max_length=32, min_length=1)], Field(description="The expected last time the group was modified.")] = None,
+        **kwargs) -> Group:  # noqa: E501
         """Update a group  # noqa: E501
 
         Updates a group adding or removing user. Change a group updates the permissions and roles the users have access to. (Groups have a maximum size of ~100KB)  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_group(group_id, group, async_req=True)
+        >>> thread = api.update_group(group_id, group, expected_last_modified_time=None, async_req=True)
         >>> result = thread.get()
 
         :param group_id: The identifier of the group. (required)
         :type group_id: str
         :param group: (required)
         :type group: Group
+        :param expected_last_modified_time: The expected last time the group was modified.
+        :type expected_last_modified_time: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request. If one
@@ -656,23 +662,29 @@ class GroupsApi(object):
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
             raise ValueError("Error! Please call the update_group_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
-        return self.update_group_with_http_info(group_id, group, **kwargs)  # noqa: E501
+        return self.update_group_with_http_info(group_id, group, expected_last_modified_time, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_group_with_http_info(self, group_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier of the group.")], group : Group, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_group_with_http_info(self,
+        group_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier of the group.")],
+        group : Group,
+        expected_last_modified_time : Annotated[Optional[constr(strict=True, max_length=32, min_length=1)], Field(description="The expected last time the group was modified.")] = None,
+        **kwargs) -> ApiResponse:  # noqa: E501
         """Update a group  # noqa: E501
 
         Updates a group adding or removing user. Change a group updates the permissions and roles the users have access to. (Groups have a maximum size of ~100KB)  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_group_with_http_info(group_id, group, async_req=True)
+        >>> thread = api.update_group_with_http_info(group_id, group, expected_last_modified_time=None, async_req=True)
         >>> result = thread.get()
 
         :param group_id: The identifier of the group. (required)
         :type group_id: str
         :param group: (required)
         :type group: Group
+        :param expected_last_modified_time: The expected last time the group was modified.
+        :type expected_last_modified_time: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -702,7 +714,8 @@ class GroupsApi(object):
 
         _all_params = [
             'group_id',
-            'group'
+            'group',
+            'expected_last_modified_time'
         ]
         _all_params.extend(
             [
@@ -738,6 +751,9 @@ class GroupsApi(object):
         _query_params = []
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
+        if _params['expected_last_modified_time']:
+            _header_params['If-Unmodified-Since'] = _params['expected_last_modified_time']
+
         # process the form parameters
         _form_params = []
         _files = {}
