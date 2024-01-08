@@ -1,6 +1,9 @@
 # Change log
 This is the changelog for [Authress SDK](readme.md).
 
+## 4.0 ##
+* [Breaking] Renamed parameter `if_unmodified_since` in the Access Record API to be `expected_last_modified_time`.
+
 ## 3.0 ##
 * [Breaking] Added type checking everywhere - This means most models have breaking changes.
 * [Breaking] Converted properties to be consistent across all generators

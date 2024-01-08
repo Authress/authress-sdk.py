@@ -1529,22 +1529,26 @@ class AccessRecordsApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def update_record(self, record_id : Annotated[constr(strict=True, max_length=100, min_length=1), Field(..., description="The identifier of the access record.")], access_record : AccessRecord, if_unmodified_since : Annotated[Optional[constr(strict=True, max_length=32, min_length=1)], Field(description="The expected last time the record was modified. (<a href=\"https://tools.ietf.org/html/rfc7231#section-7.1.1.1\" target=\"_blank\">format</a>)")] = None, **kwargs) -> None:  # noqa: E501
+    def update_record(self,
+                      record_id : Annotated[constr(strict=True, max_length=100, min_length=1), Field(..., description="The identifier of the access record.")],
+                      access_record : AccessRecord,
+                      expected_last_modified_time : Annotated[Optional[constr(strict=True, max_length=32, min_length=1)], Field(description="The expected last time the record was modified.")] = None,
+                      **kwargs) -> None:  # noqa: E501
         """Update access record  # noqa: E501
 
         Updates an access record adding or removing user permissions to resources. (Records have a maximum size of ~100KB)  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_record(record_id, access_record, if_unmodified_since, async_req=True)
+        >>> thread = api.update_record(record_id, access_record, expected_last_modified_time=None, async_req=True)
         >>> result = thread.get()
 
         :param record_id: The identifier of the access record. (required)
         :type record_id: str
         :param access_record: (required)
         :type access_record: AccessRecord
-        :param if_unmodified_since: The expected last time the record was modified. (<a href=\"https://tools.ietf.org/html/rfc7231#section-7.1.1.1\" target=\"_blank\">format</a>)
-        :type if_unmodified_since: str
+        :param expected_last_modified_time: The expected last time the record was modified.
+        :type expected_last_modified_time: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request. If one
@@ -1559,25 +1563,29 @@ class AccessRecordsApi(object):
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
             raise ValueError("Error! Please call the update_record_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
-        return self.update_record_with_http_info(record_id, access_record, if_unmodified_since, **kwargs)  # noqa: E501
+        return self.update_record_with_http_info(record_id, access_record, expected_last_modified_time, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_record_with_http_info(self, record_id : Annotated[constr(strict=True, max_length=100, min_length=1), Field(..., description="The identifier of the access record.")], access_record : AccessRecord, if_unmodified_since : Annotated[Optional[constr(strict=True, max_length=32, min_length=1)], Field(description="The expected last time the record was modified. (<a href=\"https://tools.ietf.org/html/rfc7231#section-7.1.1.1\" target=\"_blank\">format</a>)")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_record_with_http_info(self,
+        record_id : Annotated[constr(strict=True, max_length=100, min_length=1), Field(..., description="The identifier of the access record.")],
+        access_record : AccessRecord,
+        expected_last_modified_time : Annotated[Optional[constr(strict=True, max_length=32, min_length=1)], Field(description="The expected last time the record was modified.")] = None,
+        **kwargs) -> ApiResponse:  # noqa: E501
         """Update access record  # noqa: E501
 
         Updates an access record adding or removing user permissions to resources. (Records have a maximum size of ~100KB)  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_record_with_http_info(record_id, access_record, if_unmodified_since, async_req=True)
+        >>> thread = api.update_record_with_http_info(record_id, access_record, expected_last_modified_time=None, async_req=True)
         >>> result = thread.get()
 
         :param record_id: The identifier of the access record. (required)
         :type record_id: str
         :param access_record: (required)
         :type access_record: AccessRecord
-        :param if_unmodified_since: The expected last time the record was modified. (<a href=\"https://tools.ietf.org/html/rfc7231#section-7.1.1.1\" target=\"_blank\">format</a>)
-        :type if_unmodified_since: str
+        :param expected_last_modified_time: The expected last time the record was modified.
+        :type expected_last_modified_time: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1608,7 +1616,8 @@ class AccessRecordsApi(object):
         _all_params = [
             'record_id',
             'access_record',
-            'if_unmodified_since'
+            'if_unmodified_since',
+            'expected_last_modified_time'
         ]
         _all_params.extend(
             [
@@ -1646,6 +1655,8 @@ class AccessRecordsApi(object):
         _header_params = dict(_params.get('_headers', {}))
         if _params['if_unmodified_since']:
             _header_params['If-Unmodified-Since'] = _params['if_unmodified_since']
+        if _params['expected_last_modified_time']:
+            _header_params['If-Unmodified-Since'] = _params['expected_last_modified_time']
 
         # process the form parameters
         _form_params = []

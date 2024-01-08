@@ -701,7 +701,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_record**
-> update_record(record_id, access_record, if_unmodified_since=if_unmodified_since)
+> update_record(record_id, access_record, expected_last_modified_time=expected_last_modified_time)
 
 Update access record
 
@@ -728,11 +728,11 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
     record_id = 'record_id_example' # str | The identifier of the access record.
     access_record = authress.AccessRecord() # AccessRecord |
-    if_unmodified_since = 'Mon, 07 Aug 2023 14:01:12 GMT' # str | The expected last time the record was modified. (<a href=\"https://tools.ietf.org/html/rfc7231#section-7.1.1.1\" target=\"_blank\">format</a>) (optional)
+    expected_last_modified_time = '2023-08-23T14:01:12 GMT' # str | The expected last time the record was modified. (optional)
 
     try:
         # Update access record
-        authress_client.access_records.update_record(record_id, access_record, if_unmodified_since=if_unmodified_since)
+        authress_client.access_records.update_record(record_id, access_record, expected_last_modified_time=expected_last_modified_time)
     except Exception as e:
         print("Exception when calling AccessRecordsApi->update_record: %s\n" % e)
 ```
@@ -745,7 +745,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **record_id** | **str**| The identifier of the access record. |
  **access_record** | [**AccessRecord**](AccessRecord.md)|  |
- **if_unmodified_since** | **str**| The expected last time the record was modified. (&lt;a href&#x3D;\&quot;https://tools.ietf.org/html/rfc7231#section-7.1.1.1\&quot; target&#x3D;\&quot;_blank\&quot;&gt;format&lt;/a&gt;) | [optional]
+ **expected_last_modified_time** | **str**| The expected last time the record was modified. | [optional]
 
 ### Return type
 
