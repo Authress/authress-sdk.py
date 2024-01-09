@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Success. Access record created |  * Last-Modified - The expected last time the record was modified. (&lt;a href&#x3D;\&quot;https://tools.ietf.org/html/rfc7231#section-7.1.1.1\&quot; target&#x3D;\&quot;_blank\&quot;&gt;format&lt;/a&gt;) <br>  |
+**201** | Success. Access record created | - |
 **202** | Success. Access record created and permissions will be propagated asynchronously. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
 **403** | Forbidden. The user doesn&#39;t have permission to create records. |  -  |
@@ -410,7 +410,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Success. |  * Last-Modified - The expected last time the record was modified. (&lt;a href&#x3D;\&quot;https://tools.ietf.org/html/rfc7231#section-7.1.1.1\&quot; target&#x3D;\&quot;_blank\&quot;&gt;format&lt;/a&gt;) <br>  |
+**200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
 **403** | Forbidden. The user doesn&#39;t have permission to the access record, but they have other permissions to the same account. |  -  |
 **404** | Not found. The user doesn&#39;t have any permissions to the access record or this access record does not exist. |  -  |
@@ -767,7 +767,7 @@ void (empty response body)
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
 **403** | Forbidden. The user doesn&#39;t have permission to update the access record. |  -  |
 **404** | Not found. The user doesn&#39;t have any permissions to the access record. |  -  |
-**412** | Precondition failed. Usually the result of a concurrent update to the access record. Get the latest version and retry again. |  * Last-Modified - The expected last time the record was modified. (&lt;a href&#x3D;\&quot;https://tools.ietf.org/html/rfc7231#section-7.1.1.1\&quot; target&#x3D;\&quot;_blank\&quot;&gt;format&lt;/a&gt;) <br>  |
+**412** | Precondition failed. Usually the result of a concurrent update to the access record. Get the latest version and retry again. |  -  |
 **413** | The size of the record is larger than allowed. Recommended action is to create another record and retry the updates. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

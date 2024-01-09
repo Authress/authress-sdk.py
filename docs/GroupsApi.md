@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
 **403** | Forbidden. The user doesn&#39;t have permission to update the group. |  -  |
 **404** | Not found. The user doesn&#39;t have any permissions to the group. |  -  |
-**412** | Precondition failed. Usually the result of a concurrent update to the group. Get the latest version and retry again. |  * Last-Modified - The expected last time the group was modified.  |
+**412** | Precondition failed. Usually the result of a concurrent update to the group. Get the latest version and retry again. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
