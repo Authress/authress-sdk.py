@@ -728,7 +728,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
     record_id = 'record_id_example' # str | The identifier of the access record.
     access_record = authress.AccessRecord() # AccessRecord |
-    expected_last_modified_time = '2023-08-23T14:01:12 GMT' # str | The expected last time the record was modified. (optional)
+    expected_last_modified_time = '2023-08-23T14:01:12Z' # str | The expected last time the record was modified. (optional)
 
     try:
         # Update access record

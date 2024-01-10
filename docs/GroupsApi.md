@@ -310,7 +310,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 group_id = "group_id" # str | The identifier of the group.
 group = authress.Group() # Group |
-expected_last_modified_time = '2023-08-23T14:01:12 GMT' # str | The expected last time the group was modified. (optional)
+expected_last_modified_time = '2023-08-23T14:01:12Z' # str | The expected last time the group was modified. (optional)
 
 try:
     # Update a group
