@@ -47,31 +47,31 @@ Class | Method | HTTP request | Description
 `authress.invites` | [**delete_invite**](./InvitesApi.md#delete_invite) | **DELETE** /v1/invites/{inviteId} | Delete invite
 `authress.invites` | [**get_invite**](./InvitesApi.md#get_invite) | **GET** /v1/invites/{inviteId} | Retrieve invite
 `authress.invites` | [**respond_to_invite**](./InvitesApi.md#respond_to_invite) | **PATCH** /v1/invites/{inviteId} | Accept invite
-`authress.resourcePermissions` | [**get_permissioned_resource**](./ResourcePermissionsApi.md#get_permissioned_resource) | **GET** /v1/resources/{resourceUri} | Retrieve resource configuration
-`authress.resourcePermissions` | [**get_permissioned_resources**](./ResourcePermissionsApi.md#get_permissioned_resources) | **GET** /v1/resources | List all resource configurations
-`authress.resourcePermissions` | [**get_resource_users**](./ResourcePermissionsApi.md#get_resource_users) | **GET** /v1/resources/{resourceUri}/users | List users with resource access
-`authress.resourcePermissions` | [**update_permissioned_resource**](./ResourcePermissionsApi.md#update_permissioned_resource) | **PUT** /v1/resources/{resourceUri} | Update resource configuration
+`authress.resource_permissions` | [**get_permissioned_resource**](./ResourcePermissionsApi.md#get_permissioned_resource) | **GET** /v1/resources/{resourceUri} | Retrieve resource configuration
+`authress.resource_permissions` | [**get_permissioned_resources**](./ResourcePermissionsApi.md#get_permissioned_resources) | **GET** /v1/resources | List all resource configurations
+`authress.resource_permissions` | [**get_resource_users**](./ResourcePermissionsApi.md#get_resource_users) | **GET** /v1/resources/{resourceUri}/users | List users with resource access
+`authress.resource_permissions` | [**update_permissioned_resource**](./ResourcePermissionsApi.md#update_permissioned_resource) | **PUT** /v1/resources/{resourceUri} | Update resource configuration
 `authress.roles` | [**create_role**](./RolesApi.md#create_role) | **POST** /v1/roles | Create role
 `authress.roles` | [**delete_role**](./RolesApi.md#delete_role) | **DELETE** /v1/roles/{roleId} | Deletes role
 `authress.roles` | [**get_role**](./RolesApi.md#get_role) | **GET** /v1/roles/{roleId} | Retrieve role
 `authress.roles` | [**get_roles**](./RolesApi.md#get_roles) | **GET** /v1/roles | List roles
 `authress.roles` | [**update_role**](./RolesApi.md#update_role) | **PUT** /v1/roles/{roleId} | Update role
-`authress.serviceClients` | [**create_client**](./ServiceClientsApi.md#create_client) | **POST** /v1/clients | Create service client
-`authress.serviceClients` | [**delete_access_key**](./ServiceClientsApi.md#delete_access_key) | **DELETE** /v1/clients/{clientId}/access-keys/{keyId} | Delete service client access key
-`authress.serviceClients` | [**delete_client**](./ServiceClientsApi.md#delete_client) | **DELETE** /v1/clients/{clientId} | Delete service client
-`authress.serviceClients` | [**get_client**](./ServiceClientsApi.md#get_client) | **GET** /v1/clients/{clientId} | Retrieve service client
-`authress.serviceClients` | [**get_clients**](./ServiceClientsApi.md#get_clients) | **GET** /v1/clients | List service clients
-`authress.serviceClients` | [**request_access_key**](./ServiceClientsApi.md#request_access_key) | **POST** /v1/clients/{clientId}/access-keys | Generate service client access key
-`authress.serviceClients` | [**update_client**](./ServiceClientsApi.md#update_client) | **PUT** /v1/clients/{clientId} | Update service client
+`authress.service_clients` | [**create_client**](./ServiceClientsApi.md#create_client) | **POST** /v1/clients | Create service client
+`authress.service_clients` | [**delete_access_key**](./ServiceClientsApi.md#delete_access_key) | **DELETE** /v1/clients/{clientId}/access-keys/{keyId} | Delete service client access key
+`authress.service_clients` | [**delete_client**](./ServiceClientsApi.md#delete_client) | **DELETE** /v1/clients/{clientId} | Delete service client
+`authress.service_clients` | [**get_client**](./ServiceClientsApi.md#get_client) | **GET** /v1/clients/{clientId} | Retrieve service client
+`authress.service_clients` | [**get_clients**](./ServiceClientsApi.md#get_clients) | **GET** /v1/clients | List service clients
+`authress.service_clients` | [**request_access_key**](./ServiceClientsApi.md#request_access_key) | **POST** /v1/clients/{clientId}/access-keys | Generate service client access key
+`authress.service_clients` | [**update_client**](./ServiceClientsApi.md#update_client) | **PUT** /v1/clients/{clientId} | Update service client
 `authress.tenants` | [**create_tenant**](./TenantsApi.md#create_tenant) | **POST** /v1/tenants | Create tenant
 `authress.tenants` | [**delete_tenant**](./TenantsApi.md#delete_tenant) | **DELETE** /v1/tenants/{tenantId} | Delete tenant
 `authress.tenants` | [**get_tenant**](./TenantsApi.md#get_tenant) | **GET** /v1/tenants/{tenantId} | Retrieve tenant
 `authress.tenants` | [**get_tenants**](./TenantsApi.md#get_tenants) | **GET** /v1/tenants | List tenants
 `authress.tenants` | [**update_tenant**](./TenantsApi.md#update_tenant) | **PUT** /v1/tenants/{tenantId} | Update tenant
-`authress.userPermissions` | [**authorize_user**](./UserPermissionsApi.md#authorize_user) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions/{permission} | Verify user authorization
-`authress.userPermissions` | [**get_user_permissions_for_resource**](./UserPermissionsApi.md#get_user_permissions_for_resource) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions | Get user permissions for resource
-`authress.userPermissions` | [**get_user_resources**](./UserPermissionsApi.md#get_user_resources) | **GET** /v1/users/{userId}/resources | List user resources
-`authress.userPermissions` | [**get_user_roles_for_resource**](./UserPermissionsApi.md#get_user_roles_for_resource) | **GET** /v1/users/{userId}/resources/{resourceUri}/roles | Get user roles for resource
+`authress.user_permissions` | [**authorize_user**](./UserPermissionsApi.md#authorize_user) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions/{permission} | Verify user authorization
+`authress.user_permissions` | [**get_user_permissions_for_resource**](./UserPermissionsApi.md#get_user_permissions_for_resource) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions | Get user permissions for resource
+`authress.user_permissions` | [**get_user_resources**](./UserPermissionsApi.md#get_user_resources) | **GET** /v1/users/{userId}/resources | List user resources
+`authress.user_permissions` | [**get_user_roles_for_resource**](./UserPermissionsApi.md#get_user_roles_for_resource) | **GET** /v1/users/{userId}/resources/{resourceUri}/roles | Get user roles for resource
 `authress.users` | [**delete_user**](./UsersApi.md#delete_user) | **DELETE** /v1/users/{userId} | Delete a user
 `authress.users` | [**get_user**](./UsersApi.md#get_user) | **GET** /v1/users/{userId} | Retrieve a user
 `authress.users` | [**get_users**](./UsersApi.md#get_users) | **GET** /v1/users | List users
