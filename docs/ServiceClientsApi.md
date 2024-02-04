@@ -30,7 +30,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -95,7 +95,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -162,7 +162,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -228,7 +228,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -295,7 +295,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -364,7 +364,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -432,7 +432,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://login.your.domain.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
