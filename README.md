@@ -1,6 +1,5 @@
-
 <p align="center">
-    <img src="https://github.com/Authress/authress-local/assets/5056218/156e3881-b359-4810-bc96-7abeaf9ddbdb" height="300px" alt="Authress Media Banner">
+  <img height="300px" src="https://authress.io/static/images/media-banner.png" alt="Authress media banner">
 </p>
 
 # Authress SDK for Python
