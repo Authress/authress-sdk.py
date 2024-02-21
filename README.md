@@ -1,4 +1,4 @@
-<p align="center">
+<p id="main" align="center">
   <img src="https://authress.io/static/images/linkedin-banner.png" alt="Authress media banner">
 </p>
 
