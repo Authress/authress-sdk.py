@@ -50,6 +50,7 @@ class ServiceClientTokenProvider(object):
       'iat': datetime.datetime.utcnow(),
       'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=86400),
       'sub': decoded_access_key['clientId'],
+      'client_id': decoded_access_key['clientId'],
       'scopes': 'openId'
     }
 
