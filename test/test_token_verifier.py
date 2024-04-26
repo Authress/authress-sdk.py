@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import unittest
+import unittest.mock
 
 from authress.api import token_verifier
 
@@ -22,5 +23,27 @@ class TokenVerifierTest(unittest.IsolatedAsyncioTestCase):
     access_key = 'CLIENT.KEY.ACCOUNT.MC4CAQAwBQYDK2VwBCIEIDVjjrIVCH3dVRq4ixRzBwjVHSoB2QzZ2iJuHq1Wshwp'
     publicKey = { 'alg': 'EdDSA', 'kty': 'OKP', 'crv': 'Ed25519', 'x': 'JxtSC5tZZJuaW7Aeu5Kh_3tgCpPZRkHaaFyTj5sQ3KU' }
 
-    identity = token_verifier.TokenVerifier().verify_token(authressCustomDomain=f"https://{customDomain}", token=access_key, options={ 'expectedPublicKey': publicKey })
+    token_verifier_instance = token_verifier.TokenVerifier()
+
+    mock_get_key_uncached = unittest.mock.MagicMock(return_value=publicKey)
+    token_verifier_instance.get_key_uncached = mock_get_key_uncached
+    identity = token_verifier_instance.verify_token(authressCustomDomain=f"https://{customDomain}", token=access_key)
+
+    mock_get_key_uncached.assert_called_once_with(f"https://{customDomain}/v1/clients/CLIENT/.well-known/openid-configuration/jwks", "KEY")
     assert identity['iss'] == f'https://{customDomain}/v1/clients/CLIENT'
+    assert identity['sub'] == "CLIENT"
+
+  def test_get_public_key(self):
+    token_verifier_instance = token_verifier.TokenVerifier()
+
+    test_key_value = "TestKeyValue"
+    mock_get_key_uncached = unittest.mock.MagicMock(return_value=test_key_value)
+    token_verifier_instance.get_key_uncached = mock_get_key_uncached
+
+    public_key_1 = token_verifier_instance.get_public_key(f'https://{customDomain}/v1/clients/CLIENT', "Test KID")
+    public_key_2 = token_verifier_instance.get_public_key(f'https://{customDomain}/v1/clients/CLIENT', "Test KID")
+
+    mock_get_key_uncached.assert_called_once_with(f'https://{customDomain}/v1/clients/CLIENT', "Test KID")
+
+    assert public_key_1 == public_key_2
+    assert public_key_1 == test_key_value

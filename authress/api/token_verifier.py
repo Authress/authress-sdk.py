@@ -51,7 +51,7 @@ class TokenVerifier(object):
     if (clientIdMatcher is not None and clientIdMatcher.group(1) != unverifiedPayload['sub']):
       raise Exception("Unauthorized", "Service ID does not match token sub claim")
 
-    jwk = options['expectedPublicKey'] if options is not None and 'expectedPublicKey' in options else self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks", kid)
+    jwk = self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks", kid)
 
     try:
       return jwt.decode(authenticationToken, jwt.api_jwk.PyJWK.from_dict(jwk).key, algorithms=['EdDSA'], options = { 'verify_aud': False })
@@ -61,7 +61,7 @@ class TokenVerifier(object):
   def get_public_key(self, jwkKeyListUrl, kid):
     hashKey = f"{jwkKeyListUrl}|{kid}"
 
-    if hashKey in self.keyMap is not None:
+    if hashKey in self.keyMap is None:
       self.keyMap[hashKey] = self.get_key_uncached(jwkKeyListUrl, kid)
 
     try:

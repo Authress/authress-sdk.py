@@ -14,6 +14,7 @@ This is the changelog for [Authress SDK](readme.md).
 * [Breaking] Renamed `AccessRecordStatement` model to `Statement` in `models.statement.py`.
 * [Breaking] Renamed `AccessRecordResource` model to `Resource` in `models.resource.py`.
 * Add missing `If-Unmodified-Since` support to the `update_group` in the `Groups` API.
+* Improve caching in `verify_token`
 
 ## 2.0 ##
 * Add support for users and groups at the statement level of access records.
