@@ -55,7 +55,7 @@ class TokenVerifier(object):
 
     try:
       return jwt.decode(authenticationToken, jwt.api_jwk.PyJWK.from_dict(jwk).key, algorithms=['EdDSA'], options = { 'verify_aud': False })
-    except jwt.ExpiredSignatureError:
+    except:
       raise Exception("Unauthorized", "Token is invalid")
 
   def get_public_key(self, jwkKeyListUrl, kid):
