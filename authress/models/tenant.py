@@ -20,7 +20,10 @@ import json
 
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, Field, constr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, constr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, constr, validator
 from authress.models.tenant_connection import TenantConnection
 from authress.models.tenant_data import TenantData
 

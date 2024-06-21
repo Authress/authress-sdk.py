@@ -20,7 +20,10 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, constr
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr, conlist, constr
 from authress.models.links import Links
 
 class ExtensionApplication(BaseModel):

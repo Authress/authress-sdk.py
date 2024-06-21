@@ -17,10 +17,16 @@ import re  # noqa: F401
 import io
 import warnings
 
-from pydantic import validate_arguments, ValidationError, constr
+try:
+    from pydantic.v1 import validate_arguments, ValidationError, constr
+except ImportError:
+    from pydantic import validate_arguments, ValidationError, constr
 from typing_extensions import Annotated
 
-from pydantic import Field
+try:
+    from pydantic.v1 import Field
+except ImportError:
+    from pydantic import Field
 
 from authress.models.tenant import Tenant
 from authress.models.tenant_collection import TenantCollection

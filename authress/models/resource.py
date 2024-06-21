@@ -20,7 +20,10 @@ import json
 
 
 
-from pydantic import BaseModel, Field, constr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, constr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, constr, validator
 
 class Resource(BaseModel):
     """

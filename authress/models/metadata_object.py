@@ -20,7 +20,10 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr
 from authress.models.metadata_object_account import MetadataObjectAccount
 
 class MetadataObject(BaseModel):

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 REQUIRES = [
   "urllib3 >= 1.25.3, < 2.1.0",
   "python-dateutil",
-  "pydantic >= 1.10.5, < 2",
+  "pydantic >= 1.10.5, < 3",
   "aenum"
 ]
 

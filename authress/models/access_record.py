@@ -20,7 +20,10 @@ import json
 
 from datetime import datetime
 from typing import Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, validator
 from authress.models.access_record_account import AccessRecordAccount
 from authress.models.account_links import AccountLinks
 from authress.models.linked_group import LinkedGroup

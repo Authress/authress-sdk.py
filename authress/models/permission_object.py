@@ -20,7 +20,10 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictBool, constr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, StrictBool, constr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, StrictBool, constr, validator
 
 class PermissionObject(BaseModel):
     """

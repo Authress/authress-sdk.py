@@ -17,12 +17,18 @@ import re  # noqa: F401
 import io
 import warnings
 
-from pydantic import validate_arguments, ValidationError, constr
+try:
+    from pydantic.v1 import validate_arguments, ValidationError, constr
+except ImportError:
+    from pydantic import validate_arguments, ValidationError, constr
 from typing_extensions import Annotated
 
 from datetime import datetime
 
-from pydantic import Field, StrictStr
+try:
+    from pydantic.v1 import Field, StrictStr
+except ImportError:
+    from pydantic import Field, StrictStr
 
 from typing import Optional
 

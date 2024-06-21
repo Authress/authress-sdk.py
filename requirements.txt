@@ -4,5 +4,5 @@ setuptools >= 21.0.0
 urllib3 >= 1.25.3, < 2.1.0
 PyJWT >= 2.4.0
 cryptography >= 2.9.2
-pydantic >= 1.10.5, < 2
+pydantic >= 1.10.5, < 3
 aenum >= 3.1.11

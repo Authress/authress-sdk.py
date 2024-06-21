@@ -20,7 +20,10 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr, conlist
 from authress.models.permission_collection_account import PermissionCollectionAccount
 from authress.models.permission_object import PermissionObject
 
