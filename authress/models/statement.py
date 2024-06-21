@@ -20,7 +20,10 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, conlist, constr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, conlist, constr, validator
 from authress.models.linked_group import LinkedGroup
 from authress.models.resource import Resource
 from authress.models.user import User

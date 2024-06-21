@@ -20,7 +20,10 @@ import json
 
 
 from typing import List
-from pydantic import BaseModel, Field, conlist
+try:
+    from pydantic.v1 import BaseModel, Field, conlist
+except ImportError:
+    from pydantic import BaseModel, Field, conlist
 from authress.models.resource_permission import ResourcePermission
 
 class PermissionedResource(BaseModel):

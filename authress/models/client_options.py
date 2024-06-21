@@ -20,7 +20,10 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool
+try:
+    from pydantic.v1 import BaseModel, Field, StrictBool
+except ImportError:
+    from pydantic import BaseModel, Field, StrictBool
 
 class ClientOptions(BaseModel):
     """

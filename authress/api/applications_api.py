@@ -17,10 +17,16 @@ import re  # noqa: F401
 import io
 import warnings
 
-from pydantic import validate_arguments, ValidationError
+try:
+    from pydantic.v1 import validate_arguments, ValidationError
+except ImportError:
+    from pydantic import validate_arguments, ValidationError
 from typing_extensions import Annotated
 
-from pydantic import Field, constr
+try:
+    from pydantic.v1 import Field, constr
+except ImportError:
+    from pydantic import Field, constr
 
 from authress.models.application_delegation import ApplicationDelegation
 

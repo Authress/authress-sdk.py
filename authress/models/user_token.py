@@ -20,7 +20,10 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr
 from authress.models.account_links import AccountLinks
 from authress.models.permission_collection_account import PermissionCollectionAccount
 

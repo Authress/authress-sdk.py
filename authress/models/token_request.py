@@ -20,7 +20,10 @@ import json
 
 from datetime import datetime
 from typing import List
-from pydantic import BaseModel, Field, conlist
+try:
+    from pydantic.v1 import BaseModel, Field, conlist
+except ImportError:
+    from pydantic import BaseModel, Field, conlist
 from authress.models.statement import Statement
 
 class TokenRequest(BaseModel):

@@ -20,7 +20,10 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, constr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr, constr, validator
 
 class ConnectionData(BaseModel):
     """

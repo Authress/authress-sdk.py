@@ -20,7 +20,10 @@ import json
 
 
 
-from pydantic import BaseModel, Field
+try:
+    from pydantic.v1 import BaseModel, Field
+except ImportError:
+    from pydantic import BaseModel, Field
 from authress.models.account import Account
 
 class AccountCollection(BaseModel):

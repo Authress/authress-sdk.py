@@ -20,7 +20,10 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, validator
+try:
+    from pydantic.v1 import BaseModel, Field, StrictStr, validator
+except ImportError:
+    from pydantic import BaseModel, Field, StrictStr, validator
 
 class OAuthTokenRequest(BaseModel):
     """

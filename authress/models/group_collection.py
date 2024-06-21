@@ -20,7 +20,10 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, conlist
+try:
+    from pydantic.v1 import BaseModel, Field, conlist
+except ImportError:
+    from pydantic import BaseModel, Field, conlist
 from authress.models.collection_links import CollectionLinks
 from authress.models.group import Group
 from authress.models.pagination import Pagination

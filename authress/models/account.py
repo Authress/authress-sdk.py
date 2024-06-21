@@ -20,7 +20,10 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr
+try:
+    from pydantic.v1 import BaseModel, Field, constr
+except ImportError:
+    from pydantic import BaseModel, Field, constr
 from authress.models.account_links import AccountLinks
 
 class Account(BaseModel):
