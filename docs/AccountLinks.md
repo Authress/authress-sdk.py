@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_self** | [**Link**](Link.md) |  |
+**var_self** | [**Link**](Link.md) |  | 
 
 ## Example
 
@@ -21,7 +21,7 @@ print AccountLinks.to_json()
 # convert the object into a dict
 account_links_dict = account_links_instance.to_dict()
 # create an instance of AccountLinks from a dict
-account_links_form_dict = account_links.from_dict(account_links_dict)
+account_links_from_dict = AccountLinks.from_dict(account_links_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

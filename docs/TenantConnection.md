@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**connection_id** | **str** |  | [optional]
+**connection_id** | **str** |  | [optional] 
 
 ## Example
 
@@ -21,7 +21,7 @@ print TenantConnection.to_json()
 # convert the object into a dict
 tenant_connection_dict = tenant_connection_instance.to_dict()
 # create an instance of TenantConnection from a dict
-tenant_connection_form_dict = tenant_connection.from_dict(tenant_connection_dict)
+tenant_connection_from_dict = TenantConnection.from_dict(tenant_connection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

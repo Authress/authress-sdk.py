@@ -5,9 +5,9 @@ The extension's application configuration. The application contains the necessar
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**application_id** | **str** | The unique ID of the application. | [readonly]
-**redirect_urls** | **List[str]** |  | [optional]
-**links** | [**Links**](Links.md) |  |
+**application_id** | **str** | The unique ID of the application. | [readonly] 
+**redirect_urls** | **List[str]** |  | [optional] 
+**links** | [**Links**](Links.md) |  | [optional] 
 
 ## Example
 
@@ -24,7 +24,7 @@ print ExtensionApplication.to_json()
 # convert the object into a dict
 extension_application_dict = extension_application_instance.to_dict()
 # create an instance of ExtensionApplication from a dict
-extension_application_form_dict = extension_application.from_dict(extension_application_dict)
+extension_application_from_dict = ExtensionApplication.from_dict(extension_application_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

@@ -5,9 +5,9 @@ A collection of roles
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**roles** | [**List[Role]**](Role.md) | A list of roles |
-**pagination** | [**Pagination**](Pagination.md) |  | [optional]
-**links** | [**CollectionLinks**](CollectionLinks.md) |  |
+**roles** | [**List[Role]**](Role.md) | A list of roles | 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**links** | [**CollectionLinks**](CollectionLinks.md) |  | 
 
 ## Example
 
@@ -24,7 +24,7 @@ print RoleCollection.to_json()
 # convert the object into a dict
 role_collection_dict = role_collection_instance.to_dict()
 # create an instance of RoleCollection from a dict
-role_collection_form_dict = role_collection.from_dict(role_collection_dict)
+role_collection_from_dict = RoleCollection.from_dict(role_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

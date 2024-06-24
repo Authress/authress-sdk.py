@@ -23,7 +23,7 @@ print ClientOptions.to_json()
 # convert the object into a dict
 client_options_dict = client_options_instance.to_dict()
 # create an instance of ClientOptions from a dict
-client_options_form_dict = client_options.from_dict(client_options_dict)
+client_options_from_dict = ClientOptions.from_dict(client_options_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

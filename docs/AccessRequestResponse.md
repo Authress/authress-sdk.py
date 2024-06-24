@@ -5,7 +5,7 @@ A dynamic body to support request PATCH operations
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | New result, either approve or deny the request |
+**status** | **str** | New result, either approve or deny the request | 
 
 ## Example
 
@@ -22,7 +22,7 @@ print AccessRequestResponse.to_json()
 # convert the object into a dict
 access_request_response_dict = access_request_response_instance.to_dict()
 # create an instance of AccessRequestResponse from a dict
-access_request_response_form_dict = access_request_response.from_dict(access_request_response_dict)
+access_request_response_from_dict = AccessRequestResponse.from_dict(access_request_response_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

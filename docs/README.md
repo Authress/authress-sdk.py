@@ -68,6 +68,7 @@ Class | Method | HTTP request | Description
 `authress.tenants` | [**get_tenant**](./TenantsApi.md#get_tenant) | **GET** /v1/tenants/{tenantId} | Retrieve tenant
 `authress.tenants` | [**get_tenants**](./TenantsApi.md#get_tenants) | **GET** /v1/tenants | List tenants
 `authress.tenants` | [**update_tenant**](./TenantsApi.md#update_tenant) | **PUT** /v1/tenants/{tenantId} | Update tenant
+`authress.tenants` | [**link_tenant_user**](./TenantsApi.md#link_tenant_user) | **PATCH** /v1/tenants/{tenantId} | Link tenant user
 `authress.user_permissions` | [**authorize_user**](./UserPermissionsApi.md#authorize_user) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions/{permission} | Verify user authorization
 `authress.user_permissions` | [**get_user_permissions_for_resource**](./UserPermissionsApi.md#get_user_permissions_for_resource) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions | Get user permissions for resource
 `authress.user_permissions` | [**get_user_resources**](./UserPermissionsApi.md#get_user_resources) | **GET** /v1/users/{userId}/resources | List user resources

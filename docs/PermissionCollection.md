@@ -5,9 +5,9 @@ A collect of permissions that the user has to a resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | [**PermissionCollectionAccount**](PermissionCollectionAccount.md) |  | [optional]
-**user_id** | **str** |  |
-**permissions** | [**List[PermissionObject]**](PermissionObject.md) | A list of the permissions |
+**account** | [**PermissionCollectionAccount**](PermissionCollectionAccount.md) |  | [optional] 
+**user_id** | **str** |  | 
+**permissions** | [**List[PermissionObject]**](PermissionObject.md) | A list of the permissions | 
 
 ## Example
 
@@ -24,7 +24,7 @@ print PermissionCollection.to_json()
 # convert the object into a dict
 permission_collection_dict = permission_collection_instance.to_dict()
 # create an instance of PermissionCollection from a dict
-permission_collection_form_dict = permission_collection.from_dict(permission_collection_dict)
+permission_collection_from_dict = PermissionCollection.from_dict(permission_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

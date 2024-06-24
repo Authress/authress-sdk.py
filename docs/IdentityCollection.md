@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**identities** | [**List[Identity]**](Identity.md) |  |
+**identities** | [**List[Identity]**](Identity.md) |  | 
 
 ## Example
 
@@ -21,7 +21,7 @@ print IdentityCollection.to_json()
 # convert the object into a dict
 identity_collection_dict = identity_collection_instance.to_dict()
 # create an instance of IdentityCollection from a dict
-identity_collection_form_dict = identity_collection.from_dict(identity_collection_dict)
+identity_collection_from_dict = IdentityCollection.from_dict(identity_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

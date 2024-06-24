@@ -1,4 +1,6 @@
 # authress.ConnectionsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_connection**](ConnectionsApi.md#create_connection) | **POST** /v1/connections | Create SSO connection
@@ -29,7 +31,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -52,7 +54,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **connection** | [**Connection**](Connection.md)|  |
+ **connection** | [**Connection**](Connection.md)|  | 
 
 ### Return type
 
@@ -72,7 +74,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Connection created |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to create connection. |  -  |
+**403** | Forbidden. The user doesn't have permission to create connection. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -95,7 +97,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -116,7 +118,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **connection_id** | **str**| The connection identifier. |
+ **connection_id** | **str**| The connection identifier. | 
 
 ### Return type
 
@@ -136,7 +138,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. Connection deleted |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete connection. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete connection. |  -  |
 **404** | Not found. The connection does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -161,7 +163,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -184,7 +186,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **connection_id** | **str**| The connection identifier. |
+ **connection_id** | **str**| The connection identifier. | 
 
 ### Return type
 
@@ -204,7 +206,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to get connection. |  -  |
+**403** | Forbidden. The user doesn't have permission to get connection. |  -  |
 **404** | Not found. The connection does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -230,7 +232,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -254,8 +256,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **connection_id** | **str**| The connection identifier. |
- **user_id** | **str**| The connection user. |
+ **connection_id** | **str**| The connection identifier. | 
+ **user_id** | **str**| The Authress user ID. (Passing in the user ID generated by the third party will not return any credentials.) | 
 
 ### Return type
 
@@ -275,13 +277,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to get user connection credentials. |  -  |
+**403** | Forbidden. The user doesn't have permission to get user connection credentials. |  -  |
 **404** | Not found. The connection or user does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_connections**
-> ConnectionCollection get_connections()
+> ConnectionCollection get_connections(limit=limit, cursor=cursor, filter=filter)
 
 List SSO connections
 
@@ -300,7 +302,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -318,7 +320,12 @@ except Exception as e:
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| Max number of results to return | [optional] [default to 100]
+ **cursor** | **str**| Continuation cursor for paging | [optional] 
+ **filter** | **str**| Filter to search connections by. This is a case insensitive search through every text field. | [optional] 
 
 ### Return type
 
@@ -338,7 +345,7 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to fetch account connections, but has other account permissions. |  -  |
+**403** | Forbidden. The user doesn't have permission to fetch account connections, but has other account permissions. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -362,7 +369,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -386,8 +393,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **connection_id** | **str**| The connection identifier. |
- **connection** | [**Connection**](Connection.md)|  |
+ **connection_id** | **str**| The connection identifier. | 
+ **connection** | [**Connection**](Connection.md)|  | 
 
 ### Return type
 
@@ -407,7 +414,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. Connection updated |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update connection. |  -  |
+**403** | Forbidden. The user doesn't have permission to update connection. |  -  |
 **404** | Not found. The connection does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -42,6 +42,10 @@ unzip SHA
 podman stop $CID && podman rm $CID
 ```
 
+### Repeated actions
+* Move `models`, `tests`, `docs` to the appropriate locations.
+* Ensure multiple versions of pydantic work
+
 ### Common review items
 * [ ] Inputs to Constructor are (string: authress_api_url, string: service_client_access_key)
 * [ ] authress_api_url should sanitize https:// prefix and remove trailing `/`s

@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_id** | **str** |  |
+**account_id** | **str** |  | 
 
 ## Example
 
@@ -21,7 +21,7 @@ print AccessRecordAccount.to_json()
 # convert the object into a dict
 access_record_account_dict = access_record_account_instance.to_dict()
 # create an instance of AccessRecordAccount from a dict
-access_record_account_form_dict = access_record_account.from_dict(access_record_account_dict)
+access_record_account_from_dict = AccessRecordAccount.from_dict(access_record_account_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

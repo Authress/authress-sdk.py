@@ -5,8 +5,8 @@ A collection of platform extensions.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**extensions** | [**List[Extension]**](Extension.md) |  |
-**pagination** | [**Pagination**](Pagination.md) |  | [optional]
+**extensions** | [**List[Extension]**](Extension.md) |  | 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
 
 ## Example
 
@@ -23,7 +23,7 @@ print ExtensionCollection.to_json()
 # convert the object into a dict
 extension_collection_dict = extension_collection_instance.to_dict()
 # create an instance of ExtensionCollection from a dict
-extension_collection_form_dict = extension_collection.from_dict(extension_collection_dict)
+extension_collection_from_dict = ExtensionCollection.from_dict(extension_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

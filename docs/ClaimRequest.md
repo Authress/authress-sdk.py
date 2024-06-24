@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**collection_resource** | **str** | The parent resource to add a sub-resource to. The resource must have a resource configuration that add the permission CLAIM for this to work. |
-**resource_id** | **str** | The sub-resource the user is requesting Admin ownership over. |
+**collection_resource** | **str** | The parent resource to add a sub-resource to. The resource must have a resource configuration that add the permission CLAIM for this to work. | 
+**resource_id** | **str** | The sub-resource the user is requesting Admin ownership over. | 
 
 ## Example
 
@@ -22,7 +22,7 @@ print ClaimRequest.to_json()
 # convert the object into a dict
 claim_request_dict = claim_request_instance.to_dict()
 # create an instance of ClaimRequest from a dict
-claim_request_form_dict = claim_request.from_dict(claim_request_dict)
+claim_request_from_dict = ClaimRequest.from_dict(claim_request_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**permissions** | [**List[ResourcePermission]**](ResourcePermission.md) |  |
+**permissions** | [**List[ResourcePermission]**](ResourcePermission.md) |  | 
 
 ## Example
 
@@ -21,7 +21,7 @@ print PermissionedResource.to_json()
 # convert the object into a dict
 permissioned_resource_dict = permissioned_resource_instance.to_dict()
 # create an instance of PermissionedResource from a dict
-permissioned_resource_form_dict = permissioned_resource.from_dict(permissioned_resource_dict)
+permissioned_resource_from_dict = PermissionedResource.from_dict(permissioned_resource_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

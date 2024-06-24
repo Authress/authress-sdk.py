@@ -5,7 +5,7 @@ Details containing how to pagination through the collection. Consists of an opti
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**next** | [**PaginationNext**](PaginationNext.md) |  | [optional]
+**next** | [**PaginationNext**](PaginationNext.md) |  | [optional] 
 
 ## Example
 
@@ -22,7 +22,7 @@ print Pagination.to_json()
 # convert the object into a dict
 pagination_dict = pagination_instance.to_dict()
 # create an instance of Pagination from a dict
-pagination_form_dict = pagination.from_dict(pagination_dict)
+pagination_from_dict = Pagination.from_dict(pagination_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **str** |  |
-**allow** | **bool** |  |
+**action** | **str** |  | 
+**allow** | **bool** |  | 
 
 ## Example
 
@@ -22,7 +22,7 @@ print ResourcePermission.to_json()
 # convert the object into a dict
 resource_permission_dict = resource_permission_instance.to_dict()
 # create an instance of ResourcePermission from a dict
-resource_permission_form_dict = resource_permission.from_dict(resource_permission_dict)
+resource_permission_from_dict = ResourcePermission.from_dict(resource_permission_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

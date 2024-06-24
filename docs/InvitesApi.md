@@ -1,4 +1,6 @@
 # authress.InvitesApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_invite**](InvitesApi.md#create_invite) | **POST** /v1/invites | Create user invite
@@ -27,7 +29,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -50,7 +52,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **invite** | [**Invite**](Invite.md)|  |
+ **invite** | [**Invite**](Invite.md)|  | 
 
 ### Return type
 
@@ -70,7 +72,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Invite created |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have the permissions to create an invite. They may have specified too many permissions in the invite. |  -  |
+**403** | Forbidden. The user doesn't have the permissions to create an invite. They may have specified too many permissions in the invite. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -93,7 +95,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -114,7 +116,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **invite_id** | **str**| The identifier of the invite. |
+ **invite_id** | **str**| The identifier of the invite. | 
 
 ### Return type
 
@@ -134,8 +136,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. Invite deleted. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete the invite. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the invite. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete the invite. |  -  |
+**404** | Not found. The user doesn't have any permissions to the invite. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -159,7 +161,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -182,7 +184,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **invite_id** | **str**| The identifier of the invite. |
+ **invite_id** | **str**| The identifier of the invite. | 
 
 ### Return type
 
@@ -202,8 +204,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to this invite, but they have other permissions to the same account. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the invite or the invite does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to this invite, but they have other permissions to the same account. |  -  |
+**404** | Not found. The user doesn't have any permissions to the invite or the invite does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -227,7 +229,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -250,7 +252,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **invite_id** | **str**| The identifier of the invite. |
+ **invite_id** | **str**| The identifier of the invite. | 
 
 ### Return type
 
@@ -270,8 +272,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. Invite accepted. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update the access record. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the access record. |  -  |
+**403** | Forbidden. The user doesn't have permission to update the access record. |  -  |
+**404** | Not found. The user doesn't have any permissions to the access record. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

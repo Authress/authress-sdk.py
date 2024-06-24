@@ -93,8 +93,6 @@ from authress.models.invite import Invite
 from authress.models.link import Link
 from authress.models.linked_group import LinkedGroup
 from authress.models.links import Links
-from authress.models.metadata_object import MetadataObject
-from authress.models.metadata_object_account import MetadataObjectAccount
 from authress.models.o_auth_authorize_response import OAuthAuthorizeResponse
 from authress.models.o_auth_token_request import OAuthTokenRequest
 from authress.models.o_auth_token_response import OAuthTokenResponse

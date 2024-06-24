@@ -5,9 +5,9 @@ A collection of resource permissions that have been defined.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**resources** | [**List[PermissionedResource]**](PermissionedResource.md) |  |
-**pagination** | [**Pagination**](Pagination.md) |  | [optional]
-**links** | [**CollectionLinks**](CollectionLinks.md) |  |
+**resources** | [**List[PermissionedResource]**](PermissionedResource.md) |  | 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**links** | [**CollectionLinks**](CollectionLinks.md) |  | 
 
 ## Example
 
@@ -24,7 +24,7 @@ print PermissionedResourceCollection.to_json()
 # convert the object into a dict
 permissioned_resource_collection_dict = permissioned_resource_collection_instance.to_dict()
 # create an instance of PermissionedResourceCollection from a dict
-permissioned_resource_collection_form_dict = permissioned_resource_collection.from_dict(permissioned_resource_collection_dict)
+permissioned_resource_collection_from_dict = PermissionedResourceCollection.from_dict(permissioned_resource_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

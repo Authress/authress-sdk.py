@@ -58,8 +58,6 @@ authress/models/invite.py
 authress/models/link.py
 authress/models/linked_group.py
 authress/models/links.py
-authress/models/metadata_object.py
-authress/models/metadata_object_account.py
 authress/models/o_auth_authorize_response.py
 authress/models/o_auth_token_request.py
 authress/models/o_auth_token_response.py
@@ -217,8 +215,6 @@ test/test_invites_api.py
 test/test_link.py
 test/test_linked_group.py
 test/test_links.py
-test/test_metadata_object.py
-test/test_metadata_object_account.py
 test/test_o_auth_authorize_response.py
 test/test_o_auth_token_request.py
 test/test_o_auth_token_response.py

@@ -5,9 +5,9 @@ A collection of groups
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**groups** | [**List[Group]**](Group.md) | A list of groups |
-**pagination** | [**Pagination**](Pagination.md) |  | [optional]
-**links** | [**CollectionLinks**](CollectionLinks.md) |  |
+**groups** | [**List[Group]**](Group.md) | A list of groups | 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**links** | [**CollectionLinks**](CollectionLinks.md) |  | 
 
 ## Example
 
@@ -24,7 +24,7 @@ print GroupCollection.to_json()
 # convert the object into a dict
 group_collection_dict = group_collection_instance.to_dict()
 # create an instance of GroupCollection from a dict
-group_collection_form_dict = group_collection.from_dict(group_collection_dict)
+group_collection_from_dict = GroupCollection.from_dict(group_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

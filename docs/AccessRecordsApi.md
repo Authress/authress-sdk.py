@@ -1,11 +1,13 @@
 # authress.AccessRecordsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_claim**](AccessRecordsApi.md#create_claim) | **POST** /v1/claims | Create resource Claim
 [**create_record**](AccessRecordsApi.md#create_record) | **POST** /v1/records | Create access record
 [**create_request**](AccessRecordsApi.md#create_request) | **POST** /v1/requests | Create access request
-[**delete_record**](AccessRecordsApi.md#delete_record) | **DELETE** /v1/records/{recordId} | Deletes access record
-[**delete_request**](AccessRecordsApi.md#delete_request) | **DELETE** /v1/requests/{requestId} | Deletes access request
+[**delete_record**](AccessRecordsApi.md#delete_record) | **DELETE** /v1/records/{recordId} | Delete access record
+[**delete_request**](AccessRecordsApi.md#delete_request) | **DELETE** /v1/requests/{requestId} | Delete access request
 [**get_record**](AccessRecordsApi.md#get_record) | **GET** /v1/records/{recordId} | Retrieve access record
 [**get_records**](AccessRecordsApi.md#get_records) | **GET** /v1/records | List access records
 [**get_request**](AccessRecordsApi.md#get_request) | **GET** /v1/requests/{requestId} | Retrieve access request
@@ -34,7 +36,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -56,7 +58,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **claim_request** | [**ClaimRequest**](ClaimRequest.md)|  |
+ **claim_request** | [**ClaimRequest**](ClaimRequest.md)|  | 
 
 ### Return type
 
@@ -76,7 +78,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Resource claimed. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the resource collection to claim a sub-resource. |  -  |
+**403** | Forbidden. The user doesn't have permission to the resource collection to claim a sub-resource. |  -  |
 **409** | AlreadyClaimed. The resource has already been claimed by another user or another user already has access to this resource. So admin access will not be given. The reason for this is to prevent preemptive stealing of admin access to these records. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -101,7 +103,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -124,7 +126,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_record** | [**AccessRecord**](AccessRecord.md)|  |
+ **access_record** | [**AccessRecord**](AccessRecord.md)|  | 
 
 ### Return type
 
@@ -142,10 +144,10 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Success. Access record created | - |
+**201** | Success. Access record created |  -  |
 **202** | Success. Access record created and permissions will be propagated asynchronously. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to create records. |  -  |
+**403** | Forbidden. The user doesn't have permission to create records. |  -  |
 **409** | AccessRecordAlreadyExists. There already exists an access record with this recordId. |  -  |
 **413** | The size of the record is larger than allowed. Recommended action is to create another record and retry the updates. |  -  |
 
@@ -171,7 +173,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -194,7 +196,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **access_request** | [**AccessRequest**](AccessRequest.md)|  |
+ **access_request** | [**AccessRequest**](AccessRequest.md)|  | 
 
 ### Return type
 
@@ -214,7 +216,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Access request created |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to create access requests. |  -  |
+**403** | Forbidden. The user doesn't have permission to create access requests. |  -  |
 **422** | Unprocessable Entity. Some of the data in the request is invalid. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -222,7 +224,7 @@ Name | Type | Description  | Notes
 # **delete_record**
 > delete_record(record_id)
 
-Deletes access record
+Delete access record
 
 Remove an access record, removing associated permissions from all users in record. If a user has a permission from another record, that permission will not be removed. (Note: This disables the record by changing the status to <strong>DELETED</strong> but not completely remove the record for tracking purposes.
 
@@ -238,7 +240,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -259,7 +261,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **record_id** | **str**| The identifier of the access record. |
+ **record_id** | **str**| The identifier of the access record. | 
 
 ### Return type
 
@@ -279,15 +281,15 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. The access record has been deleted |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete the access record. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the resource or the access record no longer exists. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete the access record. |  -  |
+**404** | Not found. The user doesn't have any permissions to the resource or the access record no longer exists. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_request**
 > delete_request(request_id)
 
-Deletes access request
+Delete access request
 
 Remove an access request.
 
@@ -303,7 +305,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -324,7 +326,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_id** | **str**| The identifier of the access request. |
+ **request_id** | **str**| The identifier of the access request. | 
 
 ### Return type
 
@@ -344,8 +346,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. The access request has been deleted |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete the access request. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the access request or it no longer exists. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete the access request. |  -  |
+**404** | Not found. The user doesn't have any permissions to the access request or it no longer exists. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -369,7 +371,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -392,7 +394,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **record_id** | **str**| The identifier of the access record. |
+ **record_id** | **str**| The identifier of the access record. | 
 
 ### Return type
 
@@ -412,8 +414,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the access record, but they have other permissions to the same account. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the access record or this access record does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to the access record, but they have other permissions to the same account. |  -  |
+**404** | Not found. The user doesn't have any permissions to the access record or this access record does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -422,7 +424,7 @@ Name | Type | Description  | Notes
 
 List access records
 
-Returns a paginated records list for the account. Only records the user has access to are returned. This query resource is meant for administrative actions only, therefore has a lower rate limit tier than user permissions related resources. Additionally, the results from a query to Access Records may be delayed up to 5 minutes.
+Returns a paginated records list for the account. Only records the user has access to are returned. The results sort order is not stable, on subsequent requests different results may be returned. This query resource is meant for administrative actions only, therefore has a lower rate limit tier than user permissions related resources. Additionally, the results from a query to Access Records may be delayed up to 5 minutes.
 
 ### Example
 
@@ -437,7 +439,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -464,9 +466,9 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max number of results to return | [optional] [default to 20]
- **cursor** | **str**| Continuation cursor for paging | [optional]
- **filter** | **str**| Filter to search records by. This is a case insensitive search through every text field. | [optional]
- **status** | **str**| Filter records by their current status. | [optional]
+ **cursor** | **str**| Continuation cursor for paging | [optional] 
+ **filter** | **str**| Filter to search records by. This is a case insensitive search through every text field. | [optional] 
+ **status** | **str**| Filter records by their current status. | [optional] 
 
 ### Return type
 
@@ -486,7 +488,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to fetch account records, but has other account permissions. |  -  |
+**403** | Forbidden. The user doesn't have permission to fetch account records, but has other account permissions. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -510,7 +512,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -533,7 +535,7 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_id** | **str**| The identifier of the access request. |
+ **request_id** | **str**| The identifier of the access request. | 
 
 ### Return type
 
@@ -553,8 +555,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the access request, but they have other permissions to the same account. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the access request or this access request does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to the access request, but they have other permissions to the same account. |  -  |
+**404** | Not found. The user doesn't have any permissions to the access request or this access request does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -578,7 +580,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -604,8 +606,8 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max number of results to return | [optional] [default to 20]
- **cursor** | **str**| Continuation cursor for paging | [optional]
- **status** | **str**| Filter requests by their current status. | [optional]
+ **cursor** | **str**| Continuation cursor for paging | [optional] 
+ **status** | **str**| Filter requests by their current status. | [optional] 
 
 ### Return type
 
@@ -625,7 +627,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to fetch access requests, but has other account permissions. |  -  |
+**403** | Forbidden. The user doesn't have permission to fetch access requests, but has other account permissions. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -650,7 +652,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -674,8 +676,8 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **request_id** | **str**| The identifier of the access request. |
- **access_request_response** | [**AccessRequestResponse**](AccessRequestResponse.md)|  |
+ **request_id** | **str**| The identifier of the access request. | 
+ **access_request_response** | [**AccessRequestResponse**](AccessRequestResponse.md)|  | 
 
 ### Return type
 
@@ -695,8 +697,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. Access record updated. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update the access request. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the access request. |  -  |
+**403** | Forbidden. The user doesn't have permission to update the access request. |  -  |
+**404** | Not found. The user doesn't have any permissions to the access request. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -720,7 +722,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -743,9 +745,9 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **record_id** | **str**| The identifier of the access record. |
- **access_record** | [**AccessRecord**](AccessRecord.md)|  |
- **expected_last_modified_time** | **str**| The expected last time the record was modified. | [optional]
+ **record_id** | **str**| The identifier of the access record. | 
+ **access_record** | [**AccessRecord**](AccessRecord.md)|  | 
+ **expected_last_modified_time** | **str**| The expected last time the record was modified. | [optional] 
 
 ### Return type
 
@@ -765,8 +767,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **202** | Success. Access record update request was accepted. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update the access record. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the access record. |  -  |
+**403** | Forbidden. The user doesn't have permission to update the access record. |  -  |
+**404** | Not found. The user doesn't have any permissions to the access record. |  -  |
 **412** | Precondition failed. Usually the result of a concurrent update to the access record. Get the latest version and retry again. |  -  |
 **413** | The size of the record is larger than allowed. Recommended action is to create another record and retry the updates. |  -  |
 

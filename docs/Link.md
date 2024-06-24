@@ -5,8 +5,8 @@ A url linking object that complies to application/links+json RFC. Either is an I
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**href** | **str** | The absolute url pointing to the reference resource. |
-**rel** | **str** | Optional property indicating the type of link if it is not a default IANA approved global link relation. | [optional]
+**href** | **str** | The absolute url pointing to the reference resource. | 
+**rel** | **str** | Optional property indicating the type of link if it is not a default IANA approved global link relation. | [optional] 
 
 ## Example
 
@@ -23,7 +23,7 @@ print Link.to_json()
 # convert the object into a dict
 link_dict = link_instance.to_dict()
 # create an instance of Link from a dict
-link_form_dict = link.from_dict(link_dict)
+link_from_dict = Link.from_dict(link_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

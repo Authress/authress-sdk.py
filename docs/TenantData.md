@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional]
+**name** | **str** |  | [optional] 
 
 ## Example
 
@@ -21,7 +21,7 @@ print TenantData.to_json()
 # convert the object into a dict
 tenant_data_dict = tenant_data_instance.to_dict()
 # create an instance of TenantData from a dict
-tenant_data_form_dict = tenant_data.from_dict(tenant_data_dict)
+tenant_data_from_dict = TenantData.from_dict(tenant_data_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 
