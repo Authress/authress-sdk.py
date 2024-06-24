@@ -1,4 +1,6 @@
 # authress.AccountsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delegate_authentication**](AccountsApi.md#delegate_authentication) | **POST** /v1/identities | Link external provider
@@ -27,7 +29,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -48,7 +50,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identity_request** | [**IdentityRequest**](IdentityRequest.md)|  |
+ **identity_request** | [**IdentityRequest**](IdentityRequest.md)|  | 
 
 ### Return type
 
@@ -68,7 +70,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **201** | Success. New identity linked. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update identities for the account. |  -  |
+**403** | Forbidden. The user doesn't have permission to update identities for the account. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -92,7 +94,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -114,7 +116,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **account_id** | **str**| The unique identifier for the account |
+ **account_id** | **str**| The unique identifier for the account | 
 
 ### Return type
 
@@ -134,7 +136,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. The account |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to this account or it does not exist. |  -  |
+**404** | Not found. The user doesn't have any permissions to this account or it does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -158,7 +160,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -196,7 +198,7 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Not found. The user doesn&#39;t have permission to list identities for this account. |  -  |
+**403** | Not found. The user doesn't have permission to list identities for this account. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -220,7 +222,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -243,7 +245,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **earliest_cache_time** | **datetime**| Ensure the accounts list is not cached before this time. | [optional]
+ **earliest_cache_time** | **datetime**| Ensure the accounts list is not cached before this time. | [optional] 
 
 ### Return type
 

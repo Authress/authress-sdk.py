@@ -4,11 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_id** | **str** |  |
-**created_time** | **datetime** |  | [readonly]
-**name** | **str** |  | [optional]
-**company** | **object** |  |
-**links** | [**AccountLinks**](AccountLinks.md) |  |
+**account_id** | **str** |  | 
+**created_time** | **datetime** |  | [readonly] 
+**name** | **str** |  | [optional] 
+**company** | **object** |  | 
+**links** | [**AccountLinks**](AccountLinks.md) |  | [optional] 
 
 ## Example
 
@@ -25,7 +25,7 @@ print Account.to_json()
 # convert the object into a dict
 account_dict = account_instance.to_dict()
 # create an instance of Account from a dict
-account_form_dict = account.from_dict(account_dict)
+account_from_dict = Account.from_dict(account_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

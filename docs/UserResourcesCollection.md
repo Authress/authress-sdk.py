@@ -5,11 +5,11 @@ A collect of permissions that the user has to a resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | [**PermissionCollectionAccount**](PermissionCollectionAccount.md) |  | [optional]
-**user_id** | **str** |  |
-**resources** | [**List[Resource]**](Resource.md) | A list of the resources the user has some permission to. | [optional]
-**pagination** | [**Pagination**](Pagination.md) |  | [optional]
-**links** | [**CollectionLinks**](CollectionLinks.md) |  |
+**account** | [**PermissionCollectionAccount**](PermissionCollectionAccount.md) |  | [optional] 
+**user_id** | **str** |  | 
+**resources** | [**List[Resource]**](Resource.md) | A list of the resources the user has some permission to. | [optional] 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**links** | [**CollectionLinks**](CollectionLinks.md) |  | 
 
 ## Example
 
@@ -26,7 +26,7 @@ print UserResourcesCollection.to_json()
 # convert the object into a dict
 user_resources_collection_dict = user_resources_collection_instance.to_dict()
 # create an instance of UserResourcesCollection from a dict
-user_resources_collection_form_dict = user_resources_collection.from_dict(user_resources_collection_dict)
+user_resources_collection_from_dict = UserResourcesCollection.from_dict(user_resources_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

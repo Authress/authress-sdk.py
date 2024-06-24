@@ -1,4 +1,6 @@
 # authress.ServiceClientsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_client**](ServiceClientsApi.md#create_client) | **POST** /v1/clients | Create service client
@@ -30,7 +32,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -53,7 +55,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client** | [**Client**](Client.md)|  |
+ **client** | [**Client**](Client.md)|  | 
 
 ### Return type
 
@@ -95,7 +97,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -117,8 +119,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The unique identifier of the client. |
- **key_id** | **str**| The ID of the access key to remove from the client. |
+ **client_id** | **str**| The unique identifier of the client. | 
+ **key_id** | **str**| The ID of the access key to remove from the client. | 
 
 ### Return type
 
@@ -138,8 +140,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. The access key has been deleted. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete access keys from a client. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the client or the client does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete access keys from a client. |  -  |
+**404** | Not found. The user doesn't have any permissions to the client or the client does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -162,7 +164,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -183,7 +185,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The unique identifier for the client. |
+ **client_id** | **str**| The unique identifier for the client. | 
 
 ### Return type
 
@@ -203,8 +205,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. The client was deleted. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete the client. |  -  |
-**404** | Not found. The user doesn&#39;t have any permission to the client or the client does not exist |  -  |
+**403** | Forbidden. The user doesn't have permission to delete the client. |  -  |
+**404** | Not found. The user doesn't have any permission to the client or the client does not exist |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -228,7 +230,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -251,7 +253,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The unique identifier for the client. |
+ **client_id** | **str**| The unique identifier for the client. | 
 
 ### Return type
 
@@ -271,7 +273,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**404** | Not found. The user doesn&#39;t have permissions to the client or the client does not exist. |  -  |
+**404** | Not found. The user doesn't have permissions to the client or the client does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -295,7 +297,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -320,7 +322,7 @@ except Exception as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max number of results to return | [optional] [default to 20]
- **cursor** | **str**| Continuation cursor for paging. | [optional]
+ **cursor** | **str**| Continuation cursor for paging. | [optional] 
 
 ### Return type
 
@@ -340,7 +342,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the resource, but they have other permissions to the same resource. |  -  |
+**403** | Forbidden. The user doesn't have permission to the resource, but they have other permissions to the same resource. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -349,7 +351,7 @@ Name | Type | Description  | Notes
 
 Generate service client access key
 
-Create a new access key for the client so that a service can authenticate with Authress as that client. Using the client will allow delegation of permission checking of users. (Limited to 5 Active keys per client)
+Create a new access key for the client or upload a compliant public key, so that a service can authenticate with Authress as that client. Using the client will allow delegation of permission checking of users. Enables machine-to-machine authentication between your services and with your end users. (There is a limit of 5 Active keys per client)
 
 ### Example
 
@@ -364,7 +366,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -387,7 +389,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The unique identifier of the client. |
+ **client_id** | **str**| The unique identifier of the client. | 
 
 ### Return type
 
@@ -407,8 +409,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to create access keys for the client. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to client or the client does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to create access keys for the client. |  -  |
+**404** | Not found. The user doesn't have any permissions to client or the client does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -432,7 +434,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -456,8 +458,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **client_id** | **str**| The unique identifier for the client. |
- **client** | [**Client**](Client.md)|  |
+ **client_id** | **str**| The unique identifier for the client. | 
+ **client** | [**Client**](Client.md)|  | 
 
 ### Return type
 
@@ -477,8 +479,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. The client was updated |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update the client. |  -  |
-**404** | Not found. The user doesn&#39;t have permission to the account or the client does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to update the client. |  -  |
+**404** | Not found. The user doesn't have permission to the account or the client does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

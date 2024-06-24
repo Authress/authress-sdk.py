@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scope** | **str** |  | [optional] [default to 'profile email openid']
+**scope** | **str** | Default OAuth scopes to use for every request (leave blank to remove scopes). | [optional] [default to 'profile email openid']
 
 ## Example
 
@@ -21,7 +21,7 @@ print ConnectionDefaultConnectionProperties.to_json()
 # convert the object into a dict
 connection_default_connection_properties_dict = connection_default_connection_properties_instance.to_dict()
 # create an instance of ConnectionDefaultConnectionProperties from a dict
-connection_default_connection_properties_form_dict = connection_default_connection_properties.from_dict(connection_default_connection_properties_dict)
+connection_default_connection_properties_from_dict = ConnectionDefaultConnectionProperties.from_dict(connection_default_connection_properties_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

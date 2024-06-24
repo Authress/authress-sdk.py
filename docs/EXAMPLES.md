@@ -6,7 +6,7 @@ from authress import AuthressClient
 
 # create an instance of the API class during service initialization
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -42,7 +42,7 @@ from authress import AuthressClient
 
 # create an instance of the API class during service initialization
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # Create a service client in the Authress management portal and past the access token here
 service_client_access_key = 'eyJrZXlJ....'
@@ -101,7 +101,7 @@ from authress.models import *
 # Your service's service client access token
 service_client_access_key = 'eyJrZXlJ....'
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 authress_client = AuthressClient(authress_api_url=authress_api_url, service_client_access_key=service_client_access_key)
 
 # User to create access token for
@@ -132,7 +132,7 @@ from authress import AuthressClient
 authorization_token = request.headers.get("authorization")
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-host = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+host = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # Instantiate the client
 authress_client = AuthressClient(host)

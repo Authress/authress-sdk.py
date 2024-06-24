@@ -5,7 +5,7 @@ A role with associated role data.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**role_id** | **str** |  |
+**role_id** | **str** | Unique identifier for the role, can be specified on creation, and used by records to map to permissions. | 
 
 ## Example
 
@@ -22,7 +22,7 @@ print UserRole.to_json()
 # convert the object into a dict
 user_role_dict = user_role_instance.to_dict()
 # create an instance of UserRole from a dict
-user_role_form_dict = user_role.from_dict(user_role_dict)
+user_role_from_dict = UserRole.from_dict(user_role_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

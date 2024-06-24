@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_id** | **str** |  | [optional]
+**account_id** | **str** |  | [optional] 
 
 ## Example
 
@@ -21,7 +21,7 @@ print PermissionCollectionAccount.to_json()
 # convert the object into a dict
 permission_collection_account_dict = permission_collection_account_instance.to_dict()
 # create an instance of PermissionCollectionAccount from a dict
-permission_collection_account_form_dict = permission_collection_account.from_dict(permission_collection_account_dict)
+permission_collection_account_from_dict = PermissionCollectionAccount.from_dict(permission_collection_account_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

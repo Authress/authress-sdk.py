@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accounts** | [**Account**](Account.md) |  |
+**accounts** | [**Account**](Account.md) |  | 
 
 ## Example
 
@@ -21,7 +21,7 @@ print AccountCollection.to_json()
 # convert the object into a dict
 account_collection_dict = account_collection_instance.to_dict()
 # create an instance of AccountCollection from a dict
-account_collection_form_dict = account_collection.from_dict(account_collection_dict)
+account_collection_from_dict = AccountCollection.from_dict(account_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

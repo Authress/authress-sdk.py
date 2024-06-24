@@ -1,4 +1,6 @@
 # authress.UserPermissionsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**authorize_user**](UserPermissionsApi.md#authorize_user) | **GET** /v1/users/{userId}/resources/{resourceUri}/permissions/{permission} | Verify user authorization
@@ -28,7 +30,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -51,9 +53,9 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user to check permissions on |
- **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed, the resource must be a full path. |
- **permission** | **str** | Permission to check, &#39;*&#39; and scoped permissions can also be checked here. |
+ **user_id** | **str**| The user identifier to check and verify the permissions of. | 
+ **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed, the resource must be a full path. | 
+ **permission** | **str**| Permission to check, '*' and scoped permissions can also be checked here. | 
 
 ### Return type
 
@@ -73,8 +75,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **200** | Success. The user has permissions |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The requestor of the authorization check doesn&#39;t have the required permission to check the user&#39;s authorization. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the resource including the one requested. |  -  |
+**403** | Forbidden. The requestor of the authorization check doesn't have the required permission to check the user's authorization. |  -  |
+**404** | Not found. The user doesn't have any permissions to the resource including the one requested. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -83,7 +85,7 @@ void (empty response body)
 
 Get user permissions for resource
 
-Get a summary of the permissions a user has to a particular resource.
+Get a summary of the permissions a user has to a particular resource. For real time authorization checks, specify the permission.
 
 ### Example
 
@@ -99,7 +101,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -123,8 +125,8 @@ authress_client = AuthressClient(authress_api_url=authress_api_url , service_cli
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user to check permissions on |
- **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. |
+ **user_id** | **str**| The user identifier for the user to check permissions. | 
+ **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. | 
 
 ### Return type
 
@@ -144,7 +146,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. The user has permissions |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the resource. |  -  |
+**404** | Not found. The user doesn't have any permissions to the resource. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -170,7 +172,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -198,12 +200,12 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user to check permissions on |
- **resource_uri** | **str**| The top level uri path of a resource to query for. Will only match explicit or nested sub-resources. Will not partial match resource names. | [optional]
- **collection_configuration** | **str**| &#x60;TOP_LEVEL_ONLY&#x60; - returns only directly nested resources under the resourceUri. A query to &#x60;resourceUri&#x3D;Collection&#x60; will return &#x60;Collection/resource_1&#x60;.&lt;br&gt;&#x60;INCLUDE_NESTED&#x60; - will return all sub-resources as well as deeply nested resources that the user has the specified permission to. A query to &#x60;resourceUri&#x3D;Collection&#x60; will return &#x60;Collection/namespaces/ns/resources/resource_1&#x60;.&lt;br&gt;&lt;br&gt;To return matching resources for nested resources, set this parameter to &#x60;INCLUDE_NESTED&#x60;. | [optional] [default to &#39;TOP_LEVEL_ONLY&#39;]
- **permissions** | **str**| Permission to check, &#39;*&#39; and scoped permissions can also be checked here. By default if the user has any permission explicitly to a resource, it will be included in the list. | [optional]
+ **user_id** | **str**| The user identifier for which to list all accessible resources. | 
+ **resource_uri** | **str**| The top level uri path of a resource to query for. Will only match explicit or nested sub-resources. Will not partial match resource names. | [optional] 
+ **collection_configuration** | **str**| &#x60;TOP_LEVEL_ONLY&#x60; - returns only directly nested resources under the resourceUri. A query to &#x60;resourceUri&#x3D;Collection&#x60; will return &#x60;Collection/resource_1&#x60;.&lt;br&gt;&#x60;INCLUDE_NESTED&#x60; - will return all sub-resources as well as deeply nested resources that the user has the specified permission to. A query to &#x60;resourceUri&#x3D;Collection&#x60; will return &#x60;Collection/namespaces/ns/resources/resource_1&#x60;.&lt;br&gt;&lt;br&gt;To return matching resources for nested resources, set this parameter to &#x60;INCLUDE_NESTED&#x60;. | [optional] [default to 'TOP_LEVEL_ONLY']
+ **permissions** | **str**| Permission to check, '*' and scoped permissions can also be checked here. By default if the user has any permission explicitly to a resource, it will be included in the list. | [optional] 
  **limit** | **int**| Max number of results to return | [optional] [default to 20]
- **cursor** | **str**| Continuation cursor for paging | [optional]
+ **cursor** | **str**| Continuation cursor for paging | [optional] 
 
 ### Return type
 
@@ -231,7 +233,7 @@ Name | Type | Description  | Notes
 
 Get user roles for resource
 
-Get a summary of the roles a user has to a particular resource. Users can be assigned roles from multiple access records, this may cause the same role to appear in the list more than once.
+Get a summary of the roles a user has to a particular resource. Users can be assigned roles from multiple access records, this may cause the same role to appear in the list more than once. Only contains explicity roles assigned to the user for the specified resources. Roles granted to the user for the resource due to a parent resource assignment are not returned. For real time authorization checks, use the  /permission endpoint and specify the explicit permission.
 
 ### Example
 
@@ -247,7 +249,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -271,8 +273,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**| The user to get roles for. |
- **resource_uri** | **str**| The uri path of a resource to get roles for, must be URL encoded. Checks for explicit resource roles, roles attached to parent resources are not returned. |
+ **user_id** | **str**| The user to get roles for. | 
+ **resource_uri** | **str**| The uri path of a resource to get roles for, must be URL encoded. Checks for explicit resource roles, roles attached to parent resources are not returned. | 
 
 ### Return type
 
@@ -292,7 +294,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. The user has roles |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the resource. |  -  |
+**404** | Not found. The user doesn't have any roles to the resource. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

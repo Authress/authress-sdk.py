@@ -1,8 +1,10 @@
 # authress.RolesApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_role**](RolesApi.md#create_role) | **POST** /v1/roles | Create role
-[**delete_role**](RolesApi.md#delete_role) | **DELETE** /v1/roles/{roleId} | Deletes role
+[**delete_role**](RolesApi.md#delete_role) | **DELETE** /v1/roles/{roleId} | Delete role
 [**get_role**](RolesApi.md#get_role) | **GET** /v1/roles/{roleId} | Retrieve role
 [**get_roles**](RolesApi.md#get_roles) | **GET** /v1/roles | List roles
 [**update_role**](RolesApi.md#update_role) | **PUT** /v1/roles/{roleId} | Update role
@@ -28,7 +30,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -51,7 +53,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role** | [**Role**](Role.md)|  |
+ **role** | [**Role**](Role.md)|  | 
 
 ### Return type
 
@@ -71,7 +73,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Role created. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the role, but they have other permissions to the same account. |  -  |
+**403** | Forbidden. The user doesn't have permission to the role, but they have other permissions to the same account. |  -  |
 **409** | RoleAlreadyExists. A role with this identifier already exists |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -79,7 +81,7 @@ Name | Type | Description  | Notes
 # **delete_role**
 > delete_role(role_id)
 
-Deletes role
+Delete role
 
 Remove a role. If a record references the role, that record will not be modified.
 
@@ -95,7 +97,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -116,7 +118,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_id** | **str**| The identifier of the role. |
+ **role_id** | **str**| The identifier of the role. | 
 
 ### Return type
 
@@ -136,8 +138,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. The role has been deleted |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete the role. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the resource or the role no longer exists. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete the role. |  -  |
+**404** | Not found. The user doesn't have any permissions to the resource or the role no longer exists. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -161,7 +163,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -184,7 +186,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_id** | **str**| The identifier of the role. |
+ **role_id** | **str**| The identifier of the role. | 
 
 ### Return type
 
@@ -204,13 +206,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the role, but they have other permissions to the same account. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the role or this role does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to the role, but they have other permissions to the same account. |  -  |
+**404** | Not found. The user doesn't have any permissions to the role or this role does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_roles**
-> RoleCollection get_roles()
+> RoleCollection get_roles(limit=limit, cursor=cursor, filter=filter)
 
 List roles
 
@@ -229,7 +231,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -248,7 +250,12 @@ except Exception as e:
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| Max number of results to return. | [optional] [default to 100]
+ **cursor** | **str**| Continuation cursor for paging. | [optional] 
+ **filter** | **str**| Filter to search roles by. This is a case insensitive search. | [optional] 
 
 ### Return type
 
@@ -268,7 +275,7 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to account roles, but they have other permissions to the same account. |  -  |
+**403** | Forbidden. The user doesn't have permission to account roles, but they have other permissions to the same account. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -292,7 +299,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -316,8 +323,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_id** | **str**| The identifier of the role. |
- **role** | [**Role**](Role.md)|  |
+ **role_id** | **str**| The identifier of the role. | 
+ **role** | [**Role**](Role.md)|  | 
 
 ### Return type
 
@@ -337,8 +344,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. Role updated. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the role, but they have other permissions to the same account. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the role or this role does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to the role, but they have other permissions to the same account. |  -  |
+**404** | Not found. The user doesn't have any permissions to the role or this role does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

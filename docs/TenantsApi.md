@@ -1,10 +1,13 @@
 # authress.TenantsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_tenant**](TenantsApi.md#create_tenant) | **POST** /v1/tenants | Create tenant
 [**delete_tenant**](TenantsApi.md#delete_tenant) | **DELETE** /v1/tenants/{tenantId} | Delete tenant
 [**get_tenant**](TenantsApi.md#get_tenant) | **GET** /v1/tenants/{tenantId} | Retrieve tenant
 [**get_tenants**](TenantsApi.md#get_tenants) | **GET** /v1/tenants | List tenants
+[**link_tenant_user**](TenantsApi.md#link_tenant_user) | **PATCH** /v1/tenants/{tenantId}/users | Link tenant user
 [**update_tenant**](TenantsApi.md#update_tenant) | **PUT** /v1/tenants/{tenantId} | Update tenant
 
 
@@ -28,7 +31,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -51,7 +54,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant** | [**Tenant**](Tenant.md)|  |
+ **tenant** | [**Tenant**](Tenant.md)|  | 
 
 ### Return type
 
@@ -71,7 +74,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Tenant created |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to create tenants. |  -  |
+**403** | Forbidden. The user doesn't have permission to create tenants. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -95,7 +98,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -115,7 +118,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_id** | **str**| The tenantId. |
+ **tenant_id** | **str**| The tenantId. | 
 
 ### Return type
 
@@ -135,7 +138,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. Tenant deleted |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete tenant. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete tenant. |  -  |
 **404** | Not found. The tenant does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -161,7 +164,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -184,7 +187,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_id** | **str**| The tenantId. |
+ **tenant_id** | **str**| The tenantId. | 
 
 ### Return type
 
@@ -204,7 +207,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to get the tenant. |  -  |
+**403** | Forbidden. The user doesn't have permission to get the tenant. |  -  |
 **404** | Not found. The tenant does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -229,7 +232,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -267,7 +270,76 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to fetch account tenants, but has other account permissions. |  -  |
+**403** | Forbidden. The user doesn't have permission to fetch account tenants, but has other account permissions. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **link_tenant_user**
+> link_tenant_user(tenant_id, tenant_user)
+
+Link tenant user
+
+Links an existing user to an existing tenant. This allows the user to log in via that tenant. Users that are linked with a tenant, will also be returned when fetching all the users linked with that tenant via the getUsers endpoint.
+
+### Example
+
+* Bearer (JWT) Authentication (oauth2):
+```python
+import time
+import os
+import authress
+from authress.models.tenant import Tenant
+from authress.rest import ApiException
+from pprint import pprint
+
+
+# Authress custom domain or if there isn't one yet, use the authress account specific url
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
+
+# The Service Client Access Key for your service client.
+service_client_access_key = "sc_key_001"
+authress_client = AuthressClient(authress_api_url=authress_api_url , service_client_access_key=service_client_access_key)
+
+tenant = authress.Tenant() # Tenant |
+
+try:
+    # Link tenant user
+    api_response = authress_client.tenants.link_tenant_user(tenant_id, tenant_user)
+    print("The response of TenantsApi->create_tenant:\n")
+    pprint(api_response)
+except Exception as e:
+    print("Exception when calling TenantsApi->create_tenant: %s\n" % e)
+```
+
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_id** | **str**| The tenantId. | 
+ **tenant_user** | [**TenantUser**](TenantUser.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Success. User added to tenant. |  -  |
+**401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
+**403** | Forbidden. The user doesn't have permission to update tenant. |  -  |
+**404** | Not found. The tenant does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -292,7 +364,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -316,8 +388,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tenant_id** | **str**| The tenantId. |
- **tenant** | [**Tenant**](Tenant.md)|  |
+ **tenant_id** | **str**| The tenantId. | 
+ **tenant** | [**Tenant**](Tenant.md)|  | 
 
 ### Return type
 
@@ -337,7 +409,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. Tenant updated |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update tenant. |  -  |
+**403** | Forbidden. The user doesn't have permission to update tenant. |  -  |
 **404** | Not found. The tenant does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

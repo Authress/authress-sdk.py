@@ -5,8 +5,8 @@ A collect of roles that the user has to a resource.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** |  |
-**roles** | [**List[UserRole]**](UserRole.md) | A list of the roles |
+**user_id** | **str** |  | 
+**roles** | [**List[UserRole]**](UserRole.md) | A list of the roles | 
 
 ## Example
 
@@ -23,7 +23,7 @@ print UserRoleCollection.to_json()
 # convert the object into a dict
 user_role_collection_dict = user_role_collection_instance.to_dict()
 # create an instance of UserRoleCollection from a dict
-user_role_collection_form_dict = user_role_collection.from_dict(user_role_collection_dict)
+user_role_collection_from_dict = UserRoleCollection.from_dict(user_role_collection_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

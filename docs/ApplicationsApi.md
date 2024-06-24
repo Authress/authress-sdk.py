@@ -1,4 +1,6 @@
 # authress.ApplicationsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delegate_user_login**](ApplicationsApi.md#delegate_user_login) | **POST** /v1/applications/{applicationId}/users/{userId}/delegation | Log user into third-party application
@@ -9,7 +11,7 @@ Method | HTTP request | Description
 
 Log user into third-party application
 
-Redirect the user to an external application to login them in. Authress uses OpenID and SAML configuration to securely pass the user's login session in your platform to an external platform. The user will then be logged into that platform.
+Redirect the user to an external application to login them in. Use this endpoint when you want to enable a user in your platform, identified by an Authress User ID, to log into a third party external application you do not control. The user will then be logged into that platform. Authress uses OpenID and SAML configuration to securely pass the user's login session in your platform to an external platform.<br><br>For first party applications, use the Authress Login SDK. First party applications are those that your team, org, and company own, operate, and run (even if they are open source solutions). Third party applications are those that are operated by another company on a separate eTLD and you have no control over.
 
 ### Example
 
@@ -24,7 +26,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -48,8 +50,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **application_id** | **str**| The application to have the user log into. |
- **user_id** | [**str**](.md)| The user. |
+ **application_id** | **str**| The third party application, the users wants to login using their Authress User Identity. Application IDs begin with app_. | 
+ **user_id** | **str**| The Authress user identifier. | 
 
 ### Return type
 
@@ -69,7 +71,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to log a user into this application. |  -  |
+**403** | Forbidden. The user doesn't have permission to log a user into this application. |  -  |
 **404** | Not found. The application or user does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

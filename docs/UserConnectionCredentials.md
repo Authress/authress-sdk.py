@@ -5,7 +5,7 @@ The user credentials for this connection which can be used to access the connect
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **str** | The access token. |
+**access_token** | **str** | The access token. | 
 
 ## Example
 
@@ -22,7 +22,7 @@ print UserConnectionCredentials.to_json()
 # convert the object into a dict
 user_connection_credentials_dict = user_connection_credentials_instance.to_dict()
 # create an instance of UserConnectionCredentials from a dict
-user_connection_credentials_form_dict = user_connection_credentials.from_dict(user_connection_credentials_dict)
+user_connection_credentials_from_dict = UserConnectionCredentials.from_dict(user_connection_credentials_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

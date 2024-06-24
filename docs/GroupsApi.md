@@ -1,8 +1,10 @@
 # authress.GroupsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_group**](GroupsApi.md#create_group) | **POST** /v1/groups | Create group
-[**delete_group**](GroupsApi.md#delete_group) | **DELETE** /v1/groups/{groupId} | Deletes group
+[**delete_group**](GroupsApi.md#delete_group) | **DELETE** /v1/groups/{groupId} | Delete group
 [**get_group**](GroupsApi.md#get_group) | **GET** /v1/groups/{groupId} | Retrieve group
 [**get_groups**](GroupsApi.md#get_groups) | **GET** /v1/groups | List groups
 [**update_group**](GroupsApi.md#update_group) | **PUT** /v1/groups/{groupId} | Update a group
@@ -13,7 +15,7 @@ Method | HTTP request | Description
 
 Create group
 
-Specify users to be included in a new group. (Groups have a maximum size of ~100KB)
+Specify users to be included in a new group. (Groups have a maximum size of 100 users)
 
 ### Example
 
@@ -28,7 +30,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -51,7 +53,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group** | [**Group**](Group.md)|  |
+ **group** | [**Group**](Group.md)|  | 
 
 ### Return type
 
@@ -71,14 +73,14 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Success. Group created |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to create groups. |  -  |
+**403** | Forbidden. The user doesn't have permission to create groups. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_group**
 > delete_group(group_id)
 
-Deletes group
+Delete group
 
 Remove a group, users will lose any role that was assigned through membership of this group. This action cannot be undone.
 
@@ -95,7 +97,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -116,7 +118,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_id** | **str**| The identifier of the group. |
+ **group_id** | **str**| The identifier of the group. | 
 
 ### Return type
 
@@ -136,8 +138,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Success. The group has been deleted |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to delete the group. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the resource or the group no longer exists. |  -  |
+**403** | Forbidden. The user doesn't have permission to delete the group. |  -  |
+**404** | Not found. The user doesn't have any permissions to the resource or the group no longer exists. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -162,7 +164,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -185,7 +187,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **group_id** | **str**| The identifier of the group. |
+ **group_id** | **str**| The identifier of the group. | 
 
 ### Return type
 
@@ -205,8 +207,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the group, but they have other permissions to the same account. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the group or this group does not exist. |  -  |
+**403** | Forbidden. The user doesn't have permission to the group, but they have other permissions to the same account. |  -  |
+**404** | Not found. The user doesn't have any permissions to the group or this group does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -215,7 +217,7 @@ Name | Type | Description  | Notes
 
 List groups
 
-Returns a paginated groups list for the account. Only groups the user has access to are returned. This query resource is meant for administrative actions only, therefore has a lower rate limit tier than user permissions related resources.
+Returns a paginated groups list for the account. Only groups the user has access to are returned. The results sort order is not stable, on subsequent requests different results may be returned. This query resource is meant for administrative actions only, therefore has a lower rate limit tier than user permissions related resources. Additionally, the results from a query to Groups may be delayed up to 5 minutes.
 
 ### Example
 
@@ -230,7 +232,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -256,8 +258,8 @@ except Exception as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max number of results to return | [optional] [default to 20]
- **cursor** | **str**| Continuation cursor for paging | [optional]
- **filter** | **str**| Filter to search groups by. This is a case insensitive search through every text field. | [optional]
+ **cursor** | **str**| Continuation cursor for paging | [optional] 
+ **filter** | **str**| Filter to search groups by. This is a case insensitive search through every text field. | [optional] 
 
 ### Return type
 
@@ -277,12 +279,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to fetch groups, but has other account permissions |  -  |
+**403** | Forbidden. The user doesn't have permission to fetch groups, but has other account permissions |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_group**
-> Group update_group(group_id, group, expected_last_modified_time=expected_last_modified_time)
+> Group update_group(group_id, group, if_unmodified_since=if_unmodified_since)
 
 Update a group
 
@@ -302,7 +304,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -349,8 +351,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. Group updated. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to update the group. |  -  |
-**404** | Not found. The user doesn&#39;t have any permissions to the group. |  -  |
+**403** | Forbidden. The user doesn't have permission to update the group. |  -  |
+**404** | Not found. The user doesn't have any permissions to the group. |  -  |
 **412** | Precondition failed. Usually the result of a concurrent update to the group. Get the latest version and retry again. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

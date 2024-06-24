@@ -5,10 +5,10 @@ The composite user identity stored in Authress sourced by the customer SSO/SAML/
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** | The user identifier. |
-**name** | **str** | The user&#39;s formatted display name. | [optional]
-**picture** | **str** | A url that resolves to a picture that can be rendered. | [optional]
-**email** | **str** | The user&#39;s verified email address sourced from their SSO IdP. | [optional]
+**user_id** | **str** |  | 
+**name** | **str** | The user's formatted display name. | [optional] 
+**picture** | **str** | A url that resolves to a picture that can be rendered. | [optional] 
+**email** | **str** | The user's verified email address sourced from their SSO IdP. | [optional] 
 
 ## Example
 
@@ -25,7 +25,7 @@ print UserIdentity.to_json()
 # convert the object into a dict
 user_identity_dict = user_identity_instance.to_dict()
 # create an instance of UserIdentity from a dict
-user_identity_form_dict = user_identity.from_dict(user_identity_dict)
+user_identity_from_dict = UserIdentity.from_dict(user_identity_dict)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

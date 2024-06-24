@@ -1,4 +1,6 @@
 # authress.ResourcePermissionsApi
+
+
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**get_permissioned_resource**](ResourcePermissionsApi.md#get_permissioned_resource) | **GET** /v1/resources/{resourceUri} | Retrieve resource configuration
@@ -27,7 +29,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -50,7 +52,7 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. |
+ **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. | 
 
 ### Return type
 
@@ -70,7 +72,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**404** | Not found. The user doesn&#39;t have permission to the resource. |  -  |
+**404** | Not found. The user doesn't have permission to the resource. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -79,7 +81,7 @@ Name | Type | Description  | Notes
 
 List all resource configurations
 
-Permissions can be set globally at a resource level. Lists any resources with a globally set resource policy.
+Permissions can be set globally at a resource level. This endpoint returns a list of resources with globally set resource permissions.
 
 ### Example
 
@@ -94,7 +96,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -156,7 +158,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -181,9 +183,9 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. |
+ **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. | 
  **limit** | **int**| Max number of results to return | [optional] [default to 20]
- **cursor** | **str**| Continuation cursor for paging | [optional]
+ **cursor** | **str**| Continuation cursor for paging | [optional] 
 
 ### Return type
 
@@ -226,7 +228,7 @@ from pprint import pprint
 
 
 # Authress custom domain or if there isn't one yet, use the authress account specific url
-authress_api_url = "https://authress.company.com" # or "https://ACCOUNT_ID.api.authress.io"
+authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
 
 # The Service Client Access Key for your service client.
 service_client_access_key = "sc_key_001"
@@ -248,8 +250,8 @@ except Exception as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. |
- **permissioned_resource** | [**PermissionedResource**](PermissionedResource.md)| The contents of the permission to set on the resource. Overwrites existing data. |
+ **resource_uri** | **str**| The uri path of a resource to validate, must be URL encoded, uri segments are allowed. | 
+ **permissioned_resource** | [**PermissionedResource**](PermissionedResource.md)| The contents of the permission to set on the resource. Overwrites existing data. | 
 
 ### Return type
 
@@ -269,8 +271,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **200** | Success. |  -  |
 **401** | Unauthorized. The request JWT found in the Authorization header is no longer valid. |  -  |
-**403** | Forbidden. The user doesn&#39;t have permission to the resource, but they have other permissions to the same resource. |  -  |
-**404** | Not found. The user doesn&#39;t have permission to the resource. |  -  |
+**403** | Forbidden. The user doesn't have permission to the resource, but they have other permissions to the same resource. |  -  |
+**404** | Not found. The user doesn't have permission to the resource. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
