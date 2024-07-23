@@ -73,7 +73,7 @@ class TokenVerifier(object):
 
   def get_key_uncached(self, jwkKeyListUrl, kid):
     rest_client = rest.RESTClientObject()
-    result = rest_client.GET(jwkKeyListUrl)
+    result = rest_client.get_request(jwkKeyListUrl)
 
     for index, key in enumerate(json.loads(result.data)['keys']):
       if key['kid'] == kid:

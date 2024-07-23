@@ -5,7 +5,11 @@ REQUIRES = [
   "urllib3 >= 1.25.3, < 2.1.0",
   "python-dateutil",
   "pydantic >= 1.10.5, < 3",
-  "aenum"
+  "PyJWT >= 2.4.0",
+  "cryptography >= 2.9.2",
+  "aenum",
+  "certifi >= 14.05.14",
+  "python_dateutil >= 2.5.3"
 ]
 
 # To install the library, run the following
