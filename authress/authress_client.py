@@ -2,6 +2,8 @@
 from __future__ import absolute_import
 
 import json
+import re
+
 from authress.api.applications_api import ApplicationsApi
 from authress.api.connections_api import ConnectionsApi
 from authress.api.extensions_api import ExtensionsApi
@@ -23,6 +25,7 @@ from authress.api import token_verifier
 class AuthressClient(object):
     def __init__(self, authress_api_url=None, service_client_access_key=None):
         self._host = authress_api_url if authress_api_url.startswith('http') else f"https://{authress_api_url}"
+        self._host = re.sub(r'/+$', '', self._host)
         self._token_verifier = token_verifier.TokenVerifier()
         self._http_client = HttpClient(host=self._host, access_key=service_client_access_key)
 
