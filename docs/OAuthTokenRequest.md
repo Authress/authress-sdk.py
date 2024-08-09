@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.o_auth_token_request import OAuthTokenRequest
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of OAuthTokenRequest from a JSON string
 o_auth_token_request_instance = OAuthTokenRequest.from_json(json)

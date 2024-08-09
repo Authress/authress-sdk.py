@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.permission_collection_account import PermissionCollectionAccount
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of PermissionCollectionAccount from a JSON string
 permission_collection_account_instance = PermissionCollectionAccount.from_json(json)

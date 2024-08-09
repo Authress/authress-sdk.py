@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.user_identity import UserIdentity
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of UserIdentity from a JSON string
 user_identity_instance = UserIdentity.from_json(json)

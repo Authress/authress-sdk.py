@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.resource_users_collection import ResourceUsersCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ResourceUsersCollection from a JSON string
 resource_users_collection_instance = ResourceUsersCollection.from_json(json)

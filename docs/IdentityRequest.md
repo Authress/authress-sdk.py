@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.identity_request import IdentityRequest
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of IdentityRequest from a JSON string
 identity_request_instance = IdentityRequest.from_json(json)

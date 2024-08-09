@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.access_request_response import AccessRequestResponse
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of AccessRequestResponse from a JSON string
 access_request_response_instance = AccessRequestResponse.from_json(json)

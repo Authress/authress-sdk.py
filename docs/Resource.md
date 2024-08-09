@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.resource import Resource
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Resource from a JSON string
 resource_instance = Resource.from_json(json)

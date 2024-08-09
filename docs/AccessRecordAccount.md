@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.access_record_account import AccessRecordAccount
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of AccessRecordAccount from a JSON string
 access_record_account_instance = AccessRecordAccount.from_json(json)

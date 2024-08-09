@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.application_delegation import ApplicationDelegation
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ApplicationDelegation from a JSON string
 application_delegation_instance = ApplicationDelegation.from_json(json)

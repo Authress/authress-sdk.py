@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.claim_request import ClaimRequest
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ClaimRequest from a JSON string
 claim_request_instance = ClaimRequest.from_json(json)

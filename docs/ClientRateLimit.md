@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.client_rate_limit import ClientRateLimit
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ClientRateLimit from a JSON string
 client_rate_limit_instance = ClientRateLimit.from_json(json)

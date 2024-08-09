@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.user_role_collection import UserRoleCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of UserRoleCollection from a JSON string
 user_role_collection_instance = UserRoleCollection.from_json(json)

@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.collection_links import CollectionLinks
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of CollectionLinks from a JSON string
 collection_links_instance = CollectionLinks.from_json(json)

@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.user_token import UserToken
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of UserToken from a JSON string
 user_token_instance = UserToken.from_json(json)

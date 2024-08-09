@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.connection_linking_configuration import ConnectionLinkingConfiguration
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ConnectionLinkingConfiguration from a JSON string
 connection_linking_configuration_instance = ConnectionLinkingConfiguration.from_json(json)

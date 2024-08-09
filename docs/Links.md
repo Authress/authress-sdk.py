@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.links import Links
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Links from a JSON string
 links_instance = Links.from_json(json)

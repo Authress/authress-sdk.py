@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.resource_permission import ResourcePermission
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ResourcePermission from a JSON string
 resource_permission_instance = ResourcePermission.from_json(json)

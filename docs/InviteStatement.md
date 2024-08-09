@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.invite_statement import InviteStatement
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of InviteStatement from a JSON string
 invite_statement_instance = InviteStatement.from_json(json)

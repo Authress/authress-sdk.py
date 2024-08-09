@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.access_template import AccessTemplate
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of AccessTemplate from a JSON string
 access_template_instance = AccessTemplate.from_json(json)

@@ -18,15 +18,12 @@ import io
 import warnings
 
 try:
-    from pydantic.v1 import validate_arguments, ValidationError
+    from pydantic.v1 import validate_arguments, ValidationError, Field, StrictStr, conint, constr, validator
 except ImportError:
-    from pydantic import validate_arguments, ValidationError
+    from pydantic import validate_arguments, ValidationError, Field, StrictStr, conint, constr, validator
 from typing_extensions import Annotated
 
-try:
-    from pydantic.v1 import Field, constr, validator
-except ImportError:
-    from pydantic import Field, constr, validator
+from typing import Optional
 
 from authress.models.role import Role
 from authress.models.role_collection import RoleCollection
@@ -46,7 +43,7 @@ class RolesApi(object):
     Do not edit the class manually.
     """
 
-    def __init__(self, api_client=None):
+    def __init__(self, api_client=None) -> None:
         if api_client is None:
             api_client = HttpClient.get_default()
         self.api_client = api_client
@@ -66,10 +63,10 @@ class RolesApi(object):
         :type role: Role
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -202,7 +199,7 @@ class RolesApi(object):
 
     @validate_arguments
     def delete_role(self, role_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier of the role.")], **kwargs) -> None:  # noqa: E501
-        """Deletes role  # noqa: E501
+        """Delete role  # noqa: E501
 
         Remove a role. If a record references the role, that record will not be modified.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -215,10 +212,10 @@ class RolesApi(object):
         :type role_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -231,7 +228,7 @@ class RolesApi(object):
 
     @validate_arguments
     def delete_role_with_http_info(self, role_id : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The identifier of the role.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """Deletes role  # noqa: E501
+        """Delete role  # noqa: E501
 
         Remove a role. If a record references the role, that record will not be modified.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -298,7 +295,7 @@ class RolesApi(object):
 
         # process the path parameters
         _path_params = {}
-        if _params['role_id']:
+        if _params['role_id'] is not None:
             _path_params['roleId'] = _params['role_id']
 
 
@@ -348,10 +345,10 @@ class RolesApi(object):
         :type role_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -431,7 +428,7 @@ class RolesApi(object):
 
         # process the path parameters
         _path_params = {}
-        if _params['role_id']:
+        if _params['role_id'] is not None:
             _path_params['roleId'] = _params['role_id']
 
 
@@ -476,22 +473,28 @@ class RolesApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def get_roles(self, **kwargs) -> RoleCollection:  # noqa: E501
+    def get_roles(self, limit : Annotated[Optional[conint(strict=True, le=100, ge=1)], Field(description="Max number of results to return.")] = None, cursor : Annotated[Optional[StrictStr], Field(description="Continuation cursor for paging.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=128, min_length=0)], Field(description="Filter to search roles by. This is a case insensitive search.")] = None, **kwargs) -> RoleCollection:  # noqa: E501
         """List roles  # noqa: E501
 
         Get all the account roles. Roles contain a list of permissions that will be applied to any user or resource  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_roles(async_req=True)
+        >>> thread = api.get_roles(limit, cursor, filter, async_req=True)
         >>> result = thread.get()
 
+        :param limit: Max number of results to return.
+        :type limit: int
+        :param cursor: Continuation cursor for paging.
+        :type cursor: str
+        :param filter: Filter to search roles by. This is a case insensitive search.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -499,20 +502,27 @@ class RolesApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the get_roles_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
-        return self.get_roles_with_http_info(**kwargs)  # noqa: E501
+            message = "Error! Please call the get_roles_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        return self.get_roles_with_http_info(limit, cursor, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_roles_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_roles_with_http_info(self, limit : Annotated[Optional[conint(strict=True, le=100, ge=1)], Field(description="Max number of results to return.")] = None, cursor : Annotated[Optional[StrictStr], Field(description="Continuation cursor for paging.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=128, min_length=0)], Field(description="Filter to search roles by. This is a case insensitive search.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """List roles  # noqa: E501
 
         Get all the account roles. Roles contain a list of permissions that will be applied to any user or resource  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_roles_with_http_info(async_req=True)
+        >>> thread = api.get_roles_with_http_info(limit, cursor, filter, async_req=True)
         >>> result = thread.get()
 
+        :param limit: Max number of results to return.
+        :type limit: int
+        :param cursor: Continuation cursor for paging.
+        :type cursor: str
+        :param filter: Filter to search roles by. This is a case insensitive search.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -541,6 +551,9 @@ class RolesApi(object):
         _params = locals()
 
         _all_params = [
+            'limit',
+            'cursor',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -571,6 +584,15 @@ class RolesApi(object):
 
         # process the query parameters
         _query_params = []
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('cursor') is not None:  # noqa: E501
+            _query_params.append(('cursor', _params['cursor']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -625,10 +647,10 @@ class RolesApi(object):
         :type role: Role
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
@@ -711,7 +733,7 @@ class RolesApi(object):
 
         # process the path parameters
         _path_params = {}
-        if _params['role_id']:
+        if _params['role_id'] is not None:
             _path_params['roleId'] = _params['role_id']
 
 

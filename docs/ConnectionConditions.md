@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.connection_conditions import ConnectionConditions
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ConnectionConditions from a JSON string
 connection_conditions_instance = ConnectionConditions.from_json(json)
