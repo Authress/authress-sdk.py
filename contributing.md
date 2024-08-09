@@ -75,3 +75,4 @@ podman stop $CID && podman rm $CID
 * [ ] Tests
 * [ ] If-unmodified-since should called `expectedLastModifiedTime`, accept string or dateTime and convert this to an ISO String
 * [ ] Update OAuth2 openapi authentication references in the documentation
+* [ ] Alias all ____Id types to be strong string (userId : UserId, TenantId, GroupId, RoleId) search for regex `:type .*_id: (?!str)`
