@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.link import Link
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Link from a JSON string
 link_instance = Link.from_json(json)

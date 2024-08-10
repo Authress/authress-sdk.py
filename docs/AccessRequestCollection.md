@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.access_request_collection import AccessRequestCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of AccessRequestCollection from a JSON string
 access_request_collection_instance = AccessRequestCollection.from_json(json)

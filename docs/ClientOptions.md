@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.client_options import ClientOptions
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ClientOptions from a JSON string
 client_options_instance = ClientOptions.from_json(json)

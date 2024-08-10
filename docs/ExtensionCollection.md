@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.extension_collection import ExtensionCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ExtensionCollection from a JSON string
 extension_collection_instance = ExtensionCollection.from_json(json)

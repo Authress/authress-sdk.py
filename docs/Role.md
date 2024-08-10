@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.role import Role
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Role from a JSON string
 role_instance = Role.from_json(json)

@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.client_collection import ClientCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ClientCollection from a JSON string
 client_collection_instance = ClientCollection.from_json(json)

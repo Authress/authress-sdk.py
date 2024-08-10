@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.user_connection_credentials import UserConnectionCredentials
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of UserConnectionCredentials from a JSON string
 user_connection_credentials_instance = UserConnectionCredentials.from_json(json)

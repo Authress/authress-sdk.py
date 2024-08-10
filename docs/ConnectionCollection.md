@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.connection_collection import ConnectionCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ConnectionCollection from a JSON string
 connection_collection_instance = ConnectionCollection.from_json(json)

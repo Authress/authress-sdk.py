@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.tenant_collection import TenantCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of TenantCollection from a JSON string
 tenant_collection_instance = TenantCollection.from_json(json)

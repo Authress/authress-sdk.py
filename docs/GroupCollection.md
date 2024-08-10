@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.group_collection import GroupCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of GroupCollection from a JSON string
 group_collection_instance = GroupCollection.from_json(json)

@@ -28,7 +28,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.connection import Connection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Connection from a JSON string
 connection_instance = Connection.from_json(json)

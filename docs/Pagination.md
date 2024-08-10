@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.pagination import Pagination
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Pagination from a JSON string
 pagination_instance = Pagination.from_json(json)

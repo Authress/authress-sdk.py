@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.connection_default_connection_properties import ConnectionDefaultConnectionProperties
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ConnectionDefaultConnectionProperties from a JSON string
 connection_default_connection_properties_instance = ConnectionDefaultConnectionProperties.from_json(json)

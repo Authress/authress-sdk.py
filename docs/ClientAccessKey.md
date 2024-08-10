@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.client_access_key import ClientAccessKey
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ClientAccessKey from a JSON string
 client_access_key_instance = ClientAccessKey.from_json(json)

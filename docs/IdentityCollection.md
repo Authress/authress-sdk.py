@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.identity_collection import IdentityCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of IdentityCollection from a JSON string
 identity_collection_instance = IdentityCollection.from_json(json)

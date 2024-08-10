@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.token_request import TokenRequest
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of TokenRequest from a JSON string
 token_request_instance = TokenRequest.from_json(json)

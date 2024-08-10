@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.extension_application import ExtensionApplication
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of ExtensionApplication from a JSON string
 extension_application_instance = ExtensionApplication.from_json(json)

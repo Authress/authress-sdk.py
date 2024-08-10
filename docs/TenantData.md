@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.tenant_data import TenantData
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of TenantData from a JSON string
 tenant_data_instance = TenantData.from_json(json)

@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.permissioned_resource_collection import PermissionedResourceCollection
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of PermissionedResourceCollection from a JSON string
 permissioned_resource_collection_instance = PermissionedResourceCollection.from_json(json)

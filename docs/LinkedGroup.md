@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.linked_group import LinkedGroup
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of LinkedGroup from a JSON string
 linked_group_instance = LinkedGroup.from_json(json)

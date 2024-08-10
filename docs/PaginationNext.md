@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.pagination_next import PaginationNext
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of PaginationNext from a JSON string
 pagination_next_instance = PaginationNext.from_json(json)

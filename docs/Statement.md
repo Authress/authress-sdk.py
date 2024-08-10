@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 ```python
 from authress.models.statement import Statement
 
-# TODO update the JSON string below
 json = "{}"
 # create an instance of Statement from a JSON string
 statement_instance = Statement.from_json(json)
