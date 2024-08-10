@@ -8,7 +8,7 @@ import re
 from urllib.parse import urlparse
 
 from authress import rest
-from authress.api import service_client_token_provider
+from authress.utils import service_client_token_provider
 
 class TokenVerifier(object):
   def __init__(self):
@@ -26,7 +26,7 @@ class TokenVerifier(object):
       headers = jwt.get_unverified_header(authenticationToken)
     except jwt.DecodeError:
       try:
-        authenticationToken = service_client_token_provider.ServiceClientTokenProvider().get_client_token(token, completeIssuerUrl)
+        authenticationToken = service_client_token_provider.ServiceClientTokenProvider(token, completeIssuerUrl).get_client_token()
         unverifiedPayload = jwt.decode(authenticationToken, options={"verify_signature": False})
         headers = jwt.get_unverified_header(authenticationToken)
       except Exception as e:
