@@ -4,8 +4,13 @@ import unittest
 import time
 
 from authress.models import *
+from authress.utils import ServiceClientTokenProvider, JwtManager
 from authress import AuthressClient
 from authress.http_client import HttpClient
+
+import unittest
+from unittest.mock import patch
+from urllib.parse import urlparse, parse_qs
 
 class ServiceClientTokenProviderTest(unittest.TestCase):
   def setUp(self):
@@ -54,3 +59,60 @@ class ServiceClientTokenProviderTest(unittest.TestCase):
     token1 = http_client._get_client_token()
     assert token1 == None
     pass
+
+  def test_should_correctly_parse_parameters_from_authentication_url_object(self):
+      access_key = 'clientId.uDeF.a43706ca-9647-40e4-aeae-7dcaa54bbab3.MC4CAQAwBQYDK2VwBCIEIE99LFw2c3DCiYwrY/Qkg1nIDiagoHtdCwb88RxarVYA'
+      token_provider = ServiceClientTokenProvider(access_key)
+
+      url = token_provider.generate_user_login_url({'authentication_url': 'https://login.redirect-url.com?client_id=clientId&state=state'}, 'user1')
+      parsed_url = urlparse(url)
+      query_params = parse_qs(parsed_url.query)
+      self.assertEqual(query_params['iss'][0], 'https://login.redirect-url.com/v1/clients/clientId')
+      self.assertEqual(query_params['state'][0], 'state')
+
+  def test_should_throw_error_if_state_not_provided(self):
+      access_key = 'clientId.uDeF.a43706ca-9647-40e4-aeae-7dcaa54bbab3.MC4CAQAwBQYDK2VwBCIEIE99LFw2c3DCiYwrY/Qkg1nIDiagoHtdCwb88RxarVYA'
+      token_provider = ServiceClientTokenProvider(access_key)
+
+      with self.assertRaises(ValueError) as context:
+          token_provider.generate_user_login_url({'authentication_url': 'https://login.redirect-url.com?client_id=clientId'}, 'user1')
+      self.assertEqual(str(context.exception), 'The state is required to generate a authorization code redirect for is required, and should be present in the authentication_url.')
+
+  def test_should_throw_error_if_client_id_does_not_match(self):
+      access_key = 'clientId.uDeF.a43706ca-9647-40e4-aeae-7dcaa54bbab3.MC4CAQAwBQYDK2VwBCIEIE99LFw2c3DCiYwrY/Qkg1nIDiagoHtdCwb88RxarVYA'
+      token_provider = ServiceClientTokenProvider(access_key)
+
+      with self.assertRaises(ValueError) as context:
+          token_provider.generate_user_login_url({'authentication_url': 'https://login.redirect-url.com?client_id=wrongClientId&state=state'}, 'user1')
+      self.assertEqual(str(context.exception), 'The client_id should be specified in the authentication_url. It should match the service client ID.')
+
+  def test_should_throw_error_if_user_id_not_provided(self):
+      access_key = 'clientId.uDeF.a43706ca-9647-40e4-aeae-7dcaa54bbab3.MC4CAQAwBQYDK2VwBCIEIE99LFw2c3DCiYwrY/Qkg1nIDiagoHtdCwb88RxarVYA'
+      token_provider = ServiceClientTokenProvider(access_key)
+
+      with self.assertRaises(ValueError) as context:
+          token_provider.generate_user_login_url({'authentication_url': 'https://login.redirect-url.com?client_id=wrongClientId&state=state'}, None)
+      self.assertEqual(str(context.exception), 'The user to generate an authorization code redirect for is required.')
+
+  def test_should_generate_url_with_correct_authorization_code_and_parameters(self):
+      access_key = 'clientId.uDeF.a43706ca-9647-40e4-aeae-7dcaa54bbab3.MC4CAQAwBQYDK2VwBCIEIE99LFw2c3DCiYwrY/Qkg1nIDiagoHtdCwb88RxarVYA'
+      token_provider = ServiceClientTokenProvider(access_key)
+
+      url = token_provider.generate_user_login_url({'authentication_url': 'https://login.redirect-url.com?client_id=clientId&state=state'}, 'user1')
+      parsed_url = urlparse(url)
+      query_params = parse_qs(parsed_url.query)
+
+      code = query_params['code'][0]
+      self.assertIsNotNone(code)
+
+      jwt_payload = JwtManager().decode(code)
+      self.assertEqual(jwt_payload['aud'], 'a43706ca-9647-40e4-aeae-7dcaa54bbab3.accounts.authress.io')
+      self.assertEqual(jwt_payload['iss'], 'https://login.redirect-url.com/v1/clients/clientId')
+      self.assertEqual(jwt_payload['sub'], 'user1')
+      self.assertEqual(jwt_payload['client_id'], 'clientId')
+      self.assertIsInstance(jwt_payload['iat'], int)
+      self.assertIsInstance(jwt_payload['exp'], int)
+      self.assertEqual(jwt_payload['scope'], 'openid')
+
+      self.assertEqual(query_params['iss'][0], 'https://login.redirect-url.com/v1/clients/clientId')
+      self.assertEqual(query_params['state'][0], 'state')

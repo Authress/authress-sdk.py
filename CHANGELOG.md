@@ -17,6 +17,7 @@ This is the changelog for [Authress SDK](readme.md).
 * Improve caching in `verify_token`
 * Support additionally pydantic v2 dependencies. Support for v1 will be removed in a future version.
 * Prevent unnecessary extra trailing slashes in domain name.
+* Add support for the `generateUserLoginUrl` from the ServiceClientTokenProvider.
 
 ## 2.0 ##
 * Add support for users and groups at the statement level of access records.

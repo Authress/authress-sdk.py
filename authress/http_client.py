@@ -14,7 +14,7 @@ import time
 from urllib.parse import quote
 
 from authress.api_response import ApiResponse
-from authress.api import service_client_token_provider
+from authress.utils import service_client_token_provider
 import authress.models
 from authress import rest
 from authress.exceptions import ApiValueError, ApiException, ServiceException
@@ -57,7 +57,7 @@ class HttpClient(object):
         self.default_headers = {}
         self.client_side_validation = False
 
-        self.service_client_token_provider = service_client_token_provider.ServiceClientTokenProvider()
+        self.service_client_token_provider = service_client_token_provider.ServiceClientTokenProvider(self.access_key, self.host)
 
         this_directory = os.path.abspath(os.path.dirname(__file__))
         with open(os.path.join(this_directory, 'VERSION')) as version_file:
@@ -764,4 +764,4 @@ class HttpClient(object):
         return klass.from_dict(data)
 
     def _get_client_token(self) -> str:
-      return self.service_client_token_provider.get_client_token(self.access_key, self.host)
+      return self.service_client_token_provider.get_client_token()

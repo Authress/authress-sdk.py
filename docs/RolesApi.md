@@ -36,16 +36,19 @@ authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.ap
 service_client_access_key = "sc_key_001"
 authress_client = AuthressClient(authress_api_url=authress_api_url , service_client_access_key=service_client_access_key)
 
-role = Role.from_dict({
-    'role_id': 'ro_my_first_role',
-    'name': 'Example Test Role',
-    'permissions': [PermissionObject.from_dict({
-        'action': 'documents:read',
-        'allow': True,
-        'grant': True,
-        'delegate': False
-    })]
-})
+role = Role(
+    name = "Example Test Role",
+    role_id = "ro_my_first_role",
+    permissions = [
+        PermissionObject(
+            action = "documents:read",
+            allow = True,
+            grant = True,
+            delegate = False
+        )
+    ]
+)
+```
 
 try:
     # Create role
@@ -302,7 +305,7 @@ Updates a role adding or removing permissions.
 import time
 import os
 import authress
-from authress.models.role import Role
+from authress import Role, PermissionObject
 from authress.rest import ApiException
 from pprint import pprint
 
@@ -315,7 +318,18 @@ service_client_access_key = "sc_key_001"
 authress_client = AuthressClient(authress_api_url=authress_api_url , service_client_access_key=service_client_access_key)
 
 role_id = 'role_id_example' # str | The identifier of the role.
-role = authress.Role() # Role |
+role = Role( # Role | The new Role and it's properties.
+    name = "Documents Viewer",
+    permissions = [
+        PermissionObject(
+            action = "documents:read",
+            allow = True,
+            grant = True,
+            delegate = False
+        )
+    ]
+)
+```
 
 try:
     # Update role
