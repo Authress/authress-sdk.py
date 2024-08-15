@@ -1,9 +1,6 @@
 # Change log
 This is the changelog for [Authress SDK](readme.md).
 
-## 4.0 ##
-* [Breaking] Renamed parameter `if_unmodified_since` in the Access Record API to be `expected_last_modified_time`.
-
 ## 3.0 ##
 * [Breaking] Added type checking everywhere - This means most models have breaking changes.
 * [Breaking] Converted properties to be consistent across all generators
@@ -13,6 +10,7 @@ This is the changelog for [Authress SDK](readme.md).
 * [Breaking] Moved `authress_client.clients` api to `authress_client.service_clients`.
 * [Breaking] Renamed `AccessRecordStatement` model to `Statement` in `models.statement.py`.
 * [Breaking] Renamed `AccessRecordResource` model to `Resource` in `models.resource.py`.
+* [Breaking] Renamed parameter `if_unmodified_since` in the Access Record API to be `expected_last_modified_time`.
 * Add missing `If-Unmodified-Since` support to the `update_group` in the `Groups` API.
 * Improve caching in `verify_token`
 * Support additionally pydantic v2 dependencies. Support for v1 will be removed in a future version.

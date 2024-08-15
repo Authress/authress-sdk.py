@@ -1622,7 +1622,6 @@ class AccessRecordsApi(object):
         _all_params = [
             'record_id',
             'access_record',
-            'if_unmodified_since',
             'expected_last_modified_time'
         ]
         _all_params.extend(
@@ -1659,8 +1658,6 @@ class AccessRecordsApi(object):
         _query_params = []
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
-        if _params['if_unmodified_since']:
-            _header_params['If-Unmodified-Since'] = _params['if_unmodified_since']
         if _params['expected_last_modified_time']:
             _header_params['If-Unmodified-Since'] = _params['expected_last_modified_time']
 

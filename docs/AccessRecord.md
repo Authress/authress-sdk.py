@@ -24,16 +24,24 @@ Name | Type | Description | Notes
 ```python
 from authress.models.access_record import AccessRecord
 
-json = "{}"
-# create an instance of AccessRecord from a JSON string
-access_record_instance = AccessRecord.from_json(json)
-# print the JSON string representation of the object
-print AccessRecord.to_json()
-
-# convert the object into a dict
-access_record_dict = access_record_instance.to_dict()
-# create an instance of AccessRecord from a dict
-access_record_from_dict = AccessRecord.from_dict(access_record_dict)
+access_record = AccessRecord(
+    record_id='rec_new_record',
+    name="Permissions Example",
+    users=[
+        User(user_id="user_id")
+    ],
+    admins=[
+        User(user_id="admin_user_id")
+    ],
+    statements=[
+        Statement(
+            roles=["Authress:Owner"],
+            resources=[
+                Resource(resourceUri="/documents/test_document_id")
+            ]
+        )
+    ]
+) 
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 
