@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_group**
-> Group update_group(group_id, group, if_unmodified_since=if_unmodified_since)
+> Group update_group(group_id, group, expected_last_modified_time=expected_last_modified_time)
 
 Update a group
 

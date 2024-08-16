@@ -14,16 +14,12 @@ Name | Type | Description | Notes
 ```python
 from authress.models.statement import Statement
 
-json = "{}"
-# create an instance of Statement from a JSON string
-statement_instance = Statement.from_json(json)
-# print the JSON string representation of the object
-print Statement.to_json()
-
-# convert the object into a dict
-statement_dict = statement_instance.to_dict()
-# create an instance of Statement from a dict
-statement_from_dict = Statement.from_dict(statement_dict)
+statement = Statement(
+    roles=["ro_viewer"],
+    resources=[
+        Resource(resourceUri="/accounts/acc_001/documents/*")
+    ]
+)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

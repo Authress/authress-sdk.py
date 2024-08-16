@@ -109,7 +109,21 @@ authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.ap
 service_client_access_key = "sc_key_001"
 authress_client = AuthressClient(authress_api_url=authress_api_url , service_client_access_key=service_client_access_key)
 
-    access_record = authress.AccessRecord() # AccessRecord |
+    access_record = AccessRecord(
+      record_id='rec_record_id',
+      name="Permissions example",
+      users=[
+        User(user_id="user_id_1")
+      ],
+      statements=[
+        Statement(
+          roles=["ro_viewer"],
+          resources=[
+            Resource(resourceUri="/documents/test_document_id")
+          ]
+        )
+      ]
+    )
 
     try:
         # Create access record
