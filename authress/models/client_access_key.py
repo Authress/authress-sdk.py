@@ -30,12 +30,11 @@ class ClientAccessKey(BaseModel):
     A client access key configuration. The configuration contains information about the key. On first creation the configuration also contains the raw `clientSecret` and `accessKey` for use with OAuth and the Authress SDKs.  # noqa: E501
     """
     key_id: Optional[StrictStr] = Field(default=None, alias="keyId", description="The unique ID of the client.")
-    client_id: StrictStr = Field(default=..., alias="clientId", description="The unique ID of the client.")
     public_key: Optional[constr(strict=True, max_length=256, min_length=0)] = Field(default=None, alias="publicKey", description="Specify a public key on access key creation to bring your own private key. When left blank, Authress will automatically generate a private and public key pair and then return the private key as part of the request. This property holds the public key.")
     generation_date: Optional[datetime] = Field(default=None, alias="generationDate")
     client_secret: Optional[StrictStr] = Field(default=None, alias="clientSecret", description="The unencoded OAuth client secret used with the OAuth endpoints to request a JWT using the `client_credentials` grant type. Pass the clientId and the clientSecret to the documented /tokens endpoint.")
     access_key: Optional[StrictStr] = Field(default=None, alias="accessKey", description="An encoded access key which contains identifying information for client access token creation. For direct use with the Authress SDKs. This private access key must be saved on first creation as it is discarded afterwards. Authress only saves the corresponding public key to verify the private access key.")
-    __properties = ["keyId", "clientId", "publicKey", "generationDate", "clientSecret", "accessKey"]
+    __properties = ["keyId", "publicKey", "generationDate", "clientSecret", "accessKey"]
 
     @validator('public_key')
     def public_key_validate_regular_expression(cls, value):
