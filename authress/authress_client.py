@@ -33,7 +33,8 @@ class AuthressClient(object):
         self._http_client.set_token(token)
 
     def get_client_token(self) -> str:
-        self._http_client._get_client_token()
+        """Generates a Service Client Machine JWT to be used for securing machine to machine requests."""
+        return self._http_client._get_client_token()
 
     def verify_token(self, token: str) -> object:
       """Verify a user access token
@@ -57,7 +58,7 @@ class AuthressClient(object):
 
     @property
     def users(self) -> UsersApi:
-        """Gets the User permissions API to make HTTP Requests with."""
+        """Gets the Users API to make HTTP Requests with."""
         return UsersApi(api_client=self._http_client)
 
     @property
@@ -67,7 +68,7 @@ class AuthressClient(object):
 
     @property
     def accounts(self) -> AccountsApi:
-        """Gets the Authress Accounts API to make HTTP Requests with."""
+        """Gets the Authress Admin API to make HTTP Requests with."""
         return AccountsApi(api_client=self._http_client)
 
     @property
