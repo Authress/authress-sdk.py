@@ -31,7 +31,7 @@ class ExtensionClient(BaseModel):
     """
     The extension's client configuration.  # noqa: E501
     """
-    client_id: StrictStr = Field(default=..., alias="clientId", description="The unique ID of the client.")
+    client_id: Optional[StrictStr] = Field(default=None, alias="clientId", description="The unique ID of the client.")
     rate_limits: Optional[conlist(ClientRateLimit, max_items=1, min_items=0)] = Field(default=None, alias="rateLimits", description="A list of the service client rate limits. Rate Limits can be used to prevent service clients from creating too many requests to your API. They can also limit the number of requests to Authress management APIs, or contain a maximum quota for a client before it is not longer allowed to make additional requests.")
     links: Optional[Links] = None
     __properties = ["clientId", "rateLimits", "links"]

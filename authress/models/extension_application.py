@@ -30,7 +30,7 @@ class ExtensionApplication(BaseModel):
     """
     The extension's application configuration. The application contains the necessary information for users to log in to the extension.  # noqa: E501
     """
-    application_id: StrictStr = Field(default=..., alias="applicationId", description="The unique ID of the application.")
+    application_id: Optional[StrictStr] = Field(default=None, alias="applicationId", description="The unique ID of the application.")
     redirect_urls: Optional[conlist(constr(strict=True, max_length=1024), max_items=100, min_items=0)] = Field(default=None, alias="redirectUrls")
     links: Optional[Links] = None
     __properties = ["applicationId", "redirectUrls", "links"]
