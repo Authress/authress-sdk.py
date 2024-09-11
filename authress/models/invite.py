@@ -31,7 +31,7 @@ class Invite(BaseModel):
     """
     The user invite used to invite users to your application or to Authress as an admin.  # noqa: E501
     """
-    invite_id: StrictStr = Field(default=..., alias="inviteId", description="The unique identifier for the invite. Use this ID to accept the invite. This parameter is ignored during invite creation.")
+    invite_id: Optional[StrictStr] = Field(default=None, alias="inviteId", description="The unique identifier for the invite. Use this ID to accept the invite. This parameter is ignored during invite creation.")
     tenant_id: Optional[constr(strict=True, max_length=128, min_length=0)] = Field(default=None, alias="tenantId")
     statements: conlist(InviteStatement, max_items=100, min_items=0) = Field(default=..., description="A list of statements which match roles to resources. The invited user will all statements apply to them when the invite is accepted.")
     links: Optional[AccountLinks] = None

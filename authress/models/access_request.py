@@ -31,7 +31,7 @@ class AccessRequest(BaseModel):
     """
     The access requested by a user.  # noqa: E501
     """
-    request_id: constr(strict=True, max_length=100, min_length=1) = Field(default=..., alias="requestId", description="Unique identifier for the request.")
+    request_id: Optional[constr(strict=True, max_length=100, min_length=1)] = Field(default=None, alias="requestId", description="Unique identifier for the request.")
     last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated", description="The expected last time the request was updated")
     status: Optional[StrictStr] = Field(default=None, description="Current status of the access request.")
     access: AccessTemplate = Field(...)
