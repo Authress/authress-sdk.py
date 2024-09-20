@@ -34,7 +34,7 @@ from authress.exceptions import ApiKeyError
 from authress.exceptions import ApiAttributeError
 from authress.exceptions import ApiException
 
-# import models into model package
+# import models into sdk package
 from authress.models.access_record import AccessRecord
 from authress.models.access_record_account import AccessRecordAccount
 from authress.models.access_record_collection import AccessRecordCollection
