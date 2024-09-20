@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, conlist, constr, validator
+from authress.models.authentication_token_configuration import AuthenticationTokenConfiguration
 from authress.models.tenant_connection import TenantConnection
 from authress.models.tenant_data import TenantData
 from authress.models.tenant_domain import TenantDomain
@@ -37,8 +38,9 @@ class Tenant(BaseModel):
     data: Optional[TenantData] = None
     domains: Optional[conlist(TenantDomain, max_items=10, min_items=0)] = Field(default=None, description="The associated user email domains that are mapped to this tenant. When a user starts the authentication process, if they are using SSO, Authress will use their specified email address to identify which Authress Tenant to log the user in with.")
     connection: Optional[TenantConnection] = None
+    token_configuration: Optional[AuthenticationTokenConfiguration] = Field(default=None, alias="tokenConfiguration")
     created_time: Optional[datetime] = Field(default=None, alias="createdTime")
-    __properties = ["tenantId", "tenantLookupIdentifier", "data", "domains", "connection", "createdTime"]
+    __properties = ["tenantId", "tenantLookupIdentifier", "data", "domains", "connection", "tokenConfiguration", "createdTime"]
 
     @validator('tenant_id')
     def tenant_id_validate_regular_expression(cls, value):
@@ -62,6 +64,7 @@ class Tenant(BaseModel):
 
     class Config:
         """Pydantic configuration"""
+        extra = 'forbid'
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -98,6 +101,9 @@ class Tenant(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of connection
         if self.connection:
             _dict['connection'] = self.connection.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of token_configuration
+        if self.token_configuration:
+            _dict['tokenConfiguration'] = self.token_configuration.to_dict()
         # set to None if tenant_id (nullable) is None
         # and __fields_set__ contains the field
         if self.tenant_id is None and "tenant_id" in self.__fields_set__:
@@ -135,6 +141,7 @@ class Tenant(BaseModel):
             "data": TenantData.from_dict(obj.get("data")) if obj.get("data") is not None else None,
             "domains": [TenantDomain.from_dict(_item) for _item in obj.get("domains")] if obj.get("domains") is not None else None,
             "connection": TenantConnection.from_dict(obj.get("connection")) if obj.get("connection") is not None else None,
+            "token_configuration": AuthenticationTokenConfiguration.from_dict(obj.get("tokenConfiguration")) if obj.get("tokenConfiguration") is not None else None,
             "created_time": obj.get("createdTime")
         })
         return _obj
