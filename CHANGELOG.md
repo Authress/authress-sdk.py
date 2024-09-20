@@ -17,6 +17,7 @@ This is the changelog for [Authress SDK](readme.md).
 * Prevent unnecessary extra trailing slashes in domain name.
 * Add support for the `generateUserLoginUrl` from the ServiceClientTokenProvider.
 * [Breaking] Removed client_id from ClientAccessKey.py model, because it does not contain a clientId when fetching client data.
+* Add support for `tokenConfiguration` at the tenant level.
 
 ## 2.0 ##
 * Add support for users and groups at the statement level of access records.

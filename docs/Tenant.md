@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **data** | [**TenantData**](TenantData.md) |  | [optional] 
 **domains** | [**List[TenantDomain]**](TenantDomain.md) | The associated user email domains that are mapped to this tenant. When a user starts the authentication process, if they are using SSO, Authress will use their specified email address to identify which Authress Tenant to log the user in with. | [optional] 
 **connection** | [**TenantConnection**](TenantConnection.md) |  | [optional] 
+**token_configuration** | [**AuthenticationTokenConfiguration**](AuthenticationTokenConfiguration.md) |  | [optional] 
 **created_time** | **datetime** |  | [optional] [readonly] 
 
 ## Example
@@ -16,16 +17,21 @@ Name | Type | Description | Notes
 ```python
 from authress.models.tenant import Tenant
 
-json = "{}"
-# create an instance of Tenant from a JSON string
-tenant_instance = Tenant.from_json(json)
-# print the JSON string representation of the object
-print Tenant.to_json()
-
-# convert the object into a dict
-tenant_dict = tenant_instance.to_dict()
-# create an instance of Tenant from a dict
-tenant_from_dict = Tenant.from_dict(tenant_dict)
+tenant = Tenant(
+    tenant_id="Tenant_ID-001",
+    tenant_lookup_identifier="example.com",
+    data=TenantData(name="Tenant for Customer Example 001"),
+    domains=[
+        TenantDomain(domain="example.com"), TenantDomain(domain="alternate.example.com")
+    ],
+    connection=TenantConnection(
+        connection_id="google"
+    ),
+    token_configuration = AuthenticationTokenConfiguration(
+        access_token_duration="PT24H",
+        session_duration="P30D"
+    )
+)
 ```
 [[API Models]](./README.md#documentation-for-models) ☆ [[API Endpoints]](./README.md#documentation-for-api-endpoints) ☆ [[Back to Repo]](../README.md)
 

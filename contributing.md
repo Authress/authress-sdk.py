@@ -23,7 +23,7 @@ podman pull docker://openapitools/openapi-generator-online
 CID=$(podman run -d -p 8888:8080 openapitools/openapi-generator-online)
 sleep 10
 
-# Execute an HTTP request to generate a Ruby client
+# Execute an HTTP request to generate the client
 curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{"openAPIUrl": "https://api.authress.io/", "options": { "useSingleRequestParameter": true, "packageName": "authress", "packageVersion": "99.99.99" } }' 'http://localhost:8888/api/gen/clients/python-pydantic-v1'
 
 
