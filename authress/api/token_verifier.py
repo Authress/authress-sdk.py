@@ -8,11 +8,12 @@ import re
 from urllib.parse import urlparse
 
 from authress import rest
-from authress.utils import service_client_token_provider
+from authress.utils import service_client_token_provider, PackageVersionProvider
 
 class TokenVerifier(object):
   def __init__(self):
     self.keyMap = dict()
+    self.package_version_provider = PackageVersionProvider()
 
   def verify_token(self, authressCustomDomain, token, options=None):
     sanitized_domain = re.sub(r"https?://", "", authressCustomDomain)
@@ -73,7 +74,12 @@ class TokenVerifier(object):
 
   def get_key_uncached(self, jwkKeyListUrl, kid):
     rest_client = rest.RESTClientObject()
-    result = rest_client.get_request(jwkKeyListUrl)
+    
+    version = self.package_version_provider.get_version()
+    headers = {
+      'User-Agent': f'Authress SDK; Python; {version};'
+    }
+    result = rest_client.get_request(jwkKeyListUrl, headers=headers)
 
     for index, key in enumerate(json.loads(result.data)['keys']):
       if key['kid'] == kid:
