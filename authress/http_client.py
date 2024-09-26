@@ -14,7 +14,7 @@ import time
 from urllib.parse import quote
 
 from authress.api_response import ApiResponse
-from authress.utils import service_client_token_provider
+from authress.utils import service_client_token_provider, PackageVersionProvider
 import authress.models
 from authress import rest
 from authress.exceptions import ApiValueError, ApiException, ServiceException
@@ -58,11 +58,9 @@ class HttpClient(object):
         self.client_side_validation = False
 
         self.service_client_token_provider = service_client_token_provider.ServiceClientTokenProvider(self.access_key, self.host)
-
-        this_directory = os.path.abspath(os.path.dirname(__file__))
-        with open(os.path.join(this_directory, 'VERSION')) as version_file:
-          VERSION = version_file.read().strip()
-        self.default_headers['User-Agent'] = f'Authress SDK; Python; {VERSION};'
+        
+        version = PackageVersionProvider().get_version()
+        self.default_headers['User-Agent'] = f'Authress SDK; Python; {version};'
 
     def set_token(self, token):
         self.default_headers['Authorization'] = f'Bearer {token.replace("Bearer", "").strip()}'
@@ -204,7 +202,7 @@ class HttpClient(object):
 
         self.last_response = response_data
 
-        return_data = None # assuming derialization is not needed
+        return_data = None # assuming deserialization is not needed
         # data needs deserialization or returns HTTP data (deserialized) only
         if _preload_content or _return_http_data_only:
           response_type = response_types_map.get(str(response_data.status), None)
