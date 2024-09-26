@@ -85,4 +85,4 @@ class TokenVerifier(object):
       if key['kid'] == kid:
           return key
 
-    raise Exception("Unauthorized", "KID is not valid")
+    raise Exception("Unauthorized", "The Service Client Access Key is not valid yet or has been deleted. For new Access Keys just created, key validation is cached and can take up to 5 minutes before new keys can be used.")
