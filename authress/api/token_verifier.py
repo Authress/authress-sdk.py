@@ -52,7 +52,7 @@ class TokenVerifier(object):
     if (clientIdMatcher is not None and clientIdMatcher.group(1) != unverifiedPayload['sub']):
       raise Exception("Unauthorized", "Service ID does not match token sub claim")
 
-    jwk = self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks", kid)
+    jwk = self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks?kid={kid}", kid)
 
     try:
       return jwt.decode(authenticationToken, jwt.api_jwk.PyJWK.from_dict(jwk).key, algorithms=['EdDSA'], options = { 'verify_aud': False })
