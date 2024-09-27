@@ -28,7 +28,7 @@ class AuthressClient(object):
         self._host = re.sub(r'/+$', '', self._host)
         
         self._http_client = HttpClient(host=self._host, access_key=service_client_access_key, user_agent=user_agent)
-        self._token_verifier = token_verifier.TokenVerifier(http_client=_http_client)
+        self._token_verifier = token_verifier.TokenVerifier(http_client=self._http_client)
 
     def set_token(self, token: str):
         self._http_client.set_token(token)

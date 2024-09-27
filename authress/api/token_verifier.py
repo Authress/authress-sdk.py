@@ -81,7 +81,7 @@ class TokenVerifier(object):
     headers = {
       'User-Agent': f'Authress SDK; Python; {version};'
     }
-    result = self.http_client.get_request_with_retries(jwkKeyListUrl, headers=headers)
+    result = self.http_client.request_with_retries('GET', jwkKeyListUrl, headers=headers)
 
     for index, key in enumerate(json.loads(result.data)['keys']):
       if key['kid'] == kid:
