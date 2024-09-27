@@ -34,7 +34,6 @@ from authress.models.permissioned_resource import PermissionedResource
 from authress.models.permissioned_resource_collection import PermissionedResourceCollection
 from authress.models.resource_users_collection import ResourceUsersCollection
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -50,8 +49,6 @@ class ResourcePermissionsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

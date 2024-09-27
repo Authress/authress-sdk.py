@@ -48,7 +48,7 @@ class HttpClient(object):
     }
     _pool = None
 
-    def __init__(self, host=None, access_key=None):
+    def __init__(self, host=None, access_key=None, user_agent=None):
         self.host = host if host is not None and host.startswith('http') else f"https://{host}"
         self.access_key = access_key
         self.pool_threads = 1
@@ -60,7 +60,7 @@ class HttpClient(object):
         self.service_client_token_provider = service_client_token_provider.ServiceClientTokenProvider(self.access_key, self.host)
         
         version = PackageVersionProvider().get_version()
-        self.default_headers['User-Agent'] = f'Authress SDK; Python; {version};'
+        self.default_headers['User-Agent'] = f'Authress SDK; Python; {version}; {user_agent or ""}'
 
     def set_token(self, token):
         self.default_headers['Authorization'] = f'Bearer {token.replace("Bearer", "").strip()}'

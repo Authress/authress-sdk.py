@@ -23,11 +23,12 @@ from authress.api.user_permissions_api import UserPermissionsApi
 from authress.api import token_verifier
 
 class AuthressClient(object):
-    def __init__(self, authress_api_url=None, service_client_access_key=None):
+    def __init__(self, authress_api_url=None, service_client_access_key=None, user_agent=None):
         self._host = authress_api_url if authress_api_url.startswith('http') else f"https://{authress_api_url}"
         self._host = re.sub(r'/+$', '', self._host)
-        self._token_verifier = token_verifier.TokenVerifier()
-        self._http_client = HttpClient(host=self._host, access_key=service_client_access_key)
+        
+        self._http_client = HttpClient(host=self._host, access_key=service_client_access_key, user_agent=user_agent)
+        self._token_verifier = token_verifier.TokenVerifier(http_client=_http_client)
 
     def set_token(self, token: str):
         self._http_client.set_token(token)

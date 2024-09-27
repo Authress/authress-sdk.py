@@ -33,7 +33,6 @@ from typing import Optional
 from authress.models.group import Group
 from authress.models.group_collection import GroupCollection
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -49,8 +48,6 @@ class GroupsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

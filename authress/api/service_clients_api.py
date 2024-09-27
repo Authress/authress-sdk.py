@@ -34,7 +34,6 @@ from authress.models.client import Client
 from authress.models.client_access_key import ClientAccessKey
 from authress.models.client_collection import ClientCollection
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -50,8 +49,6 @@ class ServiceClientsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments
