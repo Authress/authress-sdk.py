@@ -31,7 +31,6 @@ except ImportError:
 from authress.models.account import Account
 from authress.models.invite import Invite
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -47,8 +46,6 @@ class InvitesApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

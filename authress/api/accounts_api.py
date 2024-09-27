@@ -37,7 +37,6 @@ from authress.models.account_collection import AccountCollection
 from authress.models.identity_collection import IdentityCollection
 from authress.models.identity_request import IdentityRequest
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -53,8 +52,6 @@ class AccountsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

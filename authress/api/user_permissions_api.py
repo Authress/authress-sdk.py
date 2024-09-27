@@ -34,7 +34,6 @@ from authress.models.permission_collection import PermissionCollection
 from authress.models.user_resources_collection import UserResourcesCollection
 from authress.models.user_role_collection import UserRoleCollection
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -50,8 +49,6 @@ class UserPermissionsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

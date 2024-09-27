@@ -11,7 +11,11 @@ from authress import rest
 from authress.utils import service_client_token_provider, PackageVersionProvider
 
 class TokenVerifier(object):
-  def __init__(self):
+  def __init__(self, http_client=None):
+    self.http_client = http_client
+    if http_client is None:
+      self.http_client = rest.RESTClientObject()
+
     self.keyMap = dict()
     self.package_version_provider = PackageVersionProvider()
 
@@ -72,14 +76,12 @@ class TokenVerifier(object):
       self.keyMap[hashKey] = self.get_key_uncached(jwkKeyListUrl, kid)
       return self.keyMap[hashKey]
 
-  def get_key_uncached(self, jwkKeyListUrl, kid):
-    rest_client = rest.RESTClientObject()
-    
+  def get_key_uncached(self, jwkKeyListUrl, kid):    
     version = self.package_version_provider.get_version()
     headers = {
       'User-Agent': f'Authress SDK; Python; {version};'
     }
-    result = rest_client.get_request(jwkKeyListUrl, headers=headers)
+    result = self.http_client.request_with_retries('GET', jwkKeyListUrl, headers=headers)
 
     for index, key in enumerate(json.loads(result.data)['keys']):
       if key['kid'] == kid:

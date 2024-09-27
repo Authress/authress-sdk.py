@@ -32,7 +32,6 @@ from authress.models.connection import Connection
 from authress.models.connection_collection import ConnectionCollection
 from authress.models.user_connection_credentials import UserConnectionCredentials
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -48,8 +47,6 @@ class ConnectionsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

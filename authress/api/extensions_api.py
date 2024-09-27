@@ -36,7 +36,6 @@ from authress.models.o_auth_authorize_response import OAuthAuthorizeResponse
 from authress.models.o_auth_token_request import OAuthTokenRequest
 from authress.models.o_auth_token_response import OAuthTokenResponse
 
-from authress.http_client import HttpClient
 from authress.api_response import ApiResponse
 from authress.exceptions import (  # noqa: F401
     ApiTypeError,
@@ -52,8 +51,6 @@ class ExtensionsApi(object):
     """
 
     def __init__(self, api_client=None):
-        if api_client is None:
-            api_client = HttpClient.get_default()
         self.api_client = api_client
 
     @validate_arguments

@@ -9,6 +9,7 @@ from __future__ import absolute_import
 from authress.authress_client import AuthressClient
 from authress.http_client import HttpClient
 from authress.rest import ApiException
+from authress.utils.service_client_token_provider import ServiceClientTokenProvider
  
 # import apis into sdk package
 from authress.api.access_records_api import AccessRecordsApi
