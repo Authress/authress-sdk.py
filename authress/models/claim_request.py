@@ -35,7 +35,6 @@ class ClaimRequest(BaseModel):
 
     class Config:
         """Pydantic configuration"""
-        extra = 'forbid'
         allow_population_by_field_name = True
         validate_assignment = True
 
