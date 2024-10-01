@@ -29,7 +29,7 @@ class TokenVerifierTest(unittest.IsolatedAsyncioTestCase):
     token_verifier_instance.get_key_uncached = mock_get_key_uncached
     identity = token_verifier_instance.verify_token(authressCustomDomain=f"https://{customDomain}", token=access_key)
 
-    mock_get_key_uncached.assert_called_once_with(f"https://{customDomain}/v1/clients/CLIENT/.well-known/openid-configuration/jwks?kid=KEY", "KEY")
+    mock_get_key_uncached.assert_called_once_with(f"https://{customDomain}/v1/clients/CLIENT/.well-known/openid-configuration/jwks?kid=KEY&iss={customDomain}", "KEY")
     assert identity['iss'] == f'https://{customDomain}/v1/clients/CLIENT'
     assert identity['sub'] == "CLIENT"
 
