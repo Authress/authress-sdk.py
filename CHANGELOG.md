@@ -2,7 +2,6 @@
 This is the changelog for [Authress SDK](readme.md).
 
 ## 3.1 ##
-* [Breaking] Throw validation error on setting a property that doesn't exist in any of the Authress DTO Models.
 * Optimize JWKs fetching using the keyId
 
 ## 3.0 ##
