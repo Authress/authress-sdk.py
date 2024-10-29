@@ -32,8 +32,6 @@ class InviteStatement(BaseModel):
     """
     roles: conlist(constr(strict=True, max_length=64, min_length=1), max_items=100, min_items=1) = Field(...)
     resources: conlist(Resource, max_items=100, min_items=1) = Field(...)
-    users: Optional[conlist(StrictStr, max_items=0)] = None
-    groups: Optional[conlist(StrictStr, max_items=0)] = None
     __properties = ["roles", "resources", "users", "groups"]
 
     class Config:
@@ -67,15 +65,6 @@ class InviteStatement(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['resources'] = _items
-        # set to None if users (nullable) is None
-        # and __fields_set__ contains the field
-        if self.users is None and "users" in self.__fields_set__:
-            _dict['users'] = None
-
-        # set to None if groups (nullable) is None
-        # and __fields_set__ contains the field
-        if self.groups is None and "groups" in self.__fields_set__:
-            _dict['groups'] = None
 
         return _dict
 
@@ -90,9 +79,7 @@ class InviteStatement(BaseModel):
 
         _obj = InviteStatement.parse_obj({
             "roles": obj.get("roles"),
-            "resources": [Resource.from_dict(_item) for _item in obj.get("resources")] if obj.get("resources") is not None else None,
-            "users": obj.get("users"),
-            "groups": obj.get("groups")
+            "resources": [Resource.from_dict(_item) for _item in obj.get("resources")] if obj.get("resources") is not None else None
         })
         return _obj
 
