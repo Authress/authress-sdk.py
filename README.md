@@ -34,10 +34,13 @@ import authress
 
 See the SDK reference guide for a examples of commonly executed blocks with descriptions.
 
+<!-- Use absolute links, to support this link working from PyPI-->
 [SDK Documentation](https://github.com/Authress/authress-sdk.py/blob/main/docs/README.md)
 
 
 ## Quick Examples:
+
+<!-- Use absolute links, to support this link working from PyPI-->
 
 * [Authorize using a user token](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#authorize-using-a-user-token)
 * [Authorize with a service client](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#authorize-with-a-service-client)
@@ -46,5 +49,7 @@ See the SDK reference guide for a examples of commonly executed blocks with desc
 * [Token verification](https://github.com/Authress/authress-sdk.py/blob/main/docs/EXAMPLES.md#token-verifier)
 
 ## Contribution Guide
+
+<!-- Use absolute links, to support this link working from PyPI-->
 
 [Developing for the Python SDK](https://github.com/Authress/authress-sdk.py/blob/main/contributing.md)

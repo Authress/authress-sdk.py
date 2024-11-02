@@ -31,11 +31,13 @@ class Invite(BaseModel):
     """
     The user invite used to invite users to your application or to Authress as an admin.  # noqa: E501
     """
-    invite_id: Optional[StrictStr] = Field(default=None, alias="inviteId", description="The unique identifier for the invite. Use this ID to accept the invite. This parameter is ignored during invite creation.")
-    tenant_id: Optional[constr(strict=True, max_length=128, min_length=0)] = Field(default=None, alias="tenantId")
+    invite_id: StrictStr = Field(default=..., alias="inviteId", description="The unique identifier for the invite. Use this ID to accept the invite. This parameter is ignored during invite creation.")
+    tenant_id: Optional[constr(strict=True, max_length=128, min_length=0)] = Field(default=None, alias="tenantId", description="DEPRECATED: Use default_login_tenant_id instead.")
+    default_login_tenant_id: Optional[constr(strict=True, max_length=128, min_length=0)] = Field(default=None, alias="defaultLoginTenantId", description="Specify the tenant associated with the invite. This tenant Id is used to automatically select the tenant during login with Authress when using the @authress/login SDK. This parameter is ignored when accepting invites directly. To explicitly add a user to a tenant use the linkTenantUser API endpoint.")
     statements: conlist(InviteStatement, max_items=100, min_items=0) = Field(default=..., description="A list of statements which match roles to resources. The invited user will all statements apply to them when the invite is accepted.")
+    conflict_resolution_strategy: Optional[StrictStr] = Field(default='GENERATE_NEW_RECORD', alias="conflictResolutionStrategy", description="An access record will be created when the invite is accepted. If the access record already exists, and the statements in this invite can be merged safely, then the existing record will be updated. A safe merge is one in which the current user will only gain additional access to the statements defined in the invite and other users will not gain additional access in any scenario. When this cannot be done safely, Authress will fallback to this parameter.<br>             <ul>               <li><code>GENERATE_NEW_RECORD</code> - (Default) Create a new access record which matches the statements in this invite. The record ID will be randomly generated and is unpredictable.</li>               <li><code>UNSAFE_FORCE_MERGE</code> - Add the user and statements to the existing record. This will cause the user to gain all the permissions already defined in that record and will cause all the users currently in that record to gain all the additional permissions defined in the invite.</li>               <li><code>REPLACE_RECORD_DATA</code> - Replace the existing access record users, roles, and resources with those specified in this invite.</li>               <li><code>SKIP_CHANGES</code> - Do not replace, do not create, do not throw. Optimal for ensuring that all records have a known management strategy and successful invite acceptance is more important than the granted permissions.</li>             </ul>")
     links: Optional[AccountLinks] = None
-    __properties = ["inviteId", "tenantId", "statements", "links"]
+    __properties = ["inviteId", "tenantId", "defaultLoginTenantId", "statements", "conflictResolutionStrategy", "links"]
 
     @validator('tenant_id')
     def tenant_id_validate_regular_expression(cls, value):
@@ -45,6 +47,26 @@ class Invite(BaseModel):
 
         if not re.match(r"^[a-zA-Z0-9-_.:]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9-_.:]*$/")
+        return value
+
+    @validator('default_login_tenant_id')
+    def default_login_tenant_id_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-zA-Z0-9-_.:]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9-_.:]*$/")
+        return value
+
+    @validator('conflict_resolution_strategy')
+    def conflict_resolution_strategy_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in ('GENERATE_NEW_RECORD', 'UNSAFE_FORCE_MERGE', 'SKIP_CHANGES', 'REPLACE_RECORD_DATA'):
+            raise ValueError("must be one of enum values ('GENERATE_NEW_RECORD', 'UNSAFE_FORCE_MERGE', 'SKIP_CHANGES', 'REPLACE_RECORD_DATA')")
         return value
 
     class Config:
@@ -87,6 +109,16 @@ class Invite(BaseModel):
         if self.tenant_id is None and "tenant_id" in self.__fields_set__:
             _dict['tenantId'] = None
 
+        # set to None if default_login_tenant_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.default_login_tenant_id is None and "default_login_tenant_id" in self.__fields_set__:
+            _dict['defaultLoginTenantId'] = None
+
+        # set to None if conflict_resolution_strategy (nullable) is None
+        # and __fields_set__ contains the field
+        if self.conflict_resolution_strategy is None and "conflict_resolution_strategy" in self.__fields_set__:
+            _dict['conflictResolutionStrategy'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +133,9 @@ class Invite(BaseModel):
         _obj = Invite.parse_obj({
             "invite_id": obj.get("inviteId"),
             "tenant_id": obj.get("tenantId"),
+            "default_login_tenant_id": obj.get("defaultLoginTenantId"),
             "statements": [InviteStatement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None,
+            "conflict_resolution_strategy": obj.get("conflictResolutionStrategy") if obj.get("conflictResolutionStrategy") is not None else 'GENERATE_NEW_RECORD',
             "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
         })
         return _obj

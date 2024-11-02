@@ -32,7 +32,7 @@ class InviteStatement(BaseModel):
     """
     roles: conlist(constr(strict=True, max_length=64, min_length=1), max_items=100, min_items=1) = Field(...)
     resources: conlist(Resource, max_items=100, min_items=1) = Field(...)
-    __properties = ["roles", "resources", "users", "groups"]
+    __properties = ["roles", "resources"]
 
     class Config:
         """Pydantic configuration"""
