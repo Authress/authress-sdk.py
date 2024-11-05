@@ -7,10 +7,7 @@ from authress import AuthressClient
 # create an instance of the API class during service initialization
 # Authress custom domain or if there isn't one yet, use the authress account specific url
 authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.api.authress.io"
-
-# The Service Client Access Key for your service client.
-service_client_access_key = "sc_key_001"
-authress_client = AuthressClient(authress_api_url=authress_api_url , service_client_access_key=service_client_access_key)
+authress_client = AuthressClient(authress_api_url=authress_api_url)
 
 # on api route
 from flask import request
@@ -46,7 +43,7 @@ authress_api_url = "https://authress.yourdomain.com" # or "https://ACCOUNT_ID.ap
 
 # Create a service client in the Authress management portal and past the access token here
 service_client_access_key = 'eyJrZXlJ....'
-authress_client = AuthressClient(authress_api_url=authress_api_url , service_client_access_key=service_client_access_key)
+authress_client = AuthressClient(authress_api_url=authress_api_url, service_client_access_key=service_client_access_key)
 
 # on api route
 from flask import request

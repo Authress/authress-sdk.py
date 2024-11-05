@@ -65,14 +65,6 @@ class HttpClient(object):
     def set_token(self, token):
         self.default_headers['Authorization'] = f'Bearer {token.replace("Bearer", "").strip()}'
 
-    def get_user_from_token(self):
-        token = self.default_headers['Authorization'].replace("Bearer", "").strip()
-        jwtData = jwt.decode(token, options={"verify_signature": False})
-        if 'aud' in jwtData and 'https://api.authress.io' in jwtData['aud']:
-          return f"Authress|{jwtData['sub']}"
-
-        return jwtData['sub']
-
     def __enter__(self):
         return self
 
@@ -762,4 +754,7 @@ class HttpClient(object):
         return klass.from_dict(data)
 
     def _get_client_token(self) -> str:
-      return self.service_client_token_provider.get_client_token()
+        if self.service_client_token_provider is None:
+            return None
+
+        return self.service_client_token_provider.get_client_token()
