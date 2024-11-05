@@ -590,7 +590,7 @@ class InvitesApi(object):
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "Account",
+            '200': None,
             '401': None,
             '403': None,
             '404': None,

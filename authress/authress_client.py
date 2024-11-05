@@ -26,12 +26,17 @@ class AuthressClient(object):
     def __init__(self, authress_api_url=None, service_client_access_key=None, user_agent=None):
         self._host = authress_api_url if authress_api_url.startswith('http') else f"https://{authress_api_url}"
         self._host = re.sub(r'/+$', '', self._host)
+        self._service_client_access_key = service_client_access_key
         
         self._http_client = HttpClient(host=self._host, access_key=service_client_access_key, user_agent=user_agent)
         self._token_verifier = token_verifier.TokenVerifier(http_client=self._http_client)
 
     def set_token(self, token: str):
-        self._http_client.set_token(token)
+        if self._service_client_access_key is None:
+            self._http_client.set_token(token)
+            return
+        
+        raise Exception("An AuthressClient cannot use set_token, when the client has been instantiated with a service client access key. It must either be used for User tokens or with Service Client Access Keys, but not both.")
 
     def get_client_token(self) -> str:
         """Generates a Service Client Machine JWT to be used for securing machine to machine requests."""
