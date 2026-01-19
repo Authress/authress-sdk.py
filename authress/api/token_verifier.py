@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from __future__ import absolute_import
+from datetime import datetime, timedelta
 import json
 
 import jwt
@@ -65,16 +66,20 @@ class TokenVerifier(object):
 
   def get_public_key(self, jwkKeyListUrl, kid):
     hashKey = f"{jwkKeyListUrl}|{kid}"
-
-    if hashKey in self.keyMap is None:
-      self.keyMap[hashKey] = self.get_key_uncached(jwkKeyListUrl, kid)
-
-    try:
-      key = self.keyMap[hashKey]
-      return key
-    except:
-      self.keyMap[hashKey] = self.get_key_uncached(jwkKeyListUrl, kid)
-      return self.keyMap[hashKey]
+    
+    if hashKey in self.keyMap is not None:
+      try:
+        keyData = self.keyMap[hashKey]
+        if datetime.now() < keyData["expiry"]:
+          return keyData["key"]
+      except:
+        self.keyMap[hashKey] = None
+  
+    self.keyMap[hashKey] = {
+      "key": self.get_key_uncached(jwkKeyListUrl, kid),
+      "expiry": datetime.now() + timedelta(hours=1)
+    }
+    return self.keyMap[hashKey]["key"]
 
   def get_key_uncached(self, jwkKeyListUrl, kid):    
     version = self.package_version_provider.get_version()
