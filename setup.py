@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 REQUIRES = [
-  "urllib3 >= 1.25.3, <= 3",
+  "urllib3 >= 1.25.3, < 3",
   "python-dateutil",
   "pydantic >= 1.10.5, < 3",
   "PyJWT >= 2.4.0",
