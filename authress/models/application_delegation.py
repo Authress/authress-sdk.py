@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr
+from authress.utils import lenient_construct
 
 class ApplicationDelegation(BaseModel):
     """
@@ -65,9 +66,11 @@ class ApplicationDelegation(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ApplicationDelegation.parse_obj(obj)
+            if isinstance(obj, ApplicationDelegation):
+                return obj
+            return lenient_construct(ApplicationDelegation, {})
 
-        _obj = ApplicationDelegation.parse_obj({
+        _obj = lenient_construct(ApplicationDelegation, {
             "authentication_url": obj.get("authenticationUrl")
         })
         return _obj

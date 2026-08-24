@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, constr
 except ImportError:
     from pydantic import BaseModel, constr
+from authress.utils import lenient_construct
 
 class TenantData(BaseModel):
     """
@@ -70,9 +71,11 @@ class TenantData(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return TenantData.parse_obj(obj)
+            if isinstance(obj, TenantData):
+                return obj
+            return lenient_construct(TenantData, {})
 
-        _obj = TenantData.parse_obj({
+        _obj = lenient_construct(TenantData, {
             "name": obj.get("name")
         })
         return _obj

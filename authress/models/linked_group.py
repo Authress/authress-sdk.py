@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, constr, validator
+from authress.utils import lenient_construct
 
 class LinkedGroup(BaseModel):
     """
@@ -72,9 +73,11 @@ class LinkedGroup(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return LinkedGroup.parse_obj(obj)
+            if isinstance(obj, LinkedGroup):
+                return obj
+            return lenient_construct(LinkedGroup, {})
 
-        _obj = LinkedGroup.parse_obj({
+        _obj = lenient_construct(LinkedGroup, {
             "group_id": obj.get("groupId")
         })
         return _obj

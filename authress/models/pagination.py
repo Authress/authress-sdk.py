@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel
 except ImportError:
     from pydantic import BaseModel
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.pagination_next import PaginationNext
 
 class Pagination(BaseModel):
@@ -74,10 +75,12 @@ class Pagination(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Pagination.parse_obj(obj)
+            if isinstance(obj, Pagination):
+                return obj
+            return lenient_construct(Pagination, {})
 
-        _obj = Pagination.parse_obj({
-            "next": PaginationNext.from_dict(obj.get("next")) if obj.get("next") is not None else None
+        _obj = lenient_construct(Pagination, {
+            "next": lenient_nested(PaginationNext, obj.get("next"))
         })
         return _obj
 

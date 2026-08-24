@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested_list
 from authress.models.statement import Statement
 
 class TokenRequest(BaseModel):
@@ -74,10 +75,12 @@ class TokenRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return TokenRequest.parse_obj(obj)
+            if isinstance(obj, TokenRequest):
+                return obj
+            return lenient_construct(TokenRequest, {})
 
-        _obj = TokenRequest.parse_obj({
-            "statements": [Statement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None,
+        _obj = lenient_construct(TokenRequest, {
+            "statements": lenient_nested_list(Statement, obj.get("statements")),
             "expires": obj.get("expires")
         })
         return _obj

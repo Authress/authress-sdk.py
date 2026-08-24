@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictBool
 except ImportError:
     from pydantic import BaseModel, Field, StrictBool
+from authress.utils import lenient_construct
 
 class ClientOptions(BaseModel):
     """
@@ -76,9 +77,11 @@ class ClientOptions(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ClientOptions.parse_obj(obj)
+            if isinstance(obj, ClientOptions):
+                return obj
+            return lenient_construct(ClientOptions, {})
 
-        _obj = ClientOptions.parse_obj({
+        _obj = lenient_construct(ClientOptions, {
             "grant_user_permissions_access": obj.get("grantUserPermissionsAccess") if obj.get("grantUserPermissionsAccess") is not None else False,
             "grant_token_generation": obj.get("grantTokenGeneration") if obj.get("grantTokenGeneration") is not None else False
         })

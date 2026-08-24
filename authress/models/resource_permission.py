@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictBool, StrictStr, validator
+from authress.utils import lenient_construct
 
 class ResourcePermission(BaseModel):
     """
@@ -73,9 +74,11 @@ class ResourcePermission(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ResourcePermission.parse_obj(obj)
+            if isinstance(obj, ResourcePermission):
+                return obj
+            return lenient_construct(ResourcePermission, {})
 
-        _obj = ResourcePermission.parse_obj({
+        _obj = lenient_construct(ResourcePermission, {
             "action": obj.get("action"),
             "allow": obj.get("allow")
         })

@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, conlist, constr
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.links import Links
 
 class ExtensionApplication(BaseModel):
@@ -77,12 +78,14 @@ class ExtensionApplication(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ExtensionApplication.parse_obj(obj)
+            if isinstance(obj, ExtensionApplication):
+                return obj
+            return lenient_construct(ExtensionApplication, {})
 
-        _obj = ExtensionApplication.parse_obj({
+        _obj = lenient_construct(ExtensionApplication, {
             "application_id": obj.get("applicationId"),
             "redirect_urls": obj.get("redirectUrls"),
-            "links": Links.from_dict(obj.get("links")) if obj.get("links") is not None else None
+            "links": lenient_nested(Links, obj.get("links"))
         })
         return _obj
 

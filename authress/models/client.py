@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, conlist, constr
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.client_access_key import ClientAccessKey
 from authress.models.client_options import ClientOptions
 from authress.models.client_rate_limit import ClientRateLimit
@@ -109,15 +110,17 @@ class Client(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Client.parse_obj(obj)
+            if isinstance(obj, Client):
+                return obj
+            return lenient_construct(Client, {})
 
-        _obj = Client.parse_obj({
+        _obj = lenient_construct(Client, {
             "client_id": obj.get("clientId"),
             "created_time": obj.get("createdTime"),
             "name": obj.get("name"),
-            "options": ClientOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
-            "rate_limits": [ClientRateLimit.from_dict(_item) for _item in obj.get("rateLimits")] if obj.get("rateLimits") is not None else None,
-            "verification_keys": [ClientAccessKey.from_dict(_item) for _item in obj.get("verificationKeys")] if obj.get("verificationKeys") is not None else None,
+            "options": lenient_nested(ClientOptions, obj.get("options")),
+            "rate_limits": lenient_nested_list(ClientRateLimit, obj.get("rateLimits")),
+            "verification_keys": lenient_nested_list(ClientAccessKey, obj.get("verificationKeys")),
             "tags": obj.get("tags")
         })
         return _obj

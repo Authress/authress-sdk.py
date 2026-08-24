@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, conlist
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.client_rate_limit import ClientRateLimit
 from authress.models.links import Links
 
@@ -85,12 +86,14 @@ class ExtensionClient(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ExtensionClient.parse_obj(obj)
+            if isinstance(obj, ExtensionClient):
+                return obj
+            return lenient_construct(ExtensionClient, {})
 
-        _obj = ExtensionClient.parse_obj({
+        _obj = lenient_construct(ExtensionClient, {
             "client_id": obj.get("clientId"),
-            "rate_limits": [ClientRateLimit.from_dict(_item) for _item in obj.get("rateLimits")] if obj.get("rateLimits") is not None else None,
-            "links": Links.from_dict(obj.get("links")) if obj.get("links") is not None else None
+            "rate_limits": lenient_nested_list(ClientRateLimit, obj.get("rateLimits")),
+            "links": lenient_nested(Links, obj.get("links"))
         })
         return _obj
 

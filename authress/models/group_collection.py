@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.collection_links import CollectionLinks
 from authress.models.group import Group
 from authress.models.pagination import Pagination
@@ -83,12 +84,14 @@ class GroupCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return GroupCollection.parse_obj(obj)
+            if isinstance(obj, GroupCollection):
+                return obj
+            return lenient_construct(GroupCollection, {})
 
-        _obj = GroupCollection.parse_obj({
-            "groups": [Group.from_dict(_item) for _item in obj.get("groups")] if obj.get("groups") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None,
-            "links": CollectionLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
+        _obj = lenient_construct(GroupCollection, {
+            "groups": lenient_nested_list(Group, obj.get("groups")),
+            "pagination": lenient_nested(Pagination, obj.get("pagination")),
+            "links": lenient_nested(CollectionLinks, obj.get("links"))
         })
         return _obj
 

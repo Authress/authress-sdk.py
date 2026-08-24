@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, constr, validator
+from authress.utils import lenient_construct
 
 class Resource(BaseModel):
     """
@@ -72,9 +73,11 @@ class Resource(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Resource.parse_obj(obj)
+            if isinstance(obj, Resource):
+                return obj
+            return lenient_construct(Resource, {})
 
-        _obj = Resource.parse_obj({
+        _obj = lenient_construct(Resource, {
             "resource_uri": obj.get("resourceUri")
         })
         return _obj

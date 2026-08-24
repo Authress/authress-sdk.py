@@ -26,6 +26,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, constr, validator
+from authress.utils import lenient_construct
 
 class AuthenticationTokenConfiguration(BaseModel):
     """
@@ -98,9 +99,11 @@ class AuthenticationTokenConfiguration(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AuthenticationTokenConfiguration.parse_obj(obj)
+            if isinstance(obj, AuthenticationTokenConfiguration):
+                return obj
+            return lenient_construct(AuthenticationTokenConfiguration, {})
 
-        _obj = AuthenticationTokenConfiguration.parse_obj({
+        _obj = lenient_construct(AuthenticationTokenConfiguration, {
             "access_token_duration": obj.get("accessTokenDuration") if obj.get("accessTokenDuration") is not None else 'PT24H',
             "session_duration": obj.get("sessionDuration") if obj.get("sessionDuration") is not None else 'P30D'
         })

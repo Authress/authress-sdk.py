@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictBool
 except ImportError:
     from pydantic import BaseModel, Field, StrictBool
+from authress.utils import lenient_construct
 
 class ConnectionConditions(BaseModel):
     """
@@ -70,9 +71,11 @@ class ConnectionConditions(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ConnectionConditions.parse_obj(obj)
+            if isinstance(obj, ConnectionConditions):
+                return obj
+            return lenient_construct(ConnectionConditions, {})
 
-        _obj = ConnectionConditions.parse_obj({
+        _obj = lenient_construct(ConnectionConditions, {
             "require_business_account": obj.get("requireBusinessAccount") if obj.get("requireBusinessAccount") is not None else False
         })
         return _obj

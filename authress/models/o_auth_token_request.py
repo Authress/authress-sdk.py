@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, validator
+from authress.utils import lenient_construct
 
 class OAuthTokenRequest(BaseModel):
     """
@@ -111,9 +112,11 @@ class OAuthTokenRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OAuthTokenRequest.parse_obj(obj)
+            if isinstance(obj, OAuthTokenRequest):
+                return obj
+            return lenient_construct(OAuthTokenRequest, {})
 
-        _obj = OAuthTokenRequest.parse_obj({
+        _obj = lenient_construct(OAuthTokenRequest, {
             "client_id": obj.get("client_id"),
             "client_secret": obj.get("client_secret"),
             "code_verifier": obj.get("code_verifier"),

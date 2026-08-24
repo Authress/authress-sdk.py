@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.permission_collection_account import PermissionCollectionAccount
 from authress.models.permission_object import PermissionObject
 
@@ -86,12 +87,14 @@ class PermissionCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PermissionCollection.parse_obj(obj)
+            if isinstance(obj, PermissionCollection):
+                return obj
+            return lenient_construct(PermissionCollection, {})
 
-        _obj = PermissionCollection.parse_obj({
-            "account": PermissionCollectionAccount.from_dict(obj.get("account")) if obj.get("account") is not None else None,
+        _obj = lenient_construct(PermissionCollection, {
+            "account": lenient_nested(PermissionCollectionAccount, obj.get("account")),
             "user_id": obj.get("userId"),
-            "permissions": [PermissionObject.from_dict(_item) for _item in obj.get("permissions")] if obj.get("permissions") is not None else None
+            "permissions": lenient_nested_list(PermissionObject, obj.get("permissions"))
         })
         return _obj
 

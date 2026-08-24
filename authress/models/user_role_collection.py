@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested_list
 from authress.models.user_role import UserRole
 
 class UserRoleCollection(BaseModel):
@@ -81,11 +82,13 @@ class UserRoleCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserRoleCollection.parse_obj(obj)
+            if isinstance(obj, UserRoleCollection):
+                return obj
+            return lenient_construct(UserRoleCollection, {})
 
-        _obj = UserRoleCollection.parse_obj({
+        _obj = lenient_construct(UserRoleCollection, {
             "user_id": obj.get("userId"),
-            "roles": [UserRole.from_dict(_item) for _item in obj.get("roles")] if obj.get("roles") is not None else None
+            "roles": lenient_nested_list(UserRole, obj.get("roles"))
         })
         return _obj
 

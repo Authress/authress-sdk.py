@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, conint, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, conint, validator
+from authress.utils import lenient_construct
 
 class ClientRateLimit(BaseModel):
     """
@@ -88,9 +89,11 @@ class ClientRateLimit(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ClientRateLimit.parse_obj(obj)
+            if isinstance(obj, ClientRateLimit):
+                return obj
+            return lenient_construct(ClientRateLimit, {})
 
-        _obj = ClientRateLimit.parse_obj({
+        _obj = lenient_construct(ClientRateLimit, {
             "duration": obj.get("duration"),
             "quota": obj.get("quota")
         })

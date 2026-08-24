@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.account_links import AccountLinks
 from authress.models.user import User
 
@@ -106,15 +107,17 @@ class Group(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Group.parse_obj(obj)
+            if isinstance(obj, Group):
+                return obj
+            return lenient_construct(Group, {})
 
-        _obj = Group.parse_obj({
+        _obj = lenient_construct(Group, {
             "group_id": obj.get("groupId"),
             "name": obj.get("name"),
             "last_updated": obj.get("lastUpdated"),
-            "users": [User.from_dict(_item) for _item in obj.get("users")] if obj.get("users") is not None else None,
-            "admins": [User.from_dict(_item) for _item in obj.get("admins")] if obj.get("admins") is not None else None,
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
+            "users": lenient_nested_list(User, obj.get("users")),
+            "admins": lenient_nested_list(User, obj.get("admins")),
+            "links": lenient_nested(AccountLinks, obj.get("links")),
             "tags": obj.get("tags")
         })
         return _obj

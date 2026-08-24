@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested_list
 from authress.models.resource_permission import ResourcePermission
 
 class PermissionedResource(BaseModel):
@@ -73,10 +74,12 @@ class PermissionedResource(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PermissionedResource.parse_obj(obj)
+            if isinstance(obj, PermissionedResource):
+                return obj
+            return lenient_construct(PermissionedResource, {})
 
-        _obj = PermissionedResource.parse_obj({
-            "permissions": [ResourcePermission.from_dict(_item) for _item in obj.get("permissions")] if obj.get("permissions") is not None else None
+        _obj = lenient_construct(PermissionedResource, {
+            "permissions": lenient_nested_list(ResourcePermission, obj.get("permissions"))
         })
         return _obj
 

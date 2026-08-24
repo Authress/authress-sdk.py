@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, constr, validator
+from authress.utils import lenient_construct
 
 class TenantDomain(BaseModel):
     """
@@ -72,9 +73,11 @@ class TenantDomain(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return TenantDomain.parse_obj(obj)
+            if isinstance(obj, TenantDomain):
+                return obj
+            return lenient_construct(TenantDomain, {})
 
-        _obj = TenantDomain.parse_obj({
+        _obj = lenient_construct(TenantDomain, {
             "domain": obj.get("domain")
         })
         return _obj

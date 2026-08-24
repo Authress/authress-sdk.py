@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.extension import Extension
 from authress.models.pagination import Pagination
 
@@ -78,11 +79,13 @@ class ExtensionCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ExtensionCollection.parse_obj(obj)
+            if isinstance(obj, ExtensionCollection):
+                return obj
+            return lenient_construct(ExtensionCollection, {})
 
-        _obj = ExtensionCollection.parse_obj({
-            "extensions": [Extension.from_dict(_item) for _item in obj.get("extensions")] if obj.get("extensions") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None
+        _obj = lenient_construct(ExtensionCollection, {
+            "extensions": lenient_nested_list(Extension, obj.get("extensions")),
+            "pagination": lenient_nested(Pagination, obj.get("pagination"))
         })
         return _obj
 

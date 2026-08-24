@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.access_record_account import AccessRecordAccount
 from authress.models.account_links import AccountLinks
 from authress.models.linked_group import LinkedGroup
@@ -164,21 +165,23 @@ class AccessRecord(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AccessRecord.parse_obj(obj)
+            if isinstance(obj, AccessRecord):
+                return obj
+            return lenient_construct(AccessRecord, {})
 
-        _obj = AccessRecord.parse_obj({
+        _obj = lenient_construct(AccessRecord, {
             "record_id": obj.get("recordId"),
             "name": obj.get("name"),
             "description": obj.get("description"),
             "capacity": obj.get("capacity"),
             "last_updated": obj.get("lastUpdated"),
             "status": obj.get("status"),
-            "account": AccessRecordAccount.from_dict(obj.get("account")) if obj.get("account") is not None else None,
-            "users": [User.from_dict(_item) for _item in obj.get("users")] if obj.get("users") is not None else None,
-            "admins": [User.from_dict(_item) for _item in obj.get("admins")] if obj.get("admins") is not None else None,
-            "groups": [LinkedGroup.from_dict(_item) for _item in obj.get("groups")] if obj.get("groups") is not None else None,
-            "statements": [Statement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None,
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
+            "account": lenient_nested(AccessRecordAccount, obj.get("account")),
+            "users": lenient_nested_list(User, obj.get("users")),
+            "admins": lenient_nested_list(User, obj.get("admins")),
+            "groups": lenient_nested_list(LinkedGroup, obj.get("groups")),
+            "statements": lenient_nested_list(Statement, obj.get("statements")),
+            "links": lenient_nested(AccountLinks, obj.get("links")),
             "tags": obj.get("tags")
         })
         return _obj

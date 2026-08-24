@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr
+from authress.utils import lenient_construct
 
 class UserConnectionCredentials(BaseModel):
     """
@@ -65,9 +66,11 @@ class UserConnectionCredentials(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserConnectionCredentials.parse_obj(obj)
+            if isinstance(obj, UserConnectionCredentials):
+                return obj
+            return lenient_construct(UserConnectionCredentials, {})
 
-        _obj = UserConnectionCredentials.parse_obj({
+        _obj = lenient_construct(UserConnectionCredentials, {
             "access_token": obj.get("accessToken")
         })
         return _obj

@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested_list
 from authress.models.identity import Identity
 
 class IdentityCollection(BaseModel):
@@ -73,10 +74,12 @@ class IdentityCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return IdentityCollection.parse_obj(obj)
+            if isinstance(obj, IdentityCollection):
+                return obj
+            return lenient_construct(IdentityCollection, {})
 
-        _obj = IdentityCollection.parse_obj({
-            "identities": [Identity.from_dict(_item) for _item in obj.get("identities")] if obj.get("identities") is not None else None
+        _obj = lenient_construct(IdentityCollection, {
+            "identities": lenient_nested_list(Identity, obj.get("identities"))
         })
         return _obj
 

@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, constr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, constr
+from authress.utils import lenient_construct
 
 class IdentityRequest(BaseModel):
     """
@@ -68,9 +69,11 @@ class IdentityRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return IdentityRequest.parse_obj(obj)
+            if isinstance(obj, IdentityRequest):
+                return obj
+            return lenient_construct(IdentityRequest, {})
 
-        _obj = IdentityRequest.parse_obj({
+        _obj = lenient_construct(IdentityRequest, {
         })
         return _obj
 
