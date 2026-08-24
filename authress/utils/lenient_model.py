@@ -9,7 +9,7 @@ def lenient_construct(cls, data: dict):
             present.add(name)
             raw = data[field.alias]
         else:
-            values[name] = None
+            values[name] = field.get_default()
             continue
 
         coerced, error = field.validate(raw, {}, loc=name)
