@@ -42,8 +42,8 @@ class ClientAccessKey(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^[a-zA-Z0-9-]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9-]*$/")
+        if not re.match(r"^[a-zA-Z0-9+/= -]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9+/= -]*$/")
         return value
 
     class Config:
