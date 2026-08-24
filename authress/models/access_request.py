@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, constr, validator
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.access_template import AccessTemplate
 from authress.models.account_links import AccountLinks
 
@@ -103,14 +104,16 @@ class AccessRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AccessRequest.parse_obj(obj)
+            if isinstance(obj, AccessRequest):
+                return obj
+            return lenient_construct(AccessRequest, {})
 
-        _obj = AccessRequest.parse_obj({
+        _obj = lenient_construct(AccessRequest, {
             "request_id": obj.get("requestId"),
             "last_updated": obj.get("lastUpdated"),
             "status": obj.get("status"),
-            "access": AccessTemplate.from_dict(obj.get("access")) if obj.get("access") is not None else None,
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None,
+            "access": lenient_nested(AccessTemplate, obj.get("access")),
+            "links": lenient_nested(AccountLinks, obj.get("links")),
             "tags": obj.get("tags")
         })
         return _obj

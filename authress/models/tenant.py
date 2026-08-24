@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.authentication_token_configuration import AuthenticationTokenConfiguration
 from authress.models.tenant_connection import TenantConnection
 from authress.models.tenant_data import TenantData
@@ -132,15 +133,17 @@ class Tenant(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Tenant.parse_obj(obj)
+            if isinstance(obj, Tenant):
+                return obj
+            return lenient_construct(Tenant, {})
 
-        _obj = Tenant.parse_obj({
+        _obj = lenient_construct(Tenant, {
             "tenant_id": obj.get("tenantId"),
             "tenant_lookup_identifier": obj.get("tenantLookupIdentifier"),
-            "data": TenantData.from_dict(obj.get("data")) if obj.get("data") is not None else None,
-            "domains": [TenantDomain.from_dict(_item) for _item in obj.get("domains")] if obj.get("domains") is not None else None,
-            "connection": TenantConnection.from_dict(obj.get("connection")) if obj.get("connection") is not None else None,
-            "token_configuration": AuthenticationTokenConfiguration.from_dict(obj.get("tokenConfiguration")) if obj.get("tokenConfiguration") is not None else None,
+            "data": lenient_nested(TenantData, obj.get("data")),
+            "domains": lenient_nested_list(TenantDomain, obj.get("domains")),
+            "connection": lenient_nested(TenantConnection, obj.get("connection")),
+            "token_configuration": lenient_nested(AuthenticationTokenConfiguration, obj.get("tokenConfiguration")),
             "created_time": obj.get("createdTime")
         })
         return _obj

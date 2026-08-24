@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr
+from authress.utils import lenient_construct
 
 class Link(BaseModel):
     """
@@ -66,9 +67,11 @@ class Link(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Link.parse_obj(obj)
+            if isinstance(obj, Link):
+                return obj
+            return lenient_construct(Link, {})
 
-        _obj = Link.parse_obj({
+        _obj = lenient_construct(Link, {
             "href": obj.get("href"),
             "rel": obj.get("rel")
         })

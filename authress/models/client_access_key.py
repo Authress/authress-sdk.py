@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, constr, validator
+from authress.utils import lenient_construct
 
 class ClientAccessKey(BaseModel):
     """
@@ -89,9 +90,11 @@ class ClientAccessKey(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ClientAccessKey.parse_obj(obj)
+            if isinstance(obj, ClientAccessKey):
+                return obj
+            return lenient_construct(ClientAccessKey, {})
 
-        _obj = ClientAccessKey.parse_obj({
+        _obj = lenient_construct(ClientAccessKey, {
             "key_id": obj.get("keyId"),
             "client_id": obj.get("clientId"),
             "public_key": obj.get("publicKey"),

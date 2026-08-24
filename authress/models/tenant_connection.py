@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, constr, validator
+from authress.utils import lenient_construct
 
 class TenantConnection(BaseModel):
     """
@@ -80,9 +81,11 @@ class TenantConnection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return TenantConnection.parse_obj(obj)
+            if isinstance(obj, TenantConnection):
+                return obj
+            return lenient_construct(TenantConnection, {})
 
-        _obj = TenantConnection.parse_obj({
+        _obj = lenient_construct(TenantConnection, {
             "connection_id": obj.get("connectionId")
         })
         return _obj

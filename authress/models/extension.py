@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr
 except ImportError:
     from pydantic import BaseModel, Field, constr
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.extension_application import ExtensionApplication
 from authress.models.extension_client import ExtensionClient
 
@@ -90,14 +91,16 @@ class Extension(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Extension.parse_obj(obj)
+            if isinstance(obj, Extension):
+                return obj
+            return lenient_construct(Extension, {})
 
-        _obj = Extension.parse_obj({
+        _obj = lenient_construct(Extension, {
             "extension_id": obj.get("extensionId"),
             "name": obj.get("name"),
             "created_time": obj.get("createdTime"),
-            "application": ExtensionApplication.from_dict(obj.get("application")) if obj.get("application") is not None else None,
-            "client": ExtensionClient.from_dict(obj.get("client")) if obj.get("client") is not None else None,
+            "application": lenient_nested(ExtensionApplication, obj.get("application")),
+            "client": lenient_nested(ExtensionClient, obj.get("client")),
             "tags": obj.get("tags")
         })
         return _obj

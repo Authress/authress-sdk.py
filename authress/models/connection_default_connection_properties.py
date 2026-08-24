@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr
 except ImportError:
     from pydantic import BaseModel, Field, constr
+from authress.utils import lenient_construct
 
 class ConnectionDefaultConnectionProperties(BaseModel):
     """
@@ -77,9 +78,11 @@ class ConnectionDefaultConnectionProperties(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ConnectionDefaultConnectionProperties.parse_obj(obj)
+            if isinstance(obj, ConnectionDefaultConnectionProperties):
+                return obj
+            return lenient_construct(ConnectionDefaultConnectionProperties, {})
 
-        _obj = ConnectionDefaultConnectionProperties.parse_obj({
+        _obj = lenient_construct(ConnectionDefaultConnectionProperties, {
             "scope": obj.get("scope") if obj.get("scope") is not None else 'profile email openid'
         })
         # store additional fields in additional_properties

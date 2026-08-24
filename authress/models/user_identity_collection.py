@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.collection_links import CollectionLinks
 from authress.models.pagination import Pagination
 from authress.models.user_identity import UserIdentity
@@ -83,12 +84,14 @@ class UserIdentityCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserIdentityCollection.parse_obj(obj)
+            if isinstance(obj, UserIdentityCollection):
+                return obj
+            return lenient_construct(UserIdentityCollection, {})
 
-        _obj = UserIdentityCollection.parse_obj({
-            "users": [UserIdentity.from_dict(_item) for _item in obj.get("users")] if obj.get("users") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None,
-            "links": CollectionLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
+        _obj = lenient_construct(UserIdentityCollection, {
+            "users": lenient_nested_list(UserIdentity, obj.get("users")),
+            "pagination": lenient_nested(Pagination, obj.get("pagination")),
+            "links": lenient_nested(CollectionLinks, obj.get("links"))
         })
         return _obj
 

@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, validator
+from authress.utils import lenient_construct
 
 class ConnectionUserDataConfiguration(BaseModel):
     """
@@ -80,9 +81,11 @@ class ConnectionUserDataConfiguration(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ConnectionUserDataConfiguration.parse_obj(obj)
+            if isinstance(obj, ConnectionUserDataConfiguration):
+                return obj
+            return lenient_construct(ConnectionUserDataConfiguration, {})
 
-        _obj = ConnectionUserDataConfiguration.parse_obj({
+        _obj = lenient_construct(ConnectionUserDataConfiguration, {
             "location": obj.get("location")
         })
         return _obj

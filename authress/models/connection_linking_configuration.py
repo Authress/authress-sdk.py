@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, validator
+from authress.utils import lenient_construct
 
 class ConnectionLinkingConfiguration(BaseModel):
     """
@@ -80,9 +81,11 @@ class ConnectionLinkingConfiguration(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ConnectionLinkingConfiguration.parse_obj(obj)
+            if isinstance(obj, ConnectionLinkingConfiguration):
+                return obj
+            return lenient_construct(ConnectionLinkingConfiguration, {})
 
-        _obj = ConnectionLinkingConfiguration.parse_obj({
+        _obj = lenient_construct(ConnectionLinkingConfiguration, {
             "type": obj.get("type")
         })
         return _obj

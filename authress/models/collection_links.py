@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field
 except ImportError:
     from pydantic import BaseModel, Field
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.link import Link
 
 class CollectionLinks(BaseModel):
@@ -83,11 +84,13 @@ class CollectionLinks(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CollectionLinks.parse_obj(obj)
+            if isinstance(obj, CollectionLinks):
+                return obj
+            return lenient_construct(CollectionLinks, {})
 
-        _obj = CollectionLinks.parse_obj({
-            "var_self": Link.from_dict(obj.get("self")) if obj.get("self") is not None else None,
-            "next": Link.from_dict(obj.get("next")) if obj.get("next") is not None else None
+        _obj = lenient_construct(CollectionLinks, {
+            "var_self": lenient_nested(Link, obj.get("self")),
+            "next": lenient_nested(Link, obj.get("next"))
         })
         return _obj
 

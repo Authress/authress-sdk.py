@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist
 except ImportError:
     from pydantic import BaseModel, Field, conlist
+from authress.utils import lenient_construct, lenient_nested_list
 from authress.models.statement import Statement
 from authress.models.user import User
 
@@ -82,11 +83,13 @@ class AccessTemplate(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AccessTemplate.parse_obj(obj)
+            if isinstance(obj, AccessTemplate):
+                return obj
+            return lenient_construct(AccessTemplate, {})
 
-        _obj = AccessTemplate.parse_obj({
-            "users": [User.from_dict(_item) for _item in obj.get("users")] if obj.get("users") is not None else None,
-            "statements": [Statement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None
+        _obj = lenient_construct(AccessTemplate, {
+            "users": lenient_nested_list(User, obj.get("users")),
+            "statements": lenient_nested_list(Statement, obj.get("statements"))
         })
         return _obj
 

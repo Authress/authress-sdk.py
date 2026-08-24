@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.collection_links import CollectionLinks
 from authress.models.pagination import Pagination
 from authress.models.permission_collection_account import PermissionCollectionAccount
@@ -96,14 +97,16 @@ class UserResourcesCollection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserResourcesCollection.parse_obj(obj)
+            if isinstance(obj, UserResourcesCollection):
+                return obj
+            return lenient_construct(UserResourcesCollection, {})
 
-        _obj = UserResourcesCollection.parse_obj({
-            "account": PermissionCollectionAccount.from_dict(obj.get("account")) if obj.get("account") is not None else None,
+        _obj = lenient_construct(UserResourcesCollection, {
+            "account": lenient_nested(PermissionCollectionAccount, obj.get("account")),
             "user_id": obj.get("userId"),
-            "resources": [Resource.from_dict(_item) for _item in obj.get("resources")] if obj.get("resources") is not None else None,
-            "pagination": Pagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None,
-            "links": CollectionLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
+            "resources": lenient_nested_list(Resource, obj.get("resources")),
+            "pagination": lenient_nested(Pagination, obj.get("pagination")),
+            "links": lenient_nested(CollectionLinks, obj.get("links"))
         })
         return _obj
 

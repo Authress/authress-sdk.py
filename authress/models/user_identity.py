@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, constr, validator
+from authress.utils import lenient_construct
 
 class UserIdentity(BaseModel):
     """
@@ -75,9 +76,11 @@ class UserIdentity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserIdentity.parse_obj(obj)
+            if isinstance(obj, UserIdentity):
+                return obj
+            return lenient_construct(UserIdentity, {})
 
-        _obj = UserIdentity.parse_obj({
+        _obj = lenient_construct(UserIdentity, {
             "user_id": obj.get("userId"),
             "name": obj.get("name"),
             "picture": obj.get("picture"),

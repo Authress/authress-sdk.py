@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, constr, validator
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.account_links import AccountLinks
 from authress.models.permission_collection_account import PermissionCollectionAccount
 
@@ -84,14 +85,16 @@ class UserToken(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserToken.parse_obj(obj)
+            if isinstance(obj, UserToken):
+                return obj
+            return lenient_construct(UserToken, {})
 
-        _obj = UserToken.parse_obj({
-            "account": PermissionCollectionAccount.from_dict(obj.get("account")) if obj.get("account") is not None else None,
+        _obj = lenient_construct(UserToken, {
+            "account": lenient_nested(PermissionCollectionAccount, obj.get("account")),
             "user_id": obj.get("userId"),
             "token_id": obj.get("tokenId"),
             "token": obj.get("token"),
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
+            "links": lenient_nested(AccountLinks, obj.get("links"))
         })
         return _obj
 

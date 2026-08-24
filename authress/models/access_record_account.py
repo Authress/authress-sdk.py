@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr
+from authress.utils import lenient_construct
 
 class AccessRecordAccount(BaseModel):
     """
@@ -65,9 +66,11 @@ class AccessRecordAccount(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AccessRecordAccount.parse_obj(obj)
+            if isinstance(obj, AccessRecordAccount):
+                return obj
+            return lenient_construct(AccessRecordAccount, {})
 
-        _obj = AccessRecordAccount.parse_obj({
+        _obj = lenient_construct(AccessRecordAccount, {
             "account_id": obj.get("accountId")
         })
         return _obj

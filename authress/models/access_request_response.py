@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, validator
+from authress.utils import lenient_construct
 
 class AccessRequestResponse(BaseModel):
     """
@@ -72,9 +73,11 @@ class AccessRequestResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AccessRequestResponse.parse_obj(obj)
+            if isinstance(obj, AccessRequestResponse):
+                return obj
+            return lenient_construct(AccessRequestResponse, {})
 
-        _obj = AccessRequestResponse.parse_obj({
+        _obj = lenient_construct(AccessRequestResponse, {
             "status": obj.get("status")
         })
         return _obj

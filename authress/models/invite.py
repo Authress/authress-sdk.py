@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested, lenient_nested_list
 from authress.models.account_links import AccountLinks
 from authress.models.invite_statement import InviteStatement
 
@@ -128,15 +129,17 @@ class Invite(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Invite.parse_obj(obj)
+            if isinstance(obj, Invite):
+                return obj
+            return lenient_construct(Invite, {})
 
-        _obj = Invite.parse_obj({
+        _obj = lenient_construct(Invite, {
             "invite_id": obj.get("inviteId"),
             "tenant_id": obj.get("tenantId"),
             "default_login_tenant_id": obj.get("defaultLoginTenantId"),
-            "statements": [InviteStatement.from_dict(_item) for _item in obj.get("statements")] if obj.get("statements") is not None else None,
+            "statements": lenient_nested_list(InviteStatement, obj.get("statements")),
             "conflict_resolution_strategy": obj.get("conflictResolutionStrategy") if obj.get("conflictResolutionStrategy") is not None else 'GENERATE_NEW_RECORD',
-            "links": AccountLinks.from_dict(obj.get("links")) if obj.get("links") is not None else None
+            "links": lenient_nested(AccountLinks, obj.get("links"))
         })
         return _obj
 

@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr
+from authress.utils import lenient_construct
 
 class PaginationNext(BaseModel):
     """
@@ -65,9 +66,11 @@ class PaginationNext(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PaginationNext.parse_obj(obj)
+            if isinstance(obj, PaginationNext):
+                return obj
+            return lenient_construct(PaginationNext, {})
 
-        _obj = PaginationNext.parse_obj({
+        _obj = lenient_construct(PaginationNext, {
             "cursor": obj.get("cursor")
         })
         return _obj

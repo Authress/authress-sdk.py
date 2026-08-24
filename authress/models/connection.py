@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictBool, StrictStr, constr, validator
+from authress.utils import lenient_construct, lenient_nested
 from authress.models.connection_conditions import ConnectionConditions
 from authress.models.connection_data import ConnectionData
 from authress.models.connection_default_connection_properties import ConnectionDefaultConnectionProperties
@@ -190,9 +191,11 @@ class Connection(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return Connection.parse_obj(obj)
+            if isinstance(obj, Connection):
+                return obj
+            return lenient_construct(Connection, {})
 
-        _obj = Connection.parse_obj({
+        _obj = lenient_construct(Connection, {
             "type": obj.get("type") if obj.get("type") is not None else 'OAUTH2',
             "connection_id": obj.get("connectionId"),
             "authentication_url": obj.get("authenticationUrl"),
@@ -202,11 +205,11 @@ class Connection(BaseModel):
             "client_id": obj.get("clientId"),
             "client_secret_id": obj.get("clientSecretId"),
             "client_secret": obj.get("clientSecret"),
-            "user_data_configuration": ConnectionUserDataConfiguration.from_dict(obj.get("userDataConfiguration")) if obj.get("userDataConfiguration") is not None else None,
-            "data": ConnectionData.from_dict(obj.get("data")) if obj.get("data") is not None else None,
-            "default_connection_properties": ConnectionDefaultConnectionProperties.from_dict(obj.get("defaultConnectionProperties")) if obj.get("defaultConnectionProperties") is not None else None,
-            "conditions": ConnectionConditions.from_dict(obj.get("conditions")) if obj.get("conditions") is not None else None,
-            "linking_configuration": ConnectionLinkingConfiguration.from_dict(obj.get("linkingConfiguration")) if obj.get("linkingConfiguration") is not None else None,
+            "user_data_configuration": lenient_nested(ConnectionUserDataConfiguration, obj.get("userDataConfiguration")),
+            "data": lenient_nested(ConnectionData, obj.get("data")),
+            "default_connection_properties": lenient_nested(ConnectionDefaultConnectionProperties, obj.get("defaultConnectionProperties")),
+            "conditions": lenient_nested(ConnectionConditions, obj.get("conditions")),
+            "linking_configuration": lenient_nested(ConnectionLinkingConfiguration, obj.get("linkingConfiguration")),
             "created_time": obj.get("createdTime"),
             "last_updated": obj.get("lastUpdated"),
             "is_active_connection": obj.get("isActiveConnection"),

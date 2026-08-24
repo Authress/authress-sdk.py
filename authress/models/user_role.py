@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, constr, validator
+from authress.utils import lenient_construct
 
 class UserRole(BaseModel):
     """
@@ -72,9 +73,11 @@ class UserRole(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UserRole.parse_obj(obj)
+            if isinstance(obj, UserRole):
+                return obj
+            return lenient_construct(UserRole, {})
 
-        _obj = UserRole.parse_obj({
+        _obj = lenient_construct(UserRole, {
             "role_id": obj.get("roleId")
         })
         return _obj

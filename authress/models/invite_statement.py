@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 except ImportError:
     from pydantic import BaseModel, Field, StrictStr, conlist, constr, validator
+from authress.utils import lenient_construct, lenient_nested_list
 from authress.models.resource import Resource
 
 class InviteStatement(BaseModel):
@@ -75,11 +76,13 @@ class InviteStatement(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return InviteStatement.parse_obj(obj)
+            if isinstance(obj, InviteStatement):
+                return obj
+            return lenient_construct(InviteStatement, {})
 
-        _obj = InviteStatement.parse_obj({
+        _obj = lenient_construct(InviteStatement, {
             "roles": obj.get("roles"),
-            "resources": [Resource.from_dict(_item) for _item in obj.get("resources")] if obj.get("resources") is not None else None
+            "resources": lenient_nested_list(Resource, obj.get("resources"))
         })
         return _obj
 

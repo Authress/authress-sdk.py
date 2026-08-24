@@ -24,6 +24,7 @@ try:
     from pydantic.v1 import BaseModel, Field, constr
 except ImportError:
     from pydantic import BaseModel, Field, constr
+from authress.utils import lenient_construct
 
 class ClaimRequest(BaseModel):
     """
@@ -66,9 +67,11 @@ class ClaimRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ClaimRequest.parse_obj(obj)
+            if isinstance(obj, ClaimRequest):
+                return obj
+            return lenient_construct(ClaimRequest, {})
 
-        _obj = ClaimRequest.parse_obj({
+        _obj = lenient_construct(ClaimRequest, {
             "collection_resource": obj.get("collectionResource"),
             "resource_id": obj.get("resourceId")
         })
