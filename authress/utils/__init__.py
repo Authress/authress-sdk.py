@@ -1,5 +1,6 @@
 # flake8: noqa
 
+from authress.utils.lenient_model import lenient_construct, lenient_nested, lenient_nested_list
 from authress.utils.jwt_manager import JwtManager
 from authress.utils.package_version_provider import PackageVersionProvider
 from authress.utils.service_client_token_provider import ServiceClientTokenProvider
