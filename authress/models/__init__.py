@@ -25,7 +25,10 @@ from authress.models.access_template import AccessTemplate
 from authress.models.account import Account
 from authress.models.account_collection import AccountCollection
 from authress.models.account_links import AccountLinks
+from authress.models.application import Application
+from authress.models.application_collection import ApplicationCollection
 from authress.models.application_delegation import ApplicationDelegation
+from authress.models.application_request import ApplicationRequest
 from authress.models.claim_request import ClaimRequest
 from authress.models.client import Client
 from authress.models.client_access_key import ClientAccessKey
