@@ -21,7 +21,7 @@ class TokenVerifier(object):
     self.package_version_provider = PackageVersionProvider()
 
   def verify_token(self, authressCustomDomain, token, options=None):
-    sanitized_domain = re.sub(r"https?://", "", authressCustomDomain)
+    sanitized_domain = re.sub(r"https?://", "", authressCustomDomain).rstrip('/')
     completeIssuerUrl = f"https://{sanitized_domain}"
     if token is None:
       raise Exception("Unauthorized")

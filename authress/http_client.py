@@ -49,7 +49,7 @@ class HttpClient(object):
     _pool = None
 
     def __init__(self, host=None, access_key=None, user_agent=None):
-        self.host = host if host is not None and host.startswith('http') else f"https://{host}"
+        self.host = (host if host is not None and host.startswith('http') else f"https://{host}").rstrip('/')
         self.access_key = access_key
         self.pool_threads = 1
 

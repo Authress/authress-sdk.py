@@ -15,7 +15,7 @@ class ServiceClientTokenProvider(object):
     self.token = None
     self.decoded_access_key = None
     self.account_id = None
-    self.authress_api_url = authress_api_url
+    self.authress_api_url = authress_api_url.rstrip('/') if authress_api_url else authress_api_url
     
     if access_key:
       try:
