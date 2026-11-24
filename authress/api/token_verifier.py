@@ -49,20 +49,39 @@ class TokenVerifier(object):
       raise Exception("Unauthorized", "No Issuer in token")
     issuer = unverifiedPayload['iss']
 
+    canonicalIssuer = self.get_canonical_issuer(issuer)
+    if canonicalIssuer is None:
+      raise Exception("Unauthorized", "Issuer is not in canonical form")
+
     if (urlparse(issuer).netloc != urlparse(completeIssuerUrl).netloc):
       raise Exception("Unauthorized", "Issuer does not match")
 
     # Handle service client checking
-    clientIdMatcher = re.match(r"^/v\d/clients/([^/]+)$", urlparse(issuer).path)
+    clientIdMatcher = re.match(r"^/v\d/clients/([^/]+)/?$", canonicalIssuer['path'])
     if (clientIdMatcher is not None and clientIdMatcher.group(1) != unverifiedPayload['sub']):
       raise Exception("Unauthorized", "Service ID does not match token sub claim")
 
-    jwk = self.get_public_key(f"{issuer}/.well-known/openid-configuration/jwks?kid={kid}&iss={urlparse(issuer).netloc}", kid)
+    jwk = self.get_public_key(f"{canonicalIssuer['url']}/.well-known/openid-configuration/jwks?kid={kid}&iss={urlparse(issuer).netloc}", kid)
 
     try:
       return jwt.decode(authenticationToken, jwt.api_jwk.PyJWK.from_dict(jwk).key, algorithms=['EdDSA'], options = { 'verify_aud': False })
     except:
       raise Exception("Unauthorized", "Token is invalid")
+
+  @staticmethod
+  def get_canonical_issuer(issuer):
+    """The service client check and the JWKS fetch must read the same issuer value. Any issuer that a runtime could normalise differently is rejected."""
+    issuerMatch = None if re.search(r"[?#\\]", issuer) else re.fullmatch(r"([a-z][a-z0-9+.-]*://[^/@]+)(/.*)?", issuer, re.IGNORECASE)
+    if issuerMatch is None:
+      return None
+
+    path = issuerMatch.group(2) or ""
+    path = path[:-1] if path.endswith("/") else path
+    segments = path[1:].split("/") if path else []
+    if any(not segment or segment in (".", "..") or re.search(r"%(2e|2f|5c)", segment, re.IGNORECASE) for segment in segments):
+      return None
+
+    return { 'url': f"{issuerMatch.group(1)}{path}", 'path': path }
 
   def get_public_key(self, jwkKeyListUrl, kid):
     hashKey = f"{jwkKeyListUrl}|{kid}"
